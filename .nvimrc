@@ -1,4 +1,5 @@
 call plug#begin('~/.nvim/plugged')
+Plug 'scrooloose/nerdtree'
 call plug#end()
 set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
