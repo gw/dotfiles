@@ -41,11 +41,18 @@ let mapleader = ","
 " Map save to leader ',' + w
 noremap <Leader>w :update<CR>
 
+" Map quit to leader ',' + q
+noremap <Leader>q :quit<CR>
+
+" Map write + quit to leader ',' + wq
+noremap <Leader>wq :wq<CR>
+
 " Make uppercase U 'redo' insted of Ctr + R, which is a pain
 nnoremap U <C-r>
 
-" Press jk while in insert mode to go back to normal mode
+" Press jk or kj while in insert mode to go back to normal mode
 inoremap jk <Esc>
+inoremap kj <Esc>
 
 set ruler
 set cursorline
