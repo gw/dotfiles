@@ -1,43 +1,5 @@
 set nocompatible
 
-" Required Vundle setup 
-filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Bundle 'gmarik/vundle'
-"
-" Begin Vundle Packages!!!!!
-"
-
-" Fuzzy File Finder
-Bundle 'kien/ctrlp.vim'
-
-" Fast commenting
-Bundle 'scrooloose/nerdcommenter'
-
-" File explorer gutter
-Bundle 'scrooloose/nerdtree'
-
-" Tab Autocompletion
-Bundle 'ervandew/supertab'
-
-" Smarter autoclosing 
-Bundle 'jiangmiao/auto-pairs'
-
-" Solarized color scheme
-Bundle 'altercation/vim-colors-solarized'
-
-" Better Javascript syntax highlighting
-Bundle 'jelera/vim-javascript-syntax'
-
-
-"
-" End Vundle Packages!!!!!
-"
-
-" All packages must be listed above this line
-call vundle#end()
 filetype plugin indent on
 
 set modifiable
@@ -73,12 +35,6 @@ map  <C-n> :tabnew<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" CtrlP (fuzzy file search) settings
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-
-
 " Map leader to ',' (usually) '\'
 let mapleader = ","
 
@@ -98,20 +54,6 @@ syntax enable
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-" Set Solarized theme
-set background=dark
-colorscheme solarized
-
-" NERDTree autostart
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" NERDTree toggle
-map <C-n> :NERDTreeToggle<CR>
-
-" Close NERDTree if it's the only window open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "Remap coyping and pasting from clipboard
 vnoremap <C-c> :w !pbcopy<CR><CR> 
