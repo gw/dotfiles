@@ -153,8 +153,11 @@ before layers configuration."
    ;; specified with an installed package.
    ;; Not used for now.
    dotspacemacs-default-package-repository nil
+   ;; User initialization goes here
+   ;; Evil
+   evil-escape-key-sequence "jf"
+   evil-escape-unordered-key-sequence t
    )
-  ;; User initialization goes here
   )
 
 (defun dotspacemacs/config ()
