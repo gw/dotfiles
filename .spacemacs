@@ -27,7 +27,7 @@
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; syntax-checking
+     syntax-checking
      version-control
      )
    ;; List of additional packages that will be installed without being
