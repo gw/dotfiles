@@ -18,18 +18,18 @@
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     ;; better-defaults
      emacs-lisp
      git
      (javascript :variables js2-basic-offset 2)
      ;; markdown
-     (python :variables python-enable-yapf-format-on-save t)
+     (python :variables python-enable-yapf-format-on-save nil)
      ;; org
      osx
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      syntax-checking
+     themes-megapack
      version-control
      )
    ;; List of additional packages that will be installed without being
@@ -69,13 +69,8 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
-                         solarized-dark
-                         spacemacs-light
-                         spacemacs-dark
-                         leuven
-                         monokai
-                         zenburn)
+   dotspacemacs-themes '(sanityinc-tomorrow-eighties
+                         solarized-light)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -84,7 +79,7 @@ before layers configuration."
                                :size 15
                                :weight bold
                                :width ultra-condensed
-                               :powerline-scale 1.3)
+                               :powerline-scale 1.2)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -169,6 +164,12 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  (define-key evil-normal-state-map (kbd "H") (kbd "^"))
+  (define-key evil-normal-state-map (kbd "L") (kbd "$"))
+  (define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-word-or-subword-1)
+  (define-key evil-normal-state-map (kbd "C-k") 'other-window)
+  (define-key evil-normal-state-map (kbd "U") 'undo-tree-redo)
+  (global-evil-mc-mode 1)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
