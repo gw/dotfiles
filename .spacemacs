@@ -17,12 +17,17 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t)
      emacs-lisp
      git
-     (javascript :variables js2-basic-offset 2)
+     (javascript :variables
+                 js2-basic-offset 2)
      ;; markdown
-     (python :variables python-enable-yapf-format-on-save nil)
+     (python :variables
+             python-enable-yapf-format-on-save nil)
      ;; org
      osx
      ;; (shell :variables
