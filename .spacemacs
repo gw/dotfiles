@@ -170,6 +170,7 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  ;; UI STUFF
   ;; Clean up the mode line
   (spaceline-toggle-buffer-size-off)
   (spaceline-toggle-buffer-encoding-abbrev-off)
@@ -179,8 +180,11 @@ layers configuration."
   (spaceline-toggle-evil-state-off)
   (spaceline-toggle-minor-modes-off)
   (spaceline-toggle-buffer-position-off)
-
   (spaceline-toggle-hud-on)
+  ;; Turn off vi-style tildes in the fringe
+  (global-vi-tilde-fringe-mode -1)
+  ;; Only enable right-side fringe for git-gutter
+  (fringe-mode (cons 0 5))
 
 
   (define-key evil-normal-state-map (kbd "H") (kbd "^"))
