@@ -81,7 +81,7 @@ before layers configuration."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Input"
-                               :size 16
+                               :size 15
                                :weight normal
                                :width semi-condensed
                                :powerline-scale 1.2)
@@ -186,6 +186,7 @@ layers configuration."
   (define-key evil-normal-state-map (kbd "C-8") 'evil-search-highlight-persist-remove-all)
   (define-key evil-visual-state-map (kbd "C-8") 'evil-visualstar/begin-search-forward)
   (global-evil-mc-mode 1)
+  (setq powerline-default-separator nil)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
