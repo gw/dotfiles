@@ -174,6 +174,17 @@ layers configuration."
   (define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-word-or-subword-1)
   (define-key evil-normal-state-map (kbd "C-k") 'other-window)
   (define-key evil-normal-state-map (kbd "U") 'undo-tree-redo)
+
+  (define-key evil-normal-state-map (kbd "C-u") 'helm-projectile)
+  (define-key evil-normal-state-map (kbd "C-r") 'helm-find-files)
+
+  (define-key evil-normal-state-map (kbd "C-i") 'evil-jumper/backward)
+  (define-key evil-normal-state-map (kbd "C-o") 'evil-jumper/forward)
+  (define-key evil-normal-state-map (kbd "C-9") 'spacemacs/previous-useful-buffer)
+  (define-key evil-normal-state-map (kbd "C-0") 'spacemacs/next-useful-buffer)
+
+  (define-key evil-normal-state-map (kbd "C-8") 'evil-search-highlight-persist-remove-all)
+  (define-key evil-visual-state-map (kbd "C-8") 'evil-visualstar/begin-search-forward)
   (global-evil-mc-mode 1)
 )
 
