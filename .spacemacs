@@ -170,6 +170,19 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  ;; Clean up the mode line
+  (spaceline-toggle-buffer-size-off)
+  (spaceline-toggle-buffer-encoding-abbrev-off)
+  (spaceline-toggle-persp-name-off)
+  (spaceline-toggle-workspace-number-off)
+  (spaceline-toggle-window-number-off)
+  (spaceline-toggle-evil-state-off)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-buffer-position-off)
+
+  (spaceline-toggle-hud-on)
+
+
   (define-key evil-normal-state-map (kbd "H") (kbd "^"))
   (define-key evil-normal-state-map (kbd "L") (kbd "$"))
   (define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-word-or-subword-1)
