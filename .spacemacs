@@ -33,7 +33,8 @@
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     syntax-checking
+     (syntax-checking :variables
+                      syntax-checking-enable-by-default nil)
      themes-megapack
      version-control
      )
