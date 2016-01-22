@@ -209,6 +209,14 @@ layers configuration."
   (setq powerline-default-separator nil)
 
   (global-company-mode)  ; Enable company mode globally
+  (setq helm-ff-skip-boring-files t)  ; Skip boring files in helm
+  (setq helm-boring-file-regexp-list
+        '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "~$"
+          "\\.so$" "\\.a$" "\\.elc$" "\\.fas$" "\\.fasl$" "\\.pyc$" "\\.pyo$"
+          "\\.cache$" "\__pycache__$" "\\.DS_Store$"))
+  (setq helm-boring-buffer-regexp-list
+        '("\\` " "\\*helm" "\\*helm-mode" "\\*Echo Area" "\\*tramp" "\\*Minibuf" "\\*epc"
+          "\TAGS$" "\\*scratch" "\\*spacemacs"))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
