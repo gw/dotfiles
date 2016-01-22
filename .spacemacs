@@ -17,10 +17,12 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (auto-completion :variables
+     (auto-completion :disabled-for org git
+                      :variables
                       auto-completion-tab-key-behavior 'complete
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t)
+
      emacs-lisp
      git
      (javascript :variables
@@ -205,6 +207,8 @@ layers configuration."
   (define-key evil-visual-state-map (kbd "C-8") 'evil-visualstar/begin-search-forward)
   (global-evil-mc-mode 1)
   (setq powerline-default-separator nil)
+
+  (global-company-mode)  ; Enable company mode globally
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
