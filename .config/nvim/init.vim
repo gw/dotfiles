@@ -135,8 +135,8 @@ nnoremap n nzz
 nnoremap N Nzz
 
 " Ctrl-u and Ctrl-y to navigate buffers
-nnoremap <C-,> :bprev<CR>
-nnoremap <C-.> :bnext<CR>
+nnoremap <C-h> :bprev<CR>
+nnoremap <C-l> :bnext<CR>
 " Leader d to delete a buffer. Navs to prev buffer and kills the one we just
 " left. This preserves the window split. Otherwise killing a buffer loses the
 " split.
