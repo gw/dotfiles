@@ -1,0 +1,5 @@
+#!/bin/sh
+# ag -l : return names of every file below cwd, respecting ~/.agignore
+# --links=no : don't follow symlinks
+# -L- : Operate on a list of files; '-' specifies STDIN
+ag -l | ctags --links=no -L-
