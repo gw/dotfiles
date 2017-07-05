@@ -114,9 +114,9 @@ set undodir=~/.nvim/undodir
 "'U' to 'redo'
 nnoremap U <C-r>
 
-" Map save to leader ',' + w
-noremap <Leader>w :update<CR>
-" Map quit to leader ',' + q
+" Save all buffers
+noremap <Leader>w :wa<CR>
+" Quit the tab
 noremap <Leader>q :quit<CR>
 
 " Switch Ctrl I and Ctrl O for more natural 'forward' 'back' when jumping
