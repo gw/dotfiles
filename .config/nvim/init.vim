@@ -79,6 +79,11 @@ set ignorecase
 "...Unless query has capital letters
 set smartcase
 
+"Enable folding by indent
+set foldmethod=indent
+"Don't fold newly opened files
+set nofoldenable
+
 "Use Silver Searcher for all grepping
 set grepprg=ag\ --nogroup\ --nocolor  "Vim's builtin grep search program
 let g:ackprg = "ag --vimgrep"  "Ack.vim's search program
