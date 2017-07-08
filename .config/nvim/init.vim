@@ -155,6 +155,7 @@ nnoremap <Leader>t <C-w><C-w>
 
 " clever-f frees up ';', so just hit that to enter ex mode
 nnoremap ; :
+vnoremap ; :
 
 " Modify '*' to not move cursor and support visual ranges
 nnoremap <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
