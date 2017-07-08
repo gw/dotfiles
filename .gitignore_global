@@ -5,6 +5,7 @@ tmp/
 node_modules/
 bin/
 obj/
+build/
 
 # Compiled source #
 ###################
