@@ -65,7 +65,7 @@ let mapleader="\<SPACE>"
 set lazyredraw
 
 "Always 5 lines b/w cursor and window edge
-set scrolloff=5
+set scrolloff=10
 
 "Don't wrap long lines
 set nowrap
