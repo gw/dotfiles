@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# post-rewrite fired after commit --amend and
+# rebase, but the former is already covered
+# by post-commit. To avoid the double execution,
+# we make sure to only run this if we're in a rebase.
+case "$1" in
+  rebase) exec .git/hooks/post-merge ;;
+esac
