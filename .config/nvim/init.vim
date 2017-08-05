@@ -86,7 +86,8 @@ set foldmethod=indent
 set nofoldenable
 
 "Use Silver Searcher for all grepping
-set grepprg=ag\ --nogroup\ --nocolor  "Vim's builtin grep search program
+set grepprg=ag\ --vimgrep "Vim's builtin grep search program
+set grepformat=%f:%l:%c:%m,%f:%l:%m
 let g:ackprg = "ag --vimgrep"  "Ack.vim's search program
 
 "Relative line numbers on all other lines
