@@ -23,6 +23,7 @@ Plug 'ap/vim-buftabline'
 "Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-clang'
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'jiangmiao/auto-pairs'
 
 "Linting
