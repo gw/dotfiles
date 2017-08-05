@@ -33,7 +33,6 @@ Plug 'neomake/neomake'
 Plug 'easymotion/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
 Plug 't9md/vim-quickhl'
-Plug 'vim-scripts/argtextobj.vim' "Adds the `ia` and `aa` text objects for func args
 
 "File settings, indentation
 Plug 'tpope/vim-sleuth'
