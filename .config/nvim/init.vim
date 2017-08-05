@@ -214,6 +214,9 @@ let g:gitgutter_realtime = 0
 "let g:neomake_open_list = 2
 let g:neomake_list_height = 5
 "let g:neomake_echo_current_error = 1
+" Use eslint for javascript
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_logfile = '/usr/local/var/log/neomake.log'
 
 " Easymotion
 " Disable all default mappings
