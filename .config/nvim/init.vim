@@ -39,6 +39,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'ntpeters/vim-better-whitespace'
 
 "Git
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 "Tags
