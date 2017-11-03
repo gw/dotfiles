@@ -195,6 +195,12 @@ It's easy to accidentally edit across folds--throw an error.
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'super)
 #+END_SRC
+*** C-h: Backspace
+Use <f1> to access help menus instead.
+#+BEGIN_SRC emacs-lisp
+  ;; Use key-translation-map to override any "C-h" bindings that any major or minor mode tries to introduce.
+  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
+#+END_SRC
 *** C-w: Kill backwards word if region is not active
 #+BEGIN_SRC emacs-lisp
   (defun gw/kill-region-or-word (arg)
