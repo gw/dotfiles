@@ -184,6 +184,12 @@ It's easy to accidentally edit across folds--throw an error.
 
 * Generic Keybindings / Custom Functions
 ** Emacs
+*** Edit this file
+#+BEGIN_SRC emacs-lisp
+  (defun gw/edit-config ()
+    (interactive)
+    (find-file "~/.emacs.d/conf.org"))
+#+END_SRC
 *** Swap Meta and Super so Meta is closer to thumb
 #+BEGIN_SRC emacs-lisp
   (setq mac-command-modifier 'meta)
