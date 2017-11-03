@@ -262,3 +262,12 @@ Default: add or remove faces to text in region
           search-ring
           regexp-search-ring))
 #+END_SRC
+
+
+* Useful Info
+** global-set-key vs define-key
+Use the former to define a global keymapping, use the latter to define a mapping for a particular mode, like so: `(define-key c-mode-base-map (kbd "C-c t") 'myfunc)`.
+
+`c-mode-base-map` applies to all languages that cc-mode supports, whereas `c-mode-map` applies to just the C language.
+
+`key-translation-map` is a lower-level mapping that basically modifies what keystrokes Emacs sees. `global-set-key` mappings are overridden by minor mode mappings--`key-translation-map` mappings are not.
