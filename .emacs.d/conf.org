@@ -181,7 +181,7 @@ It's easy to accidentally edit across folds--throw an error.
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'super)
 #+END_SRC
-*** Make C-w kill backwards word if region is not active
+*** C-w: Kill backwards word if region is not active
 #+BEGIN_SRC emacs-lisp
   (defun gw/kill-region-or-word (arg)
       "When called interactively with no region, kill a word backwards."
@@ -194,14 +194,15 @@ It's easy to accidentally edit across folds--throw an error.
   (global-set-key (kbd "C-w") 'gw/kill-region-or-word)
 #+END_SRC
 
-*** Kill current buffer without asking anything
+*** C-x k: Kill current buffer without asking anything
 #+BEGIN_SRC emacs-lisp
   (defun gw/kill-current-buffer ()
     "Kill the current buffer without prompting."
     (interactive)
     (kill-buffer (current-buffer)))
 
-  (global-set-key (kbd "C-c C-k") 'gw/kill-current-buffer)
+  (global-set-key (kbd "C-x k") 'gw/kill-current-buffer)
+#+END_SRC
 #+END_SRC
 
 
