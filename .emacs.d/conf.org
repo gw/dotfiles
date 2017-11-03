@@ -251,4 +251,14 @@ Default: add or remove faces to text in region
 #+END_SRC
 
 
-* OS Interaction
+* History
+** Persist kill-ring, isearch queries, and other minibuffer stuff across sessions
+#+BEGIN_SRC emacs-lisp
+  (setq savehist-file "~/.emacs.d/savehist")
+  (savehist-mode 1)
+  (setq history-delete-duplicates t)
+  (setq savehist-additional-variables
+        '(kill-ring
+          search-ring
+          regexp-search-ring))
+#+END_SRC
