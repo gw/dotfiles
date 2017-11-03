@@ -127,6 +127,13 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   (setq-default tab-width 2)
 #+END_SRC
 
+** Soft-wrap long lines in texty modes
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
+  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+#+END_SRC
+
+
 * Editing Text
 ** Auto-insert the other half of a pair
 #+BEGIN_SRC emacs-lisp
