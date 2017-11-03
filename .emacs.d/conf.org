@@ -7,6 +7,9 @@
 
   ;; Prevent outdated bytecode from being loaded
   (setq load-prefer-newer t)
+
+  ;; Try to use UTF8 when possible
+  (prefer-coding-system 'utf-8)
 #+END_SRC
 
 
