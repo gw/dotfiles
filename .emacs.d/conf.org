@@ -210,6 +210,25 @@ Default: add or remove faces to text in region
   (global-set-key (kbd "M-o") 'other-window)
 #+END_SRC
 
+*** Switch windows when splitting
+#+BEGIN_SRC emacs-lisp
+  (defun gw/split-window-below-and-switch ()
+    "Split window horizontally below and switch to new frame."
+    (interactive)
+    (split-window-below)
+    (other-window 1))
+
+  (defun gw/split-window-right-and-switch ()
+    "Split window vertically to the right and switch to new frame."
+    (interactive)
+    (split-window-right)
+    (other-window 1))
+
+  (global-set-key (kbd "C-x 2") 'gw/split-window-below-and-switch)
+  (global-set-key (kbd "C-x 3") 'gw/split-window-right-and-switch)
+#+END_SRC
+
+
 ** Org Mode
 *** <el: Elisp source block template
 #+BEGIN_SRC emacs-lisp
