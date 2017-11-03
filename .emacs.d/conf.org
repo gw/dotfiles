@@ -109,6 +109,12 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   (blink-cursor-mode 0)
 #+END_SRC
 
+** Org Mode
+*** Syntax highlight code blocks
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-fontify-natively t)
+#+END_SRC
+
 
 * Indentation / tabs
 ** Never use tabs
