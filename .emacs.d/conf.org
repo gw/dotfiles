@@ -203,6 +203,12 @@ It's easy to accidentally edit across folds--throw an error.
 
   (global-set-key (kbd "C-x k") 'gw/kill-current-buffer)
 #+END_SRC
+
+*** M-o: Focus other window
+Default: add or remove faces to text in region
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-o") 'other-window)
+#+END_SRC
 #+END_SRC
 
 
