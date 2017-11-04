@@ -206,6 +206,12 @@ It's easy to accidentally edit across folds--throw an error.
   (setq apropos-do-all t)
 #+END_SRC
 
+** Show current match/total in modeline with isearch
+#+BEGIN_SRC emacs-lisp
+  (use-package anzu
+    :config (global-anzu-mode))
+#+END_SRC
+
 ** Install flx
 For better fuzzy matching in Ivy
 #+BEGIN_SRC emacs-lisp
