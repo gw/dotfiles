@@ -190,6 +190,36 @@ It's easy to accidentally edit across folds--throw an error.
   (setq apropos-do-all t)
 #+END_SRC
 
+** Install flx
+For better fuzzy matching in Ivy
+#+BEGIN_SRC emacs-lisp
+  (use-package flx)
+#+END_SRC
+** Use Ivy, Swiper, and Counsel for minibuffer stuff
+In MELPA, Ivy and Swiper are included as dependencies of Counsel, so we just have to install the latter.
+Ivy provides a generic narrowing interface similar to (but simpler than) Helm. Swiper and Counsel both use Ivy--Swiper replaces `isearch`, and Counsel replaces most of the common minibuffer search interfaces--see below.
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel
+    :config       ; Stuff that only has meaning after package is loaded (possibly deferred)
+    (ido-mode 0)  ; Disable Ido
+    (ivy-mode 1)  ; Enable Ivy
+    (setq ivy-use-virtual-buffers t)       ; Include recent files and bookmarks in ivy-switch-buffer
+    (setq counsel-find-file-ignore-regexp  ; Ignore stuff in find-file
+          (concat
+           ;; File names beginning with # or .
+           "\\(?:\\`[#.]\\)"
+           ;; File names ending with # or ~
+           "\\|\\(?:\\`.+?[#~]\\'\\)"))
+    (setq ivy-re-builders-alist
+          '((t . ivy--regex-fuzzy)))  ; Make Ivy always use fuzzy matching
+    :bind
+    ("C-x C-f" . counsel-find-file)  ; Respects counsel-find-file-ignore-regexp
+    ("M-x" . counsel-M-x)            ; Shows keybindings in results
+    ("C-x b" . ivy-switch-buffer)    ; Otherwise, uses normal non-ivy minibuffer until you M-x ivy-switch-buffer manually, once
+    ("<f1> f" . counsel-describe-function)   ; Highlights interactive functions
+    ("<f1> v" . counsel-describe-variable))  ; Highlights defcustoms
+
+#+END_SRC
 
 * Generic Keybindings / Custom Functions
 ** Emacs
