@@ -154,6 +154,15 @@ It's easy to accidentally edit across folds--throw an error.
 #+END_SRC
 
 
+* Languages
+** YAML
+*** Install yaml-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package yaml-mode
+    :mode "\\.ya?ml\\'")
+#+END_SRC
+
+
 * Autocomplete
 ** Use hippie-expand instead of dabbrev-expand
 #+BEGIN_SRC emacs-lisp
