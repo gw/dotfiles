@@ -185,6 +185,13 @@ It's easy to accidentally edit across folds--throw an error.
   (global-set-key (kbd "M-/") 'hippie-expand)
 #+END_SRC
 
+** Configure Irony for C, C++, ObjC
+** Configure Company and Company-Irony
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :defer t  ; Needed b/c we're not using any of the implicit defer macros
+    :init (add-hook 'prog-mode-hook 'company-mode))  ; Load when activating a programming language mode
+#+END_SRC
 
 * Buffers
 ** Use interactive buffer menu instead of default one
