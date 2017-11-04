@@ -132,7 +132,7 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
 
 ** Display tabs as 4 spaces wide
 #+BEGIN_SRC emacs-lisp
-  (setq-default tab-width 2)
+  (setq-default tab-width 4)
 #+END_SRC
 
 ** Soft-wrap long lines in texty modes
