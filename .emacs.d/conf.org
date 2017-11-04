@@ -221,6 +221,17 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
 
 #+END_SRC
 
+** Use Projectile for project management
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :demand  ; Override the deferral introduced by :bind to allow project switching at startup
+    :config
+    (setq projectile-completion-system 'ivy)
+    (setq projectile-track-known-projects-automatically nil)  ; Don't auto-detect projects--it's noisy
+    (projectile-mode))  ; Enable projectile-mode globally
+#+END_SRC
+
+
 * Generic Keybindings / Custom Functions
 ** Emacs
 *** Edit this file
