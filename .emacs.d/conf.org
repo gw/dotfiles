@@ -150,7 +150,15 @@ When enabled as a minor mode, it will transparently try to set the indentation o
     (dtrt-indent-mode t))
 #+END_SRC
 
-* Editing Text
+
+* Editing/Selecting Text
+** Use expand-region for easy semantic highlighting
+This is the only non-Vim way I can live without "cib" and friends
+#+BEGIN_SRC emacs-lisp
+  (use-package expand-region
+    :bind ("C-=" . er/expand-region))
+#+END_SRC
+
 ** Auto-insert the other half of a pair
 #+BEGIN_SRC emacs-lisp
   (electric-pair-mode 1)
