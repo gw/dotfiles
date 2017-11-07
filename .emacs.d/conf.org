@@ -238,6 +238,14 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
     :config (global-anzu-mode))
 #+END_SRC
 
+** M-': Avy for "easymotion" behavior
+#+BEGIN_SRC emacs-lisp
+  (use-package avy
+    :bind
+    ("M-'" . avy-goto-char-2)
+    :config
+    (setq avy-background t))  ; Grey background when displaying results
+#+END_SRC
 ** Install flx
 For better fuzzy matching in Ivy
 #+BEGIN_SRC emacs-lisp
