@@ -242,9 +242,21 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
 #+BEGIN_SRC emacs-lisp
   (use-package avy
     :bind
-    ("M-'" . avy-goto-char-2)
+    ("M-'" . avy-goto-word-1)
     :config
-    (setq avy-background t))  ; Grey background when displaying results
+    (setq avy-background t)  ; Grey background when displaying results
+    (setq avy-keys
+          '(
+            ?t ?n ?s ?e ?r ?i ?o ?a  ;; 'power eight': can type them without any movement of the hand.
+               ?w ?f ?l ?u ?y ?\; ?d ?h ?x ?c ?v ?m ?, ?. ;; close to home rows; no pinkes
+               ?g ?b ?j ?k ?\' ;; diagonals, pinkie moves
+               ?q ?z ?p ?\/ ;; pinkies away from the home row
+               ;; ?4 ?7 ?3 ?8 ?9 ?2 ?5 ?1 ?6 ;; digits; in an order similar to the above
+               ;; shifted letters come here ...
+               ?T ?N ?S ?E ?R ?I ?A
+               ?W ?F ?L ?U ?Y ?\: ?D ?H ?X ?C ?V ?M ?< ?> ;; close to home rows; no pinkes
+               ;; These are too similar to be practical in the "fast jumping" context: ?0 ?O
+               )))
 #+END_SRC
 ** Install flx
 For better fuzzy matching in Ivy
