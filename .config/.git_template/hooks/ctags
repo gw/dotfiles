@@ -2,9 +2,12 @@
 set -e
 PATH="/usr/local/bin:$PATH"
 dir="`git rev-parse --git-dir`"
-trap 'rm -f "$dir/$$.tags"' EXIT
+# Cleanup temp .TAGS file on exit
+trap 'rm -f "$dir/$$.TAGS"' EXIT
 # -cmo: include cached, modified, and other (untracked) files
 # --exclude-standard: respect local and global gitignores
+# -e: generate emacs-friendly format
+# -L-: read files from standard input
 git ls-files -cmo --exclude-standard | \
-  ctags --tag-relative=yes -L- -f"$dir/$$.tags" --languages=-javascript,sql
-mv "$dir/$$.tags" "$dir/tags"
+  ctags -e --tag-relative=yes -L- -f"$dir/$$.TAGS" --languages=-javascript,sql
+mv "$dir/$$.TAGS" "$dir/TAGS" # Promote temp .TAGS file to TAGS, overwriting old one
