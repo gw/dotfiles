@@ -203,6 +203,14 @@ It's easy to accidentally edit across folds--throw an error.
     (unbind-key "<return>" company-active-map)
     (unbind-key "RET" company-active-map))
 #+END_SRC
+NB: successful completion of stuff in shared project header files requires setting `company-clang-arguments` (preferably in a .dir-locals.el) at project root to tell company about your header files for that project. For example:
+
+`((nil . ((company-clang-arguments . ("-I/Users/grantwu/Code/git/lang/lilc/lib/")))))`
+
+(I'm not putting it in a code block b/c I don't want this to be run on startup)
+
+Read more about directory-local variables [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][here]].
+
 
 * Buffers
 ** Use interactive buffer menu instead of default one
