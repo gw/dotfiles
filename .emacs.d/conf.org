@@ -312,6 +312,16 @@ Use <f1> to access help menus instead.
   (global-set-key (kbd "C-w") 'gw/kill-region-or-word)
 #+END_SRC
 
+*** M-<backspace>: Kill line backwards to indent
+M-<backspace> kills backwards word by default, but that's duplicated by C-<backspace>, and also C-w above.
+#+BEGIN_SRC emacs-lisp
+  (defun gw/kill-line-backwards-and-indent ()
+    (interactive)
+    (kill-line 0)
+    (indent-according-to-mode))
+
+  (global-set-key (kbd "M-<backspace>") 'gw/kill-line-backwards-and-indent)
+#+END_SRC
 *** C-x k: Kill current buffer without asking anything
 #+BEGIN_SRC emacs-lisp
   (defun gw/kill-current-buffer ()
