@@ -273,11 +273,20 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
     (ivy-mode 1)  ; Enable Ivy
     (setq ivy-use-virtual-buffers t)       ; Include recent files and bookmarks in ivy-switch-buffer
     (setq counsel-find-file-ignore-regexp  ; Ignore stuff in find-file
-          (concat
-           ;; File names beginning with # or .
+          (concat  ; NB all backslashes must be double-escaped
+           ;; Beginning with . or #
            "\\(?:\\`[#.]\\)"
-           ;; File names ending with # or ~
-           "\\|\\(?:\\`.+?[#~]\\'\\)"))
+           ;; Ending with ~ or #
+           "\\|\\(?:[#~]\\'\\)"
+           ;; Ending with .out
+           "\\|\\(?:\\.out\\'\\)"
+           ;; Ending with .dSYM/
+           "\\|\\(?:\\.dSYM/\\'\\)"
+           ;; __pycache__/
+           "\\|\\(?:__pycache__/\\'\\)"
+           ;; node_modules/
+           "\\|\\(?:node_modules/\\'\\)"
+           ))
     (setq ivy-re-builders-alist
           '((t . ivy--regex-fuzzy)))  ; Make Ivy always use fuzzy matching
     :bind
