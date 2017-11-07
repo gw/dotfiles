@@ -51,6 +51,10 @@
   (setq ring-bell-function 'ignore)
 #+END_SRC
 
+** Narrower fringes
+#+BEGIN_SRC emacs-lisp
+  (fringe-mode 4)  ; Default is 8
+#+END_SRC
 ** Show column number in mode line
 #+BEGIN_SRC emacs-lisp
   (setq column-number-mode t)
@@ -59,7 +63,7 @@
 These custom scaling functions affect text EVERYWHERE, not just the current buffer.
 #+BEGIN_SRC emacs-lisp
   (setq gw/default-font "Input")
-  (setq gw/default-font-size 13)
+  (setq gw/default-font-size 14)
   (setq gw/current-font-size gw/default-font-size)
 
   (setq gw/font-change-increment 1.1)
