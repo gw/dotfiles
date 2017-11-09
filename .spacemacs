@@ -44,6 +44,18 @@ values."
                       :variables
                       flycheck-check-syntax-automatically '(save))  ; Only lint on save
 
+     (version-control :packages
+                      git-gutter
+                      git-gutter-fringe)
+
+     (git :packages
+          magit
+          evil-magit
+          gitignore-mode                ; Mode for editing .gitignores
+          git-commit                    ; Mode for editing commits
+          :variables
+          magit-diff-refine-hunk t)     ; Show word-level diff in active Magit hunk
+
      (c-c++ :packages
             cc-mode
             company
