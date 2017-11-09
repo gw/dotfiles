@@ -10,7 +10,7 @@ values."
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs-base
+   dotspacemacs-distribution 'spacemacs
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
    ;; and `nil'. `unused' will lazy install only unused layers (i.e. layers
@@ -36,55 +36,33 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     themes-megapack
-     ivy  ; Lighter, faster, simpler than Helm
-     emacs-lisp
-
-     (syntax-checking :disabled-for org
-                      :variables
-                      flycheck-check-syntax-automatically '(save))  ; Only lint on save
-
-     (c-c++ :packages
-            cc-mode
-            company
-            flycheck
-            semantic
-            :variables
+     (c-c++ :variables
+            c-basic-offset 4
             c-c++-enable-clang-support t)
-
-     (auto-completion :disabled-for org
-                      :packages
-                      company
-                      company-statistics
-                      hippie-exp
+     helm
+     (auto-completion :disabled-for org git
                       :variables
-                      auto-completion-return-key-behavior nil  ; Enter should insert newline
-                      auto-completion-tab-key-behavior 'complete)
-
-     (spacemacs-ui-visual :packages
-                          spaceline)  ; For Anzu
-
-     (spacemacs-editing :packages
-                        clean-aindent-mode  ; Smart auto-indent and backspace-unindent
-                        expand-region
-                        smartparens)  ; Auto-insert pairs
-
-     (spacemacs-editing-visual :packages
-                               highlight-parentheses  ; Highlight surrounding parens
-                               rainbow-delimiters  ; Color delimiters according to depth
-                               volatile-highlights)  ; Flash text on certain operations
-
-     (spacemacs-evil :packages
-                     evil-anzu  ; Match count for "/" search
-                     evil-args  ; Func arg textobjects
-                     evil-indent-plus  ; Indentation level textobjects
-                     evil-mc)  ; Multiple cursors for evil
+                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-return-key-behavior nil
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t)
+     better-defaults
+     emacs-lisp
+     git
+     ;; markdown
+     ;; org
+     ;; (shell :variables
+     ;;        shell-default-height 30
+     ;;        shell-default-position 'bottom)
+     ;; spell-checking
+     syntax-checking
+     version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(dtrt-indent)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -156,7 +134,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(zenburn)
+   dotspacemacs-themes '(sanityinc-tomorrow-day)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -164,7 +142,7 @@ values."
    dotspacemacs-default-font '("Input"
                                :size 14
                                :weight normal
-                               :width normal
+                               :width condensed
                                :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
@@ -270,7 +248,7 @@ values."
    ;; If non nil show the color guide hint for transient state keys. (default t)
    dotspacemacs-show-transient-state-color-guide t
    ;; If non nil unicode symbols are displayed in the mode line. (default t)
-   dotspacemacs-mode-line-unicode-symbols t
+   dotspacemacs-mode-line-unicode-symbols nil
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
@@ -319,7 +297,10 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'trailing
+   dotspacemacs-whitespace-cleanup nil
+
+   ;; UI
+   truncate-lines t
    ))
 
 (defun dotspacemacs/user-init ()
@@ -338,17 +319,11 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  ;; UI
-  ;; Narrower fringes
-  (fringe-mode 4)  ; Default is 8 pixels wide
-  ;; Don't wrap lines by default (overriden by turn-on-visual-line-mode)
-  (setq-default truncate-lines t)
-  ;; Slower mouse scrolling
-  (setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))
-  (setq mouse-wheel-progressive-speed nil)
-  ;; Soft-wrap long lines in text-y modes
-  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
-  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+  ;; HOOKS
+  ; Trim whitespace on save
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+  ;; UI STUFF
   ;; Clean up the mode line
   (spaceline-toggle-buffer-size-off)
   (spaceline-toggle-buffer-encoding-abbrev-off)
@@ -356,91 +331,51 @@ you should place your code here."
   (spaceline-toggle-workspace-number-off)
   (spaceline-toggle-minor-modes-off)
   (spaceline-toggle-buffer-position-off)
+
   (setq powerline-default-separator 'nil)
 
-  ;; EDITING TEXT
-  ;; Auto-detect tab/space usage and offset from file settings
-  ;; When enabled as a minor mode, it will transparently try to set the
-  ;; indentation offset and `indent-tabs-mode` if it confidently detect
-  ;; what the currently-edited file is doing. It's source code is
-  ;; well-documented-just read it if you're having trouble.
-  (use-package dtrt-indent
-    :defer t
-    :init
-    (add-hook 'prog-mode-hook 'dtrt-indent-mode)
-    :config
-    (setq dtrt-indent-verbosity 2)
-    :diminish dtrt-indent-mode)
-  ;; Display tabs as 4 spaces wide
-  (setq-default tab-width 4)
-
-  ;; ORG MODE
-  ;; Syntax highlight code blocks
-  (setq org-src-fontify-natively t)
-  ;; Don't allow invisible edits
-  (setq org-catch-invisible-edits t)
+  ;; Turn off vi-style tildes in the fringe
+  (global-vi-tilde-fringe-mode -1)
+  ;; Only enable right-side fringe for git-gutter
+  (fringe-mode (cons 0 5))
 
   ;; EVIL KEYBINDINGS
-  ;; Go to beginning and end of lines
+  ; Go to beginning and end of lines
   (define-key evil-normal-state-map (kbd "H") (kbd "^"))
   (define-key evil-normal-state-map (kbd "L") (kbd "$"))
-  ;; Always move by visual lines, not logical lines
-  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-  ;; Jump to mark by column, not just line
-  (define-key evil-normal-state-map (kbd "'") (kbd "`"))
-  ;; C-t to swap splits
-  (define-key evil-normal-state-map (kbd "C-t") 'other-window)
-  (define-key evil-insert-state-map (kbd "C-t") 'other-window)
-  ;; Redo
+  ; Easymotion by beginning of words
+  (define-key evil-normal-state-map (kbd "C-s") 'evil-avy-goto-word-or-subword-1)
+  ; Toggle active pane
+  (define-key evil-normal-state-map (kbd "C-k") 'other-window)
   (define-key evil-normal-state-map (kbd "U") 'undo-tree-redo)
-  ;; Avy
-  (define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-char-2)
-  ;; Jumping
+  ; Mark jumping
   (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-backward)
   (define-key evil-normal-state-map (kbd "C-o") 'evil-jump-forward)
-  ;; Evil-escape
-  (setq-default evil-escape-key-sequence "wf")
-  (setq-default evil-escape-unordered-key-sequence t)
+  ; Buffer switching
+  (define-key evil-normal-state-map (kbd "C-9") 'previous-buffer)
+  (define-key evil-normal-state-map (kbd "C-0") 'next-buffer)
+  ; Highlight symbol at point
+  (define-key evil-normal-state-map (kbd "C-*") 'evil-search-highlight-persist-remove-all)
+  (define-key evil-normal-state-map (kbd "C-8") 'hlt-highlight-symbol)
+  ; Kill all other windows. Using spacemacs/set-leader-keys
+  ; makes is show up in the hotkey expansion menus
+  (spacemacs/set-leader-keys "wD" 'delete-other-windows)
+  ; Escape from everything with 'esc'
+  (global-set-key (kbd "C-[") 'evil-escape)
 
-  ;; SEARCHING / NAV
-  ;; Vim-like bindings in Ivy minibuffer
-  (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-next-line)
-  (define-key ivy-minibuffer-map (kbd "C-k") 'ivy-previous-line)
-  (define-key ivy-minibuffer-map (kbd "C-w") 'backward-kill-word)
-  (define-key ivy-minibuffer-map (kbd "C-l") 'ivy-alt-done)
-  ;; More extensive apropos
-  (setq apropos-do-all t)
-  ;; Ignore stuff in counsel-find-file
-  (setq counsel-find-file-ignore-regexp
-        (concat  ; NB all backslashes must be double-escaped
-         ;; Beginning with . or #
-         "\\(?:\\`[#.]\\)"
-         ;; Ending with ~ or #
-         "\\|\\(?:[#~]\\'\\)"
-         ;; Ending with .out
-         "\\|\\(?:\\.out\\'\\)"
-         ;; Ending with .dSYM/
-         "\\|\\(?:\\.dSYM/\\'\\)"
-         ;; __pycache__/
-         "\\|\\(?:__pycache__/\\'\\)"
-         ;; node_modules/
-         "\\|\\(?:node_modules/\\'\\)"
-         ))
-  ;; Always use fuzzy-matching in Ivy-based minibuffers
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-fuzzy)))
-  ;; Don't auto-add projects in Projectile
-  (setq projectile-track-known-projects-automatically nil)
+  ;; FLYCHECK
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
 
-
-  ;; GENERIC KEYBINDINGS / CUSTOM FUNCTIONS
-  ;; Use command as Meta and alt as super, instead of other way around
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'super)
-  ;; Use key-translation-map to override any "C-h" bindings that any major or minor mode tries to introduce.
-  ;; Functionality duplicated by <f1>
-  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
+  ;; Helm config
+  (setq helm-ff-skip-boring-files t)  ; Skip boring files in helm
+  (setq helm-boring-file-regexp-list
+        '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "~$"
+          "\\.so$" "\\.a$" "\\.elc$" "\\.fas$" "\\.fasl$" "\\.pyc$" "\\.pyo$"
+          "\\.cache$" "\__pycache__$" "\\.DS_Store$"))
+  (setq helm-boring-buffer-regexp-list
+        '("\\` " "\\*helm" "\\*helm-mode" "\\*Echo Area" "\\*tramp" "\\*Minibuf" "\\*epc"
+          "\TAGS$" "\\*scratch" "\\*spacemacs" "\\*Help" "\\*magit" "\\*assembly"
+          "\\*dotfile"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -450,9 +385,12 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(package-selected-packages
    (quote
-    (zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme flycheck-pos-tip flycheck dtrt-indent company-quickhelp pos-tip company-statistics company volatile-highlights rainbow-delimiters highlight-parentheses clean-aindent-mode smartparens expand-region spaceline s dash powerline evil-mc evil-indent-plus evil-args evil-anzu anzu which-key wgrep use-package smex pcre2el macrostep ivy-hydra hydra help-fns+ helm-make helm helm-core popup flx exec-path-from-shell evil-visualstar evil-escape evil goto-chg undo-tree elisp-slime-nav diminish counsel-projectile projectile pkg-info epl counsel swiper ivy bind-map bind-key auto-compile packed async ace-window avy))))
+    (unfill mwim smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor diff-hl disaster company-c-headers cmake-mode clang-format helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
