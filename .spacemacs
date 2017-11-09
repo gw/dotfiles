@@ -202,7 +202,7 @@ values."
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
    ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
-   dotspacemacs-remap-Y-to-y$ nil
+   dotspacemacs-remap-Y-to-y$ t
    ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
    ;; there. (default t)
    dotspacemacs-retain-visual-state-on-shift t
@@ -352,7 +352,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; UI
   ;; Narrower fringes
-  (fringe-mode 4)  ; Default is 8 pixels wide
+  (fringe-mode 6)  ; Default is 8 pixels wide
   ;; Don't wrap lines by default (overriden by turn-on-visual-line-mode)
   (setq-default truncate-lines t)
   ;; Slower mouse scrolling
@@ -369,6 +369,8 @@ you should place your code here."
   (spaceline-toggle-minor-modes-off)
   (spaceline-toggle-buffer-position-off)
   (setq powerline-default-separator 'nil)
+  ;; dtrt-indent displays a modeline string--silence it
+  (setq dtrt-indent-active-mode-line-info nil)
 
   ;; EDITING TEXT
   ;; Auto-detect tab/space usage and offset from file settings
@@ -381,8 +383,7 @@ you should place your code here."
     :init
     (add-hook 'prog-mode-hook 'dtrt-indent-mode)
     :config
-    (setq dtrt-indent-verbosity 2)
-    :diminish dtrt-indent-mode)
+    (setq dtrt-indent-verbosity 2))
   ;; Display tabs as 4 spaces wide
   (setq-default tab-width 4)
 
