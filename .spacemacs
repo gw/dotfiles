@@ -441,8 +441,9 @@ you should place your code here."
          "\\|\\(?:node_modules/\\'\\)"
          ))
   ;; Always use fuzzy-matching in Ivy-based minibuffers
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-fuzzy)))
+  ;; Commented out for now--getting better perf without it
+  ;; (setq ivy-re-builders-alist
+  ;;       '((t . ivy--regex-fuzzy)))
   ;; Don't auto-add projects in Projectile
   (setq projectile-track-known-projects-automatically nil)
 
