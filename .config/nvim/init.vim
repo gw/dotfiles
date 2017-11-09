@@ -127,6 +127,10 @@ noremap <Leader>w :wa<CR>
 " Quit the tab
 noremap <Leader>q :quit<CR>
 
+" Move by visual line, not logical line, when soft-wrapping
+nnoremap j gj
+nnoremap k gk
+
 " Switch Ctrl I and Ctrl O for more natural 'forward' 'back' when jumping
 nnoremap <C-I> <C-O>
 nnoremap <C-O> <C-I>
@@ -142,7 +146,7 @@ nnoremap Y y$
 nnoremap n nzz
 nnoremap N Nzz
 
-" Ctrl-u and Ctrl-y to navigate buffers
+" Ctrl-h and Ctrl-l to navigate buffers
 nnoremap <silent> <C-h> :bprev<CR>
 nnoremap <silent> <C-l> :bnext<CR>
 " Leader d to delete a buffer. Navs to prev buffer and kills the one we just
