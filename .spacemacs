@@ -446,6 +446,15 @@ you should place your code here."
   ;; Don't auto-add projects in Projectile
   (setq projectile-track-known-projects-automatically nil)
 
+  ;; VERSION CONTROL
+  (spacemacs/set-leader-keys
+    "gfh" nil                          ; Unbind weird default to magit-log-buffer-file
+    "gfl" 'magit-log-buffer-file
+    "gfL" 'magit-log-buffer-file-popup
+    "gfd" 'magit-diff-buffer-file
+    "gfD" 'magit-diff-buffer-file-popup
+    )
+
 
   ;; GENERIC KEYBINDINGS / CUSTOM FUNCTIONS
   ;; Use command as Meta and alt as super, instead of other way around
