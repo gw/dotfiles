@@ -44,10 +44,6 @@ values."
                       :variables
                       flycheck-check-syntax-automatically '(save))  ; Only lint on save
 
-     (version-control :packages
-                      git-gutter
-                      git-gutter-fringe)
-
      (git :packages
           magit
           evil-magit
