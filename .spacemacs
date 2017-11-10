@@ -327,7 +327,8 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'trailing
+   ;; Can't get this to work--implemented myself below
+   dotspacemacs-whitespace-cleanup nil
    ))
 
 (defun dotspacemacs/user-init ()
@@ -382,6 +383,8 @@ you should place your code here."
     (setq dtrt-indent-verbosity 2))
   ;; Display tabs as 4 spaces wide
   (setq-default tab-width 4)
+  ;; Trim trailing whitespace on save
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
   ;; ORG MODE
   ;; Syntax highlight code blocks
