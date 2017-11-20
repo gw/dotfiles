@@ -428,6 +428,9 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "U") 'undo-tree-redo)
   ;; Avy
   (define-key evil-normal-state-map (kbd "s") 'evil-avy-goto-char-2)
+  ;; Buffer switching
+  (define-key evil-normal-state-map (kbd "C-9") 'previous-buffer)
+  (define-key evil-normal-state-map (kbd "C-0") 'next-buffer)
   ;; Jumping
   (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-backward)
   (define-key evil-normal-state-map (kbd "C-o") 'evil-jump-forward)
