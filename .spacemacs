@@ -94,10 +94,12 @@ values."
                                volatile-highlights)  ; Flash text on certain operations
 
      (spacemacs-evil :packages
-                     evil-anzu  ; Match count for "/" search
-                     evil-args  ; Func arg textobjects
+                     evil-iedit-state
+                     evil-search-highlight-persist
+                     evil-anzu         ; Match count for "/" search
+                     evil-args         ; Func arg textobjects
                      evil-indent-plus  ; Indentation level textobjects
-                     evil-mc)  ; Multiple cursors for evil
+                     evil-mc)          ; Multiple cursors for evil
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -404,6 +406,8 @@ you should place your code here."
   (setq org-catch-invisible-edits t)
 
   ;; EVIL KEYBINDINGS
+  ;; Turn on multiple cursors
+  (global-evil-mc-mode)
   ;; Go to beginning and end of lines
   (define-key evil-normal-state-map (kbd "H") (kbd "^"))
   (define-key evil-normal-state-map (kbd "L") (kbd "$"))
@@ -411,10 +415,12 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
   ;; Jump to mark by column, not just line
-  (define-key evil-normal-state-map (kbd "'") (kbd "`"))
-  ;; C-t to swap splits
-  (define-key evil-normal-state-map (kbd "C-t") 'other-window)
-  (define-key evil-insert-state-map (kbd "C-t") 'other-window)
+  ;; C-k to swap splits
+  (define-key evil-normal-state-map (kbd "C-k") 'other-window)
+  (define-key evil-insert-state-map (kbd "C-k") 'other-window)
+  ;; Highlight symbol at point
+  (define-key evil-normal-state-map (kbd "C-*") 'evil-search-highlight-persist-remove-all)
+  (define-key evil-normal-state-map (kbd "C-8") 'hlt-highlight-symbol)
   ;; Redo
   (define-key evil-normal-state-map (kbd "U") 'undo-tree-redo)
   ;; Avy
