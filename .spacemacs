@@ -411,9 +411,11 @@ you should place your code here."
   ;; Go to beginning and end of lines
   (define-key evil-normal-state-map (kbd "H") (kbd "^"))
   (define-key evil-normal-state-map (kbd "L") (kbd "$"))
-  ;; Always move by visual lines, not logical lines
+  ;; Always move by visual lines (not logical lines) in normal/visual modes
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+  (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
   ;; Jump to mark by column, not just line
   ;; C-k to swap splits
   (define-key evil-normal-state-map (kbd "C-k") 'other-window)
