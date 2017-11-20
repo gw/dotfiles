@@ -59,6 +59,18 @@ values."
             :variables
             c-c++-enable-clang-support t)
 
+     (python :packages
+             anaconda-mode
+             company
+             company-anaconda
+             eldoc
+             flycheck
+             pip-requirements
+             pyenv-mode
+             pyvenv
+             semantic
+             smartparens)
+
      (auto-completion :disabled-for org
                       :packages
                       company
