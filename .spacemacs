@@ -391,6 +391,22 @@ you should place your code here."
   (setq powerline-default-separator 'nil)
   ;; dtrt-indent displays a modeline string--silence it
   (setq dtrt-indent-active-mode-line-info nil)
+  ;; Functions to set the line-highlight to be darker/lighter than the current
+  ;; theme's background while preserving syntax highlighting (foreground nil).
+  ;; This lets me have a lighter line on dark themes and vice versa.
+  (defun gw/set-hl-line-lighter-than-theme ()
+    (interactive)
+    (set-face-attribute 'hl-line nil
+                        :inherit nil
+                        :foreground nil
+                        :background (color-lighten-name (face-background 'default) 5)))
+  (defun gw/set-hl-line-darker-than-theme ()
+    (interactive)
+    (set-face-attribute 'hl-line nil
+                        :inherit nil
+                        :foreground nil
+                        :background (color-darken-name (face-background 'default) 5)))
+
 
   ;; EDITING TEXT
   ;; Auto-detect tab/space usage and offset from file settings
