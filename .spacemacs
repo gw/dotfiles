@@ -89,6 +89,8 @@ values."
                         smartparens)        ; Auto-insert pairs
 
      (spacemacs-editing-visual :packages
+                               highlight-numbers      ; syntax-highlight numbers in prog-modes
+                               adaptive-wrap          ; Auto-indent continuation lines when soft-wrapping
                                highlight-parentheses  ; Highlight surrounding parens
                                rainbow-delimiters     ; Color delimiters according to depth
                                volatile-highlights)   ; Flash text on certain operations
