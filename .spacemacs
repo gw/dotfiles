@@ -470,6 +470,7 @@ you should place your code here."
   (setq-default evil-escape-key-sequence "wf")
   (setq-default evil-escape-unordered-key-sequence t)
 
+
   ;; SEARCHING / NAV
   ;; Vim-like bindings in Ivy minibuffer
   (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-next-line)
@@ -509,7 +510,6 @@ you should place your code here."
     "gfd" 'magit-diff-buffer-file
     "gfD" 'magit-diff-buffer-file-popup
     )
-
 
   ;; GENERIC KEYBINDINGS / CUSTOM FUNCTIONS
   ;; Use command as Meta and alt as super, instead of other way around
