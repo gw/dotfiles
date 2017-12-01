@@ -425,11 +425,17 @@ you should place your code here."
   ;; Trim trailing whitespace on save
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+
+  ;; AVY CUSTOMIZATION
+  (setq avy-keys '(?t ?n ?s ?e ?r ?i ?a ?o ?d ?h ?p ?l ?f ?u ?w ?y ?q ?g ?j ?v ?k ?c ?m ?x ?z ?b))
+
+
   ;; ORG MODE
   ;; Syntax highlight code blocks
   (setq org-src-fontify-natively t)
   ;; Don't allow invisible edits
   (setq org-catch-invisible-edits t)
+
 
   ;; EVIL KEYBINDINGS
   ;; Turn on multiple cursors
