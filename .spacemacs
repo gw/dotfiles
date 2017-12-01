@@ -102,6 +102,10 @@ values."
                      evil-args         ; Func arg textobjects
                      evil-indent-plus  ; Indentation level textobjects
                      evil-mc)          ; Multiple cursors for evil
+
+     (markdown :packages
+               gh-md  ; Github preview
+               markdown-mode)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
