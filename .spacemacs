@@ -46,10 +46,10 @@ values."
      (git :packages
           magit
           evil-magit
-          gitignore-mode                ; Mode for editing .gitignores
-          git-commit                    ; Mode for editing commits
+          gitignore-mode             ; Mode for editing .gitignores
+          git-commit                 ; Mode for editing commits
           :variables
-          magit-diff-refine-hunk t)     ; Show word-level diff in active Magit hunk
+          magit-diff-refine-hunk t)  ; Show word-level diff in active Magit hunk
 
      (c-c++ :packages
             cc-mode
@@ -86,12 +86,12 @@ values."
      (spacemacs-editing :packages
                         clean-aindent-mode  ; Smart auto-indent and backspace-unindent
                         expand-region
-                        smartparens)  ; Auto-insert pairs
+                        smartparens)        ; Auto-insert pairs
 
      (spacemacs-editing-visual :packages
                                highlight-parentheses  ; Highlight surrounding parens
-                               rainbow-delimiters  ; Color delimiters according to depth
-                               volatile-highlights)  ; Flash text on certain operations
+                               rainbow-delimiters     ; Color delimiters according to depth
+                               volatile-highlights)   ; Flash text on certain operations
 
      (spacemacs-evil :packages
                      evil-iedit-state
@@ -486,7 +486,14 @@ you should place your code here."
   ;; Use key-translation-map to override any "C-h" bindings that any major or minor mode tries to introduce.
   ;; Functionality duplicated by <f1>
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
-  )
+
+  (defun gw/align-comments (beginning end)
+    "Align comments within marked region."
+    (interactive "*r")
+    (let (indent-tabs-mode align-to-tab-stop)
+      (align-regexp beginning end (concat "\\(\\s-*\\)"
+                                          (regexp-quote comment-start)) 1 2)))
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
