@@ -112,7 +112,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(dtrt-indent)
+   dotspacemacs-additional-packages '(dtrt-indent hl-anything)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -407,7 +407,15 @@ you should place your code here."
                         :inherit nil
                         :foreground nil
                         :background (color-darken-name (face-background 'default) 5)))
-
+  ;; Use hl-anything to highlight arbitrary strings
+  (use-package hl-anything
+    ;; Defer loading until one of these commands is invoked
+    ;; Keybindings are set up below
+    :commands (hl-highlight-thingatpt-global hl-unhighlight-all-global)
+    :config
+    (hl-highlight-mode)
+    (setq-default hl-highlight-save-file nil)  ; Don't persist highlights to disk
+    (spacemacs|hide-lighter hl-highlight-mode))
 
   ;; EDITING TEXT
   ;; Auto-detect tab/space usage and offset from file settings
@@ -455,8 +463,8 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "C-k") 'other-window)
   (define-key evil-insert-state-map (kbd "C-k") 'other-window)
   ;; Highlight symbol at point
-  (define-key evil-normal-state-map (kbd "C-*") 'evil-search-highlight-persist-remove-all)
-  (define-key evil-normal-state-map (kbd "C-8") 'hlt-highlight-symbol)
+  (define-key evil-normal-state-map (kbd "&") 'hl-highlight-thingatpt-global)
+  (define-key evil-normal-state-map (kbd "C-&") 'hl-unhighlight-all-global)
   ;; Redo
   (define-key evil-normal-state-map (kbd "U") 'undo-tree-redo)
   ;; Avy
@@ -537,7 +545,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (gitignore-mode evil-magit magit magit-popup git-commit with-editor flycheck-pos-tip flycheck dtrt-indent company-quickhelp pos-tip company-statistics company volatile-highlights rainbow-delimiters highlight-parentheses clean-aindent-mode smartparens expand-region spaceline s dash powerline evil-mc evil-indent-plus evil-args evil-anzu anzu which-key wgrep use-package smex pcre2el macrostep ivy-hydra hydra help-fns+ helm-make helm helm-core popup flx exec-path-from-shell evil-visualstar evil-escape evil goto-chg undo-tree elisp-slime-nav diminish counsel-projectile projectile pkg-info epl counsel swiper ivy bind-map bind-key auto-compile packed async ace-window avy)))
+    (hl-anything ranger markdown-mode gh-md highlight-numbers parent-mode adaptive-wrap evil-iedit-state iedit highlight company-anaconda pyvenv pyenv-mode pip-requirements anaconda-mode pythonic gitignore-mode evil-magit magit magit-popup git-commit with-editor flycheck-pos-tip flycheck dtrt-indent company-quickhelp pos-tip company-statistics company volatile-highlights rainbow-delimiters highlight-parentheses clean-aindent-mode smartparens expand-region spaceline s dash powerline evil-mc evil-indent-plus evil-args evil-anzu anzu which-key wgrep use-package smex pcre2el macrostep ivy-hydra hydra help-fns+ helm-make helm helm-core popup flx exec-path-from-shell evil-visualstar evil-escape evil goto-chg undo-tree elisp-slime-nav diminish counsel-projectile projectile pkg-info epl counsel swiper ivy bind-map bind-key auto-compile packed async ace-window avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
