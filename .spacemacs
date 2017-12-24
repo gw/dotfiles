@@ -36,7 +36,8 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ranger
+     (ranger :variables
+             ranger-cleanup-on-disable t)
      ivy  ; Lighter, faster, simpler than Helm
      emacs-lisp
 
