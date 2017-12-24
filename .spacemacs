@@ -97,7 +97,6 @@ values."
 
      (spacemacs-evil :packages
                      evil-iedit-state
-                     evil-search-highlight-persist
                      evil-anzu         ; Match count for "/" search
                      evil-args         ; Func arg textobjects
                      evil-indent-plus  ; Indentation level textobjects
