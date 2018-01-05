@@ -530,6 +530,12 @@ you should place your code here."
   ;; Use key-translation-map to override any "C-h" bindings that any major or minor mode tries to introduce.
   ;; Functionality duplicated by <f1>
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
+  ;; COMPILING / TESTING
+  (spacemacs/set-leader-keys
+    "cC" 'helm-make-projectile
+    "cc" 'compile
+    "pT" nil
+    "pt" 'projectile-test-project)
 
   (defun gw/align-comments (beginning end)
     "Align comments within marked region."
