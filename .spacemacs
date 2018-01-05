@@ -513,6 +513,20 @@ you should place your code here."
   ;;       '((t . ivy--regex-fuzzy)))
   ;; Don't auto-add projects in Projectile
   (setq projectile-track-known-projects-automatically nil)
+  ;; spacemacs/search-project-auto appears to be broken at the moment
+  ;; (spacemacs/set-leader-keys
+  ;;   "/" 'counsel-projectile-ag
+  ;;   "sp" 'counsel-projectile-ag)
+
+
+  ;; GENERIC KEYBINDINGS / CUSTOM FUNCTIONS
+  ;; Use command as Meta and alt as super, instead of other way around
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'super)
+
+  ;; Use key-translation-map to override any "C-h" bindings that any major or minor mode tries to introduce.
+  ;; Functionality duplicated by <f1>
+  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 
   ;; VERSION CONTROL
   (spacemacs/set-leader-keys
@@ -523,13 +537,6 @@ you should place your code here."
     "gfD" 'magit-diff-buffer-file-popup
     )
 
-  ;; GENERIC KEYBINDINGS / CUSTOM FUNCTIONS
-  ;; Use command as Meta and alt as super, instead of other way around
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'super)
-  ;; Use key-translation-map to override any "C-h" bindings that any major or minor mode tries to introduce.
-  ;; Functionality duplicated by <f1>
-  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
   ;; COMPILING / TESTING
   (spacemacs/set-leader-keys
     "cC" 'helm-make-projectile
