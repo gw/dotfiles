@@ -450,13 +450,16 @@ you should place your code here."
   ;; Turn on multiple cursors
   (global-evil-mc-mode)
   ;; Go to beginning and end of lines
-  (define-key evil-normal-state-map (kbd "H") (kbd "^"))
-  (define-key evil-normal-state-map (kbd "L") (kbd "$"))
+  (define-key evil-normal-state-map (kbd "H") (kbd "_"))
+  (define-key evil-normal-state-map (kbd "L") (kbd "g_"))
+  (define-key evil-visual-state-map (kbd "H") (kbd "_"))
+  (define-key evil-visual-state-map (kbd "L") (kbd "g_"))
   ;; Always move by visual lines (not logical lines) in normal/visual modes
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
   (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
+
   ;; Jump to mark by column, not just line
   (define-key evil-normal-state-map (kbd "'") 'evil-goto-mark)
   ;; C-k to swap splits
