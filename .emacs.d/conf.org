@@ -121,6 +121,12 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   (setq x-stretch-cursor 1)
 #+END_SRC
 
+** Load some nice themes and pick one
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package zenburn-theme)
+  (load-theme 'adwaita t)
+  ;; (load-theme 'zenburn t)
+#+END_SRC
 ** Org Mode
 *** Syntax highlight code blocks
 #+BEGIN_SRC emacs-lisp
@@ -149,6 +155,13 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
 When enabled as a minor mode, it will transparently try to set the indentation offset and `indent-tabs-mode` if it confidently detect what the currently-edited file is doing. It's source code is well-documented-just read it if you're having trouble.
 #+BEGIN_SRC emacs-lisp
   (use-package dtrt-indent
+    :defer t
+    :init
+    (add-hook 'prog-mode-hook 'dtrt-indent-mode)
+    :config
+    (setq dtrt-indent-verbosity 2))
+#+END_SRC
+
     :config
     (setq dtrt-indent-verbosity 2)
     (dtrt-indent-mode t))
@@ -156,7 +169,7 @@ When enabled as a minor mode, it will transparently try to set the indentation o
 
 
 * Editing/Selecting Text
-** Use expand-region for easy semantic highlighting
+** Use "C-=": expand-region for easy semantic highlighting
 This is the only non-Vim way I can live without "cib" and friends
 #+BEGIN_SRC emacs-lisp
   (use-package expand-region
@@ -174,6 +187,7 @@ It's easy to accidentally edit across folds--throw an error.
 #+END_SRC
 
 
+
 * Languages
 ** YAML
 *** Install yaml-mode
@@ -184,7 +198,7 @@ It's easy to accidentally edit across folds--throw an error.
 
 
 * Autocomplete
-** Use hippie-expand instead of dabbrev-expand
+** "M-/": hippie-expand instead of dabbrev-expand
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-/") 'hippie-expand)
 #+END_SRC
@@ -226,10 +240,15 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
 #+END_SRC
 
 
-* Searching
+* Searching / Navigation
 ** More extensive apropos search
 #+BEGIN_SRC emacs-lisp
   (setq apropos-do-all t)
+#+END_SRC
+
+** Show Speedbar in same frame
+#+BEGIN_SRC emacs-lisp
+  (use-package sr-speedbar)
 #+END_SRC
 
 ** Show current match/total in modeline with isearch
@@ -242,7 +261,7 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
 #+BEGIN_SRC emacs-lisp
   (use-package avy
     :bind
-    ("M-'" . avy-goto-word-1)
+    ("C-'" . avy-goto-word-1)
     :config
     (setq avy-background t)  ; Grey background when displaying results
     (setq avy-keys
@@ -309,6 +328,8 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
 #+END_SRC
 
 
+* VC / Diffing
+
 * Generic Keybindings / Custom Functions
 ** Emacs
 *** Edit this file
@@ -329,6 +350,7 @@ Use <f1> to access help menus instead.
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 #+END_SRC
 *** C-w: Kill backwards word if region is not active
+Since this uses `global-set-key` it can be overridden.
 #+BEGIN_SRC emacs-lisp
   (defun gw/kill-region-or-word (arg)
       "When called interactively with no region, kill a word backwards."
@@ -386,6 +408,7 @@ Default: add or remove faces to text in region
 #+END_SRC
 
 
+
 ** Org Mode
 *** <el: Elisp source block template
 #+BEGIN_SRC emacs-lisp
@@ -414,3 +437,8 @@ Use the former to define a global keymapping, use the latter to define a mapping
 `c-mode-base-map` applies to all languages that cc-mode supports, whereas `c-mode-map` applies to just the C language.
 
 `key-translation-map` is a lower-level mapping that basically modifies what keystrokes Emacs sees. `global-set-key` mappings are overridden by minor mode mappings--`key-translation-map` mappings are not.
+
+
+* TODO
+- Set up automatic TAGS file loading when switching projects, instead of doing M-x visit-tags-table manually when switching projects.
+- Make a globally-enabled minor mode for keybindings that should be active everywhere, like C-w
