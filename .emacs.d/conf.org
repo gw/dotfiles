@@ -239,6 +239,11 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+END_SRC
 
+** Switch focus to new help buffers for easier <q> quitting
+#+BEGIN_SRC emacs-lisp
+  (setq-default help-window-select t)
+#+END_SRC
+
 
 * Point
 ** Save point location across sessions
