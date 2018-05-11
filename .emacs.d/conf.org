@@ -198,6 +198,11 @@ It's easy to accidentally edit across folds--throw an error.
     :mode "\\.ya?ml\\'")
 #+END_SRC
 
+** Ruby
+*** Don't insert "coding: utf-8" magic comment
+#+BEGIN_SRC emacs-lisp
+  (setq ruby-insert-encoding-magic-comment nil)
+#+END_SRC
 
 * Autocomplete
 ** "M-/": hippie-expand instead of dabbrev-expand
