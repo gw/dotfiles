@@ -1,0 +1,70 @@
+[
+    { "keys": ["w", "f"], "command": "_enter_normal_mode",
+        "args": {"mode": "mode_insert"},
+        "context": [{"key": "vi_insert_mode_aware"}]
+    },
+    { "keys": ["f", "w"], "command": "_enter_normal_mode",
+        "args": {"mode": "mode_insert"},
+        "context": [{"key": "vi_insert_mode_aware"}]
+    },
+    { "keys": ["alt+f"], "command": "move",
+        "args": {"by": "word_ends", "forward": true},
+        "context": [{"key": "vi_insert_mode_aware"}]
+    },
+    { "keys": ["alt+b"], "command": "move",
+        "args": {"by": "words", "forward": false},
+        "context": [{"key": "vi_insert_mode_aware"}]
+    },
+    { "keys": ["alt+d"], "command": "delete_word",
+        "args": {"sub_words": false, "forward": true},
+        "context": [{"key": "vi_insert_mode_aware"}]
+    },
+    { "keys": ["super+shift+e"], "command": "toggle_side_bar",
+      "context": [{ "key": "setting.command_mode", "operand": true }]
+    },
+    { "keys": ["U"], "command": "redo",
+      "context":
+        [
+            { "key": "setting.command_mode", "operand": true },
+            { "key": "setting.is_widget", "operand": false }
+        ]
+    },
+    { "keys": [" ", "w"], "command": "save_all",
+        "context":
+        [
+            { "key": "setting.command_mode", "operand": true },
+            { "key": "setting.is_widget", "operand": false }
+        ]
+    },
+    { "keys": [" ", "f"], "command": "show_overlay",
+        "args": {
+            "overlay": "goto",
+            "show_files": true
+        },
+        "context":
+        [
+            { "key": "setting.command_mode", "operand": true },
+            { "key": "setting.is_widget", "operand": false }
+        ]
+    },
+    { "keys": [" ", "d"], "command": "close",
+        "context":
+        [
+            { "key": "setting.command_mode", "operand": true },
+            { "key": "setting.is_widget", "operand": false }
+        ]
+    },
+    { "keys": ["ctrl+o"], "command": "jump_forward" },
+    { "keys": ["ctrl+i"], "command": "jump_back" },
+    { "keys": ["ctrl+9"], "command": "prev_view",
+      "context": []
+    },
+    { "keys": ["ctrl+0"], "command": "next_view",
+      "context": []
+    },
+    { "keys": ["ctrl+t"], "command": "focus_neighboring_group",
+      "context": []
+    },
+    { "keys": ["f12"], "command": "navigate_to_definition" },
+    { "keys": ["shift+f12"], "command": "goto_definition" },
+]

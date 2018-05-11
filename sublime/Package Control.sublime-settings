@@ -1,0 +1,23 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"All Autocomplete",
+		"Babel",
+		"CTags",
+		"Git",
+		"GitGutter",
+		"NeoVintageous",
+		"Package Control",
+		"Puppet",
+		"SideBarEnhancements",
+		"Solarized Color Scheme",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"SublimeLinter-rubocop"
+	]
+}
