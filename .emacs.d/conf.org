@@ -147,6 +147,12 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 #+END_SRC
 
+** Correctly indent soft-wrapped lines
+#+BEGIN_SRC emacs-lisp
+  (use-package adaptive-wrap
+      :defer t  ; Needed b/c we're not using any of the implicit defer macros
+      :init (add-hook 'visual-line-mode-hook 'adaptive-wrap-prefix-mode))
+#+END_SRC
 ** Use dtrt-indent to auto-detect indentation in some modes
 When enabled as a minor mode, it will transparently try to set the indentation offset and `indent-tabs-mode` if it confidently detect what the currently-edited file is doing. It's source code is well-documented-just read it if you're having trouble.
 #+BEGIN_SRC emacs-lisp
