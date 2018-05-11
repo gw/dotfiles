@@ -336,6 +336,7 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
     :config
     (setq projectile-completion-system 'ivy)
     (setq projectile-track-known-projects-automatically nil)  ; Don't auto-detect projects--it's noisy
+    (setq projectile-enable-caching t)
     (projectile-mode))  ; Enable projectile-mode globally
 #+END_SRC
 
