@@ -319,7 +319,7 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
            "\\|\\(?:node_modules/\\'\\)"
            ))
     (setq ivy-re-builders-alist
-          '((t . ivy--regex-fuzzy)))  ; Make Ivy always use fuzzy matching
+          '((t . ivy--regex-plus)))  ; Multi-word non-fuzzy regex matching
     :bind
     ("C-x C-f" . counsel-find-file)  ; Respects counsel-find-file-ignore-regexp
     ("M-x" . counsel-M-x)            ; Shows keybindings in results
