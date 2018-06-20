@@ -12,6 +12,11 @@
 	"find_selected_text": true,
 	"font_face": "Iosevka light",
 	"font_size": 12,
+	"font_options":
+	[
+		"no_italic",
+		"no_bold"
+	],
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
