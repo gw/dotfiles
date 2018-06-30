@@ -45,7 +45,7 @@
 
 
 * UI
-** Hide toolbars, menus, etc
+** Hide toolbars, menus, frame maximization, etc
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode 0)
   (tool-bar-mode 0)
@@ -53,6 +53,18 @@
     (scroll-bar-mode 0))
   ;; Disable all alarms
   (setq ring-bell-function 'ignore)
+
+  ;; Custom function to toggle fullscreen on mac
+  ;; This only works on railwaycat emacs
+  ;; on railwaycat emacs you can just hold shift and
+  ;; pinch in/out--I keep this around for when I'm
+  ;; using a mouse instead of a trackpad
+  (defun gw/mac-toggle-fullscreen ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen
+      (if (frame-parameter nil 'fullscreen)
+        nil
+        'fullboth)))
 #+END_SRC
 
 ** Narrower fringes
