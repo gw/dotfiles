@@ -374,6 +374,10 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
     (interactive)
     (find-file "~/.emacs.d/conf.org"))
 #+END_SRC
+*** Enable M- commands like M-h (highlight paragraph)
+#+BEGIN_SRC emacs-lisp
+  (setq mac-pass-command-to-system nil)
+#+END_SRC
 *** Swap Meta and Super so Meta is closer to thumb
 #+BEGIN_SRC emacs-lisp
   (setq mac-command-modifier 'meta)
@@ -475,6 +479,7 @@ Use the former to define a global keymapping, use the latter to define a mapping
 `key-translation-map` is a lower-level mapping that basically modifies what keystrokes Emacs sees. `global-set-key` mappings are overridden by minor mode mappings--`key-translation-map` mappings are not.
 
 
-* TODO
+* Stuff for future
 - Set up automatic TAGS file loading when switching projects, instead of doing M-x visit-tags-table manually when switching projects.
 - Make a globally-enabled minor mode for keybindings that should be active everywhere, like C-w
+- Disable bold fonts after init, so it actually works (after everything else loads)
