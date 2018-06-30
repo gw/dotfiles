@@ -271,6 +271,10 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
 
 
 * Searching / Navigation
+** Faster highlighting with incremental search
+#+BEGIN_SRC emacs-lisp
+  (setq lazy-highlight-initial-delay 0.06)
+#+END_SRC
 ** More extensive apropos search
 #+BEGIN_SRC emacs-lisp
   (setq apropos-do-all t)
@@ -287,7 +291,7 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
     :config (global-anzu-mode))
 #+END_SRC
 
-** M-': Avy for "easymotion" behavior
+** C-': Avy for "easymotion" behavior
 #+BEGIN_SRC emacs-lisp
   (use-package avy
     :bind
@@ -360,6 +364,7 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
 
 
 * VC / Diffing
+
 
 * Generic Keybindings / Custom Functions
 ** Emacs
