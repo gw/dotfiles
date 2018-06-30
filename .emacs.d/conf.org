@@ -10,6 +10,10 @@
 
   ;; Try to use UTF8 when possible
   (prefer-coding-system 'utf-8)
+
+  ;; I use the setup here: https://gist.github.com/ChillingHsu/513f9d0333f03592576338f90bc2f898
+  ;; to run railwaycat emacs as a server and open new files from the commandline with emacsclient
+  (server-start)
 #+END_SRC
 
 
