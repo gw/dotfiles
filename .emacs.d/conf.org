@@ -135,9 +135,10 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
 
 ** Load some nice themes and pick one
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package zenburn-theme)
-  (load-theme 'adwaita t)
-  ;; (load-theme 'zenburn t)
+  (use-package hc-zenburn-theme
+    :config
+    (load-theme 'hc-zenburn t))
+  ;; (load-theme 'adwaita t)
 #+END_SRC
 ** Org Mode
 *** Syntax highlight code blocks
@@ -219,6 +220,7 @@ It's easy to accidentally edit across folds--throw an error.
 #+BEGIN_SRC emacs-lisp
   (setq ruby-insert-encoding-magic-comment nil)
 #+END_SRC
+
 
 * Autocomplete
 ** "M-/": hippie-expand instead of dabbrev-expand
