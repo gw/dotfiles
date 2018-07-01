@@ -38,6 +38,8 @@ stty stop undef
 stty start undef
 
 # Grant's aliases
+# Emacs
+alias e='emacs'
 # Shell
 alias l='ls -Gp'
 alias la='ls -Gpa'
