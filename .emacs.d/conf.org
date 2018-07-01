@@ -133,12 +133,12 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   (setq x-stretch-cursor 1)
 #+END_SRC
 
-** Load some nice themes and pick one
+** Pick a theme
 #+BEGIN_SRC emacs-lisp
-  (use-package hc-zenburn-theme
-    :config
-    (load-theme 'hc-zenburn t))
-  ;; (load-theme 'adwaita t)
+  ;; I use the default them during the day and zenburn at night
+  ;; (use-package hc-zenburn-theme
+  ;;   :config
+  ;;   (load-theme 'hc-zenburn t))
 #+END_SRC
 ** Org Mode
 *** Syntax highlight code blocks
