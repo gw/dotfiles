@@ -75,7 +75,7 @@
 These custom scaling functions affect text EVERYWHERE, not just the current buffer.
 #+BEGIN_SRC emacs-lisp
   (setq gw/default-font "Iosevka light")
-  (setq gw/default-font-size 12)
+  (setq gw/default-font-size 13)
   (setq gw/current-font-size gw/default-font-size)
 
   (setq gw/font-change-increment 1.1)
