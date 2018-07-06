@@ -487,6 +487,11 @@ Use the former to define a global keymapping, use the latter to define a mapping
 `key-translation-map` is a lower-level mapping that basically modifies what keystrokes Emacs sees. `global-set-key` mappings are overridden by minor mode mappings--`key-translation-map` mappings are not.
 
 
+* Setting Emacs up on a new machine
+- Download ripgrep
+- brew install railwaycat/emacs
+- git clone the appropriate emacs source and make sure it matches `find-function-C-source-directory`
+
 * Stuff for future
 
 * How To Do Stuff in Emacs
