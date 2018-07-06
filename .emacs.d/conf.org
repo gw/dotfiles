@@ -484,6 +484,152 @@ Use the former to define a global keymapping, use the latter to define a mapping
 
 
 * Stuff for future
-- Set up automatic TAGS file loading when switching projects, instead of doing M-x visit-tags-table manually when switching projects.
-- Make a globally-enabled minor mode for keybindings that should be active everywhere, like C-w
-- Disable bold fonts after init, so it actually works (after everything else loads)
+
+* How To Do Stuff in Emacs
+** Elisp
+*** How Elisp Works
+Lisp is simple. Everything is s list. All lists are ready-to-run programs. All lists are data--sequences of atoms separated by whitespace. All the interpreter does is:
+  1) Check if there's a quote before the list. If so, it just gives the list back to you.
+  2) If not, it looks for a function definition by the name of the first element. If it finds one, it first evaluates any contained lists and then executes the function. If it doesn't, it prints an error message.
+  3) If it's a symbol that's not in a list, treat it as a variable.
+
+*** Symbols can be used as variables AND functions
+In `(+ 3 3)`, '+' is treated as a function b/c it's the first element of a list.
+In `+`, '+' is treated as a variable--evaluating this will result in a void-variable error
+Symbols can be used as both--think of them as a chest with two drawers. In one, you can put a function definition--in the other, you can put a varying value. The two don't affect each other.
+
+** Quick Text Manipulation
+*** Highlight Paragraph over piont
+M-h
+*** Reflow paragraph over point
+M-q
+*** Undo only in region
+C-u C-/
+
+** Bulk Text Manipulation
+*** Show all regexp matches in a file
+M-x occur
+
+*** Replace all string/regexp matches in a file
+string: M-% aka M-x query-replace
+Regexp: C-M-% aka M-x query-replace-regexp
+
+Both can be tested with C-s, isearch-forward-regexp, to test your regexp. When it looks right just press M-% and go (it's smart enough to know that you want query-replace-regexp if you invoke it from isearch-forward-regexp)
+These regexes are pretty powerful. Use '\(\)' in the regex to specify capture groups.
+Replacement text has:
+- \& the matched string
+- \1, \2 numbered capture groups
+- \# the number of matched lines so far
+- \? prompt user for what to enter at each replacement
+- \, arbitrary (lisp expression)
+
+*** Replace all string-regexp matches in project
+
+*** Run shell command on region, replacing it with output
+Highlight region and do:
+M-|
+With a prefix arg it replaces the region with the output of the shell command
+
+*** Turn on hard line wrapping for a buffer
+aka have Emacs insert newline characters automatically, a la "fill-region".
+Just enable 'auto-fill-mode. This will insert newline characters at 'fill-column
+as you type.
+
+** Navigation
+*** Setting a persistent place to jump back to
+Registers!
+C-x r <SPC> "key"
+Save position of point to a register named by "key"
+
+C-x r j "key"
+Jump to the register named by "key". Can be in a different, unopened buffer.
+
+*** Jumping back to where just were, after searching
+C-u C-SPC
+Move backwards through mark ring
+
+** Layout
+*** Toggle Fullscreen (railwaycat only)
+Hold shift and pinch in/out
+Executes `mac-mouse-turn-on-fullscreen`
+*** Save a window configuration
+Registers, again!
+C-x r w "key"
+
+Accessed just like any register:
+C-x r j "key"
+** Org Mode
+*** Word-wrap lines at frame boundary
+toggle-truncate-lines
+visual-line-mode
+
+** Calling functions
+*** Call interactive function with an argument
+If an interactive function takes an argument, that argument comes from the prefix argument, which is best passed with <M-number> before calling <M-x> to find the function or using its keybinding.
+Are prefix arguments always numbers?
+** Info Mode
+*** Navigation
+**** Basic Navigation
+- <?> show keybindings popup
+These only progress through nodes at your current level
+- <n> go to next node at current level, if any
+- <p> go to prev node at current level, if any
+- <l> go to last node you were just at (useful for coming back from distant xrefs)
+- <r> opposite of <l>
+These can progress through every node in the document
+- <]> go to next child or node if no more children
+- <[> go to last child of previous node
+
+- <t> go to top of current manual
+- <d> go back to Directory, which links to all manuals
+**** Menu links and xrefs
+- <TAB>, <S-TAB> cycle through *Menu items and xrefs in the node
+- <m> open *Menu select dialogue for node
+- <f> open xref dialogue for node
+*** Searching
+- <i> search the manual's index--<,> cycles through each match until you've found what you're looking for. This should be the first thing you search--commands, options, and key sequences should all be indexed.
+  - <I> builds a virtual node with the results of the search
+  - `info-apropos` searches across all indices of all manuals on your system
+- <C-r>, <C-s> incremental search across the entire manual
+- <g> go to a node in the manual by name
+*** Windows
+- <M-n> opens another, independent Info buffer (for going off on tangents)
+
+** TODO
+*** Disable bold fonts after init, so it actually works (after everything else loads)
+*** Figure out a good way to move around when you have more than 2 splits
+*** Disable autocompletion in comments
+*** Show full file path and Major mode in status line, and nothing else
+*** Understand and install visual-fill-column
+*** Highlight all occurrences of region across buffers
+Either with a keyboard shortcut or automatically whenever the region is active
+
+*** Navigate global mark ring forwards and backwards, and make it work across files
+https://stackoverflow.com/questions/3393834/how-to-move-forward-and-backward-in-emacs-mark-ring
+*** Start fuzzy finding in dir from counsel-find-file or dired
+*** Grep in open/recent buffers
+*** Fast grep entire project for symbol, while tuning case sensitivity and whole-word-ness
+- Basically replicating Sublime search in emacs
+- Also: preserve search results in a buffer so you can go back to them without re-running the search
+*** Show all class/method/function/constant definitions in a file, regardless of language (Sublime cmd-r)
+*** Make <tab> and <backtab> just insert tabs, and bind something else to 're-indent'
+...and also automatically re-indent when yanking lines
+...and also fix weird indenting behavior when entering new lines in param lists
+*** Figure out the best way to test and then replace regexes in file AND project
+*** Quickly navigate splits (windmove?)
+*** Change themes on the fly without restarting emacs
+*** Ruby IDE
+- Rubocop linting
+- rippertags company
+*** Make I-search auto-wrap
+https://stackoverflow.com/questions/285660/automatically-wrapping-i-search
+*** Install indent guide package
+*** Execute this script on init to disable all bold fonts
+(mapc
+   (lambda (face)
+     (set-face-attribute face nil :weight 'normal))
+   (face-list))
+*** Get commenting with M-; to work in Org-mode code snippets
+*** Automatically update Projectile cache when a new file gets created
+*** Go through info tutorial at f1 i, then ?
+*** Persistent undo to cache dir
