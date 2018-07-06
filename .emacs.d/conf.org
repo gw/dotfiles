@@ -448,6 +448,10 @@ Default: add or remove faces to text in region
 #+END_SRC
 
 
+*** C-s: Swiper instead of forward-i-search
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
+#+END_SRC
 
 ** Org Mode
 *** <el: Elisp source block template
