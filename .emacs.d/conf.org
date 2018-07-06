@@ -11,6 +11,10 @@
   ;; Try to use UTF8 when possible
   (prefer-coding-system 'utf-8)
 
+  ;; Since I didn't compile Emacs from source, I have to download the source files separately
+  ;; and point Emacs to it manually so that M-. knows where to look
+  (setq find-function-C-source-directory "~/Code/git/emacs/src/")
+
   ;; I use the setup here: https://gist.github.com/ChillingHsu/513f9d0333f03592576338f90bc2f898
   ;; to run railwaycat emacs as a server and open new files from the commandline with emacsclient
   (server-start)
