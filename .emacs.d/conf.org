@@ -490,6 +490,43 @@ Use the former to define a global keymapping, use the latter to define a mapping
 - git clone the appropriate emacs source and make sure it matches `find-function-C-source-directory`
 
 * Stuff for future
+*** Figure out how to change keybindings on particular contexts, e.g. ivy minibuffer (bind S-SPC to ivy-restrict-to-matches) and when autocomplete menu is visible (bind C-w to still be backwards kill word instead of showing documentation)
+*** Disable bold fonts after init, so it actually works (after everything else loads)
+*** Figure out a good way to move around when you have more than 2 splits
+*** Disable autocompletion in comments
+*** Show full file path and Major mode in status line, and nothing else
+*** Understand and install visual-fill-column
+*** Highlight all occurrences of region across buffers
+Either with a keyboard shortcut or automatically whenever the region is active
+
+*** Navigate global mark ring forwards and backwards, and make it work across files
+https://stackoverflow.com/questions/3393834/how-to-move-forward-and-backward-in-emacs-mark-ring
+*** Start fuzzy finding in dir from counsel-find-file or dired
+*** Grep in open/recent buffers
+*** Fast grep entire project for symbol, while tuning case sensitivity and whole-word-ness
+- Basically replicating Sublime search in emacs
+- Also: preserve search results in a buffer so you can go back to them without re-running the search
+*** Show all class/method/function/constant definitions in a file, regardless of language (Sublime cmd-r)
+*** Make <tab> and <backtab> just insert tabs, and bind something else to 're-indent'
+...and also automatically re-indent when yanking lines
+...and also fix weird indenting behavior when entering new lines in param lists
+*** Figure out the best way to test and then replace regexes in file AND project
+*** Quickly navigate splits (windmove?)
+*** Ruby IDE
+- Rubocop linting
+- rippertags company
+*** Make I-search auto-wrap
+https://stackoverflow.com/questions/285660/automatically-wrapping-i-search
+*** Install indent guide package
+*** Execute this script on init to disable all bold fonts
+(mapc
+   (lambda (face)
+     (set-face-attribute face nil :weight 'normal))
+   (face-list))
+*** Get commenting with M-; to work in Org-mode code snippets
+*** Automatically update Projectile cache when a new file gets created
+*** Persistent undo to cache dir
+
 
 * How To Do Stuff in Emacs
 ** Elisp
@@ -543,12 +580,27 @@ as you type.
 
 ** Navigation
 *** Setting a persistent place to jump back to
-Registers!
-C-x r <SPC> "key"
-Save position of point to a register named by "key"
+Two options: Registers and Bookmarks
 
-C-x r j "key"
+Registers: named by single-letter "key"s, don't persist across Emacs sessions. Good for quickly saving locations related to your current task, but which you probably won't need to remember later.
+Save position of point to a register named by "key"
+C-x r <SPC> "key"
+
 Jump to the register named by "key". Can be in a different, unopened buffer.
+C-x r j "key"
+
+Bookmarks: named by arbitrary strings, do persist across Emacs sessions--when you exit Emacs any modified bookmarks will be persisted to bookmark-default-file, which defaults to ~/.emacs.d/bookmarks. Good for saving locations that you'll come back to frequently over the course of a project.
+Save position of point to a bookmark named "name":
+C-x r m "name"
+
+Jump to a bookmark named "name". Can be in a different, unopened buffer.
+C-x r b "name"
+
+Delete a bookmark named "name"
+(bookmark-delete)
+
+List all bookmarks, annotate/modify them
+C-x r l
 
 *** Jumping back to where just were, after searching
 C-u C-SPC
@@ -600,42 +652,3 @@ These can progress through every node in the document
 - <g> go to a node in the manual by name
 *** Windows
 - <M-n> opens another, independent Info buffer (for going off on tangents)
-
-** TODO
-*** Disable bold fonts after init, so it actually works (after everything else loads)
-*** Figure out a good way to move around when you have more than 2 splits
-*** Disable autocompletion in comments
-*** Show full file path and Major mode in status line, and nothing else
-*** Understand and install visual-fill-column
-*** Highlight all occurrences of region across buffers
-Either with a keyboard shortcut or automatically whenever the region is active
-
-*** Navigate global mark ring forwards and backwards, and make it work across files
-https://stackoverflow.com/questions/3393834/how-to-move-forward-and-backward-in-emacs-mark-ring
-*** Start fuzzy finding in dir from counsel-find-file or dired
-*** Grep in open/recent buffers
-*** Fast grep entire project for symbol, while tuning case sensitivity and whole-word-ness
-- Basically replicating Sublime search in emacs
-- Also: preserve search results in a buffer so you can go back to them without re-running the search
-*** Show all class/method/function/constant definitions in a file, regardless of language (Sublime cmd-r)
-*** Make <tab> and <backtab> just insert tabs, and bind something else to 're-indent'
-...and also automatically re-indent when yanking lines
-...and also fix weird indenting behavior when entering new lines in param lists
-*** Figure out the best way to test and then replace regexes in file AND project
-*** Quickly navigate splits (windmove?)
-*** Change themes on the fly without restarting emacs
-*** Ruby IDE
-- Rubocop linting
-- rippertags company
-*** Make I-search auto-wrap
-https://stackoverflow.com/questions/285660/automatically-wrapping-i-search
-*** Install indent guide package
-*** Execute this script on init to disable all bold fonts
-(mapc
-   (lambda (face)
-     (set-face-attribute face nil :weight 'normal))
-   (face-list))
-*** Get commenting with M-; to work in Org-mode code snippets
-*** Automatically update Projectile cache when a new file gets created
-*** Go through info tutorial at f1 i, then ?
-*** Persistent undo to cache dir
