@@ -315,11 +315,6 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
                ;; These are too similar to be practical in the "fast jumping" context: ?0 ?O
                )))
 #+END_SRC
-** Install flx
-For better fuzzy matching in Ivy
-#+BEGIN_SRC emacs-lisp
-  (use-package flx)
-#+END_SRC
 ** Use Ivy, Swiper, and Counsel for minibuffer stuff
 In MELPA, Ivy and Swiper are included as dependencies of Counsel, so we just have to install the latter.
 Ivy provides a generic narrowing interface similar to (but simpler than) Helm. Swiper and Counsel both use Ivy--Swiper replaces `isearch`, and Counsel replaces most of the common minibuffer search interfaces--see below.
