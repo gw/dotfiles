@@ -341,7 +341,6 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
            ))
     (setq ivy-re-builders-alist
           '((t . ivy--regex-plus)))  ; Multi-word non-fuzzy regex matching
-    (setq ivy-case-fold-search-default nil)  ; Make Ivy searches case-sensitive
     (setq counsel-rg-base-command "rg --case-sensitive --max-columns 120 --no-heading --line-number --color never %s .")
     :bind
     ("C-x C-f" . counsel-find-file)  ; Respects counsel-find-file-ignore-regexp
