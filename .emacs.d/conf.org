@@ -271,6 +271,7 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
   (windmove-default-keybindings)
 #+END_SRC
 
+
 * Point
 ** Save point location across sessions
 #+BEGIN_SRC emacs-lisp
@@ -286,11 +287,6 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
 ** More extensive apropos search
 #+BEGIN_SRC emacs-lisp
   (setq apropos-do-all t)
-#+END_SRC
-
-** Show Speedbar in same frame
-#+BEGIN_SRC emacs-lisp
-  (use-package sr-speedbar)
 #+END_SRC
 
 ** Show current match/total in modeline with isearch
