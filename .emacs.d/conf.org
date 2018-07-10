@@ -344,6 +344,9 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
     (setq counsel-rg-base-command "rg --case-sensitive --max-columns 120 --no-heading --line-number --color never %s .")
     :bind
     ("C-x C-f" . counsel-find-file)  ; Respects counsel-find-file-ignore-regexp
+    ("C-s" . counsel-grep-or-swiper) ; Replace isearch-forward with swiper
+    ("C-r" . ivy-resume)             ; Replace isearch-backward with "resume most recent ivy search"
+    ("C-M-s" . counsel-rg)           ; Replace isearch-forward-regexp with ripgrep
     ("M-x" . counsel-M-x)            ; Shows keybindings in results
     ("C-x b" . ivy-switch-buffer)    ; Otherwise, uses normal non-ivy minibuffer until you M-x ivy-switch-buffer manually, once
     ("<f1> f" . counsel-describe-function)   ; Highlights interactive functions
@@ -447,11 +450,6 @@ Default: add or remove faces to text in region
   (global-set-key (kbd "C-x 3") 'gw/split-window-right-and-switch)
 #+END_SRC
 
-
-*** C-s: Swiper instead of forward-i-search
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
-#+END_SRC
 
 ** Org Mode
 *** <el: Elisp source block template
