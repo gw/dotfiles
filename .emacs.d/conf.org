@@ -244,7 +244,9 @@ It's easy to accidentally edit across folds--throw an error.
     (bind-key "<tab>" 'company-complete-selection company-active-map)
     ; Don't complete on <enter>, just input a newline
     (unbind-key "<return>" company-active-map)
-    (unbind-key "RET" company-active-map))
+    (unbind-key "RET" company-active-map)
+    ; Don't show location on <C-w>, kill word as normal
+    (unbind-key "C-w" company-active-map))
 #+END_SRC
 NB: successful completion of stuff in shared project header files requires setting `company-clang-arguments` (preferably in a .dir-locals.el) at project root to tell company about your header files for that project. For example:
 
@@ -345,7 +347,7 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
     :bind
     ("C-x C-f" . counsel-find-file)  ; Respects counsel-find-file-ignore-regexp
     ("C-s" . counsel-grep-or-swiper) ; Replace isearch-forward with swiper
-    ("C-r" . ivy-resume)             ; Replace isearch-backward with "resume most recent ivy search"
+    ("C-M-r" . ivy-resume)           ; Replace isearch-backward-regexp with "resume most recent ivy search"
     ("C-M-s" . counsel-rg)           ; Replace isearch-forward-regexp with ripgrep
     ("M-x" . counsel-M-x)            ; Shows keybindings in results
     ("C-x b" . ivy-switch-buffer)    ; Otherwise, uses normal non-ivy minibuffer until you M-x ivy-switch-buffer manually, once
@@ -363,6 +365,12 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
     (setq projectile-track-known-projects-automatically nil)  ; Don't auto-detect projects--it's noisy
     (setq projectile-enable-caching t)
     (projectile-mode))  ; Enable projectile-mode globally
+#+END_SRC
+
+** C-x f: Jump to file below pwd instead of set-fill-column
+When used with C-u prefix arg, prompts for directory under which to search
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x f") 'counsel-file-jump)
 #+END_SRC
 
 
@@ -415,6 +423,11 @@ M-<backspace> kills backwards word by default, but that's duplicated by C-<backs
     (indent-according-to-mode))
 
   (global-set-key (kbd "M-<backspace>") 'gw/kill-line-backwards-and-indent)
+#+END_SRC
+*** s-a: Move to first char in line
+Don't need to corresponding s-e b/c we should never have trailing whitespace
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "s-a") 'beginning-of-line-text)
 #+END_SRC
 *** C-x k: Kill current buffer without asking anything
 #+BEGIN_SRC emacs-lisp
@@ -486,10 +499,15 @@ Use the former to define a global keymapping, use the latter to define a mapping
 - brew install railwaycat/emacs
 - git clone the appropriate emacs source and make sure it matches `find-function-C-source-directory`
 
+
 * Stuff for future
+** Features
+*** Modify counsel-file-jump to use ripgrep, or find another method for finding a file under a non-project directory
+*** Show search directory in prompt of counsel-rg
+*** Get S-SPC working in Ivy
+*** Magit-like interface into Ivy/Counsel that makes it easy to toggle case-sensitiviy
 *** Figure out how to change keybindings on particular contexts, e.g. ivy minibuffer (bind S-SPC to ivy-restrict-to-matches) and when autocomplete menu is visible (bind C-w to still be backwards kill word instead of showing documentation)
 *** Disable bold fonts after init, so it actually works (after everything else loads)
-*** Figure out a good way to move around when you have more than 2 splits
 *** Disable autocompletion in comments
 *** Show full file path and Major mode in status line, and nothing else
 *** Understand and install visual-fill-column
@@ -508,7 +526,6 @@ https://stackoverflow.com/questions/3393834/how-to-move-forward-and-backward-in-
 ...and also automatically re-indent when yanking lines
 ...and also fix weird indenting behavior when entering new lines in param lists
 *** Figure out the best way to test and then replace regexes in file AND project
-*** Quickly navigate splits (windmove?)
 *** Ruby IDE
 - Rubocop linting
 - rippertags company
@@ -523,6 +540,13 @@ https://stackoverflow.com/questions/285660/automatically-wrapping-i-search
 *** Get commenting with M-; to work in Org-mode code snippets
 *** Automatically update Projectile cache when a new file gets created
 *** Persistent undo to cache dir
+
+** Bugs
+*** ivy--regex-plus "!" operator doesn't work with counsel-{ag, rg}
+It's just treated as another search term
+https://github.com/abo-abo/swiper/blob/master/doc/ivy.org#ivyregex-plus
+*** Ivy results highlight case-insensitively even if ivy-case-fold-search-default is nil
+*** imenu results are truncated at a too-short column length
 
 
 * How To Do Stuff in Emacs
