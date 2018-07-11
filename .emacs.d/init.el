@@ -2,18 +2,15 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+;; Emacs' "custom" facility is honestly pretty abominable, and writes stuff to this
+;; file on occasion (custom-set-variables, custom-set-faces) which clutters it and
+;; results in extraneous diffs. This effectively disables "custom"
+(setq custom-file (make-temp-file "emacs-custom"))
+
+;; Some org-mode keybindings conflict with other builtin packages, namely windmove's
+;; S-<arrow>s. This replaces them in org mode with something else.
+;; It's set here instead of in conf.org b/c it needs to be set before org-mode, and
+;; conf.org is--well, it's a .org file.
+(setq org-replace-disputed-keys t)
+
 (org-babel-load-file "~/.emacs.d/conf.org")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (projectile counsel flx avy anzu sr-speedbar company yaml-mode expand-region dtrt-indent auto-compile use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
