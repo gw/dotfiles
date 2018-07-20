@@ -226,6 +226,29 @@ It's easy to accidentally edit across folds--throw an error.
 #+END_SRC
 
 
+* Linting
+** Set up Flycheck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :config
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (global-flycheck-mode))
+
+  (defun gw/use-pay-server-rubocop ()
+    "Try to use pay-server's rubocop script if available."
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "scripts/bin/rubocop"))
+           (rubocop (and root
+                        (expand-file-name "scripts/bin/rubocop"
+                                          root))))
+      (when (and rubocop (file-executable-p rubocop))
+        (setq-local flycheck-ruby-rubocop-executable rubocop))))
+
+  (add-hook 'flycheck-mode-hook #'gw/use-pay-server-rubocop)
+#+END_SRC
+
 * Autocomplete
 ** "M-/": hippie-expand instead of dabbrev-expand
 #+BEGIN_SRC emacs-lisp
