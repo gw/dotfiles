@@ -285,7 +285,7 @@ NB: successful completion of stuff in shared project header files requires setti
 Read more about directory-local variables [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][here]].
 
 
-* Buffers
+* Buffers / Windows
 ** Use interactive buffer menu instead of default one
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -296,9 +296,12 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
   (setq-default help-window-select t)
 #+END_SRC
 
-** Init windmove with default bindings (shift-arrow)
+** Init windmove keybindings (Ctrl-arrow)
 #+BEGIN_SRC emacs-lisp
-  (windmove-default-keybindings)
+  (global-set-key (kbd "C-<left>") 'windmove-left)
+  (global-set-key (kbd "C-<right>") 'windmove-right)
+  (global-set-key (kbd "C-<up>") 'windmove-up)
+  (global-set-key (kbd "C-<down>") 'windmove-down)
 #+END_SRC
 
 

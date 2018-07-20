@@ -7,10 +7,4 @@
 ;; results in extraneous diffs. This effectively disables "custom"
 (setq custom-file (make-temp-file "emacs-custom"))
 
-;; Some org-mode keybindings conflict with other builtin packages, namely windmove's
-;; S-<arrow>s. This replaces them in org mode with something else.
-;; It's set here instead of in conf.org b/c it needs to be set before org-mode, and
-;; conf.org is--well, it's a .org file.
-(setq org-replace-disputed-keys t)
-
 (org-babel-load-file "~/.emacs.d/conf.org")
