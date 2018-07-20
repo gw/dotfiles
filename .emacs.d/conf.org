@@ -315,7 +315,7 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
 * Searching / Navigation
 ** Faster highlighting with incremental search
 #+BEGIN_SRC emacs-lisp
-  (setq lazy-highlight-initial-delay 0.06)
+  (setq lazy-highlight-initial-delay 0.05)
 #+END_SRC
 ** More extensive apropos search
 #+BEGIN_SRC emacs-lisp
