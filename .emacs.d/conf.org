@@ -364,12 +364,12 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
           '((t . ivy--regex-plus)))  ; Multi-word non-fuzzy regex matching
     (setq counsel-rg-base-command "rg --case-sensitive --max-columns 120 --no-heading --line-number --color never %s .")
     :bind
-    ("C-x C-f" . counsel-find-file)  ; Respects counsel-find-file-ignore-regexp
-    ("C-s" . counsel-grep-or-swiper) ; Replace isearch-forward with swiper
-    ("C-M-r" . ivy-resume)           ; Replace isearch-backward-regexp with "resume most recent ivy search"
-    ("C-M-s" . counsel-rg)           ; Replace isearch-forward-regexp with ripgrep
-    ("M-x" . counsel-M-x)            ; Shows keybindings in results
-    ("C-x b" . ivy-switch-buffer)    ; Otherwise, uses normal non-ivy minibuffer until you M-x ivy-switch-buffer manually, once
+    ("C-x C-f" . counsel-find-file)     ; Respects counsel-find-file-ignore-regexp
+    ("C-S-s" . counsel-grep-or-swiper)  ; Replace redundant forward-isearch binding with swiper
+    ("C-M-r" . ivy-resume)              ; Replace isearch-backward-regexp with "resume most recent ivy search"
+    ("C-M-s" . counsel-rg)              ; Replace isearch-forward-regexp with ripgrep
+    ("M-x" . counsel-M-x)               ; Shows keybindings in results
+    ("C-x b" . ivy-switch-buffer)       ; Otherwise, uses normal non-ivy minibuffer until you M-x ivy-switch-buffer manually, once
     ("<f1> f" . counsel-describe-function)   ; Highlights interactive functions
     ("<f1> v" . counsel-describe-variable))  ; Highlights defcustoms
 
