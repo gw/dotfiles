@@ -386,10 +386,10 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
     (projectile-mode))  ; Enable projectile-mode globally
 #+END_SRC
 
-** C-x f: Jump to file below pwd instead of set-fill-column
+** C-x f: Open recent file instead of set-fill-column
 When used with C-u prefix arg, prompts for directory under which to search
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-x f") 'counsel-file-jump)
+  (global-set-key (kbd "C-x f") 'counsel-recentf)
 #+END_SRC
 
 
@@ -521,6 +521,9 @@ Use the former to define a global keymapping, use the latter to define a mapping
 
 * Stuff for future
 ** Features
+*** Make C-v and M-v set the mark, but not on subsequent invocations of C-v or M-v
+*** Fast find/replace in file / region / directory / project
+*** Function to toggle between last focused window and current window
 *** Modify counsel-file-jump to use ripgrep, or find another method for finding a file under a non-project directory
 *** Show search directory in prompt of counsel-rg
 *** Get S-SPC working in Ivy
@@ -561,6 +564,10 @@ https://stackoverflow.com/questions/285660/automatically-wrapping-i-search
 *** Persistent undo to cache dir
 
 ** Bugs
+*** counsel-rg doesn't always put the highlight on the last-viewed search result when M-p'ing to recent searches
+*** Invoking C-r projectile-find-file results in an empty list, because it doesn't call ivy with a :history. Should use C-c p e instead but I wonder if we could somehow bind that to C-r when invoked inside of C-c p f
+*** counsel-file-jump and counsel-find-file share the same reverse-i-search history, which borks because they're incompatible
+Prob give counsel-file-jump its own history cuz file-name-history appears to be shared by lots of built-in emacs stuff
 *** ivy--regex-plus "!" operator doesn't work with counsel-{ag, rg}
 It's just treated as another search term
 https://github.com/abo-abo/swiper/blob/master/doc/ivy.org#ivyregex-plus
