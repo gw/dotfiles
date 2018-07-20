@@ -262,14 +262,19 @@ It's easy to accidentally edit across folds--throw an error.
     :defer t  ; Needed b/c we're not using any of the implicit defer macros
     :init (add-hook 'prog-mode-hook 'company-mode)  ; Load when activating a programming language mode
     :config
-    (setq company-idle-delay 0.2)  ; In seconds--default is 0.5
-    ; TAB to select candidate
+    (setq company-idle-delay 0.3)           ; In seconds--default is 0.5
+    (setq company-dabbrev-downcase nil)     ; Don't downcase completions in plaintext/comments
+    (setq company-dabbrev-ignore-case nil)  ; Respect the case of what I've already typed when suggesting completions
+    ;; TAB to select candidate
     (bind-key "<tab>" 'company-complete-selection company-active-map)
-    ; Don't complete on <enter>, just input a newline
+    ;; Don't complete on <enter>, just input a newline
     (unbind-key "<return>" company-active-map)
     (unbind-key "RET" company-active-map)
-    ; Don't show location on <C-w>, kill word as normal
-    (unbind-key "C-w" company-active-map))
+    ;; Don't show location on <C-w>, kill word as normal
+    (unbind-key "C-w" company-active-map)
+    ;; Disable company-search-candidates so I can search in buffer when company is active
+    (unbind-key "C-s" company-active-map)
+    (unbind-key "C-r" company-active-map))
 #+END_SRC
 NB: successful completion of stuff in shared project header files requires setting `company-clang-arguments` (preferably in a .dir-locals.el) at project root to tell company about your header files for that project. For example:
 
