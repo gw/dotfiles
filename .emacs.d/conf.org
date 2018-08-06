@@ -285,7 +285,7 @@ NB: successful completion of stuff in shared project header files requires setti
 Read more about directory-local variables [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][here]].
 
 
-* Buffers / Windows
+* Files / Buffers / Windows
 ** Use interactive buffer menu instead of default one
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -304,6 +304,20 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
   (global-set-key (kbd "C-<down>") 'windmove-down)
 #+END_SRC
 
+** Custom function to delete the current buffer and file
+#+BEGIN_SRC emacs-lisp
+  (defun gw/delete-current-buffer-and-file ()
+    "Kill the current buffer and delete the file it's visiting."
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (when filename
+        (if (vc-backend filename)
+            (vc-delete-file filename)
+          (progn
+            (delete-file filename)
+            (message "Deleted file %s" filename)
+            (kill-buffer))))))
+#+END_SRC
 
 * Point
 ** Save point location across sessions
@@ -521,6 +535,15 @@ Use the former to define a global keymapping, use the latter to define a mapping
 
 * Stuff for future
 ** Features
+*** Write analogue of gw/delete-current-buffer-and-file that renames current buffer and file
+*** KBD shortcut to open the current line in github
+*** Improve IBuffer to show longer filenames
+*** Write comma-separated items (within a paren or list or other delimiter)
+*** Run ripper-tags on git hooks
+*** Get Sorbet in Emacs
+*** Pay-server rubocop errors (things that fail builds) show up as "info" in Flycheck. Make them show up as errors!
+Idea--delete the projectile cache on a git hook
+*** Update projectile's cache after any git actions
 *** Make C-v and M-v set the mark, but not on subsequent invocations of C-v or M-v
 *** Fast find/replace in file / region / directory / project
 *** Function to toggle between last focused window and current window
