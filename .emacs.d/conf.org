@@ -249,6 +249,7 @@ It's easy to accidentally edit across folds--throw an error.
   (add-hook 'flycheck-mode-hook #'gw/use-pay-server-rubocop)
 #+END_SRC
 
+
 * Autocomplete
 ** "M-/": hippie-expand instead of dabbrev-expand
 #+BEGIN_SRC emacs-lisp
@@ -262,7 +263,7 @@ It's easy to accidentally edit across folds--throw an error.
     :defer t  ; Needed b/c we're not using any of the implicit defer macros
     :init (add-hook 'prog-mode-hook 'company-mode)  ; Load when activating a programming language mode
     :config
-    (setq company-idle-delay 0.3)           ; In seconds--default is 0.5
+    (setq company-idle-delay 0.2)           ; In seconds--default is 0.5
     (setq company-dabbrev-downcase nil)     ; Don't downcase completions in plaintext/comments
     (setq company-dabbrev-ignore-case nil)  ; Respect the case of what I've already typed when suggesting completions
     ;; TAB to select candidate
@@ -298,10 +299,10 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
 
 ** Init windmove keybindings (Ctrl-arrow)
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-<left>") 'windmove-left)
-  (global-set-key (kbd "C-<right>") 'windmove-right)
-  (global-set-key (kbd "C-<up>") 'windmove-up)
-  (global-set-key (kbd "C-<down>") 'windmove-down)
+  (global-set-key (kbd "C-S-b") 'windmove-left)
+  (global-set-key (kbd "C-S-f") 'windmove-right)
+  (global-set-key (kbd "C-S-p") 'windmove-up)
+  (global-set-key (kbd "C-S-n") 'windmove-down)
 #+END_SRC
 
 ** Custom function to delete the current buffer and file
@@ -318,6 +319,7 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
             (message "Deleted file %s" filename)
             (kill-buffer))))))
 #+END_SRC
+
 
 * Point
 ** Save point location across sessions
@@ -535,6 +537,20 @@ Use the former to define a global keymapping, use the latter to define a mapping
 
 * Stuff for future
 ** Features
+*** Learn and set up Magit
+*** Make company autcomplete fuzzy-match and rank by recent usage
+*** Use full file path name in 'ivy-switch-buffer so you can better disambiguate
+*** Change 'mark-defun to include sig annotations that appear above the function
+*** Figure out why C-S-p doesn't register in the OS when pressed with the enter key as ctrl
+*** Figure out why the heck M-? is so slow in pay-server
+Profile out, and make it faster
+*** Have annotate-annotate just write eagerly to the annotations file, instead of touching the buffer and writing when the buffer gets saved. Should be totally transparent to the buffer itself
+*** Have 'vc-annotate try to use the biggest split that's closest to the blaming split
+Not a tiny horizontal split on the other side of the frame
+*** Projectile find file won't open files if invoked via 'ivy-resume and the target file isn't already open
+*** Test runner framework with a context, like current-filename
+- Plus a function to counsel-search b/w recently-run tests, which defaults to the most recently-run test
+*** Swiper doesn't reset font faces in *xref* buffers
 *** Write analogue of gw/delete-current-buffer-and-file that renames current buffer and file
 *** KBD shortcut to open the current line in github
 *** Improve IBuffer to show longer filenames
