@@ -297,7 +297,7 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
   (setq-default help-window-select t)
 #+END_SRC
 
-** Init windmove keybindings (Ctrl-arrow)
+** Init windmove keybindings (Ctrl+Shift+<direction>)
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-S-b") 'windmove-left)
   (global-set-key (kbd "C-S-f") 'windmove-right)
@@ -333,6 +333,24 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
            (t
             (rename-file filename new-name t)
             (set-visited-file-name new-name t t)))))))
+#+END_SRC
+** Init winner-mode to remember window configurations
+C-c <left> to move down configuration stack
+C-c <right> to jump to top of configuration stack
+#+BEGIN_SRC emacs-lisp
+  (use-package winner
+    :config
+    (setq winner-boring-buffers '("*Completions*"
+                                  "*Compile-Log*"
+                                  "*inferior-lisp*"
+                                  "*Fuzzy Completions*"
+                                  "*Apropos*"
+                                  "*Help*"
+                                  "*cvs*"
+                                  "*Buffer List*"
+                                  "*Ibuffer*"
+                                  ))
+    (winner-mode 1))
 #+END_SRC
 
 
