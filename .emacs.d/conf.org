@@ -626,6 +626,27 @@ Lisp is simple. Everything is s list. All lists are ready-to-run programs. All l
 In `(+ 3 3)`, '+' is treated as a function b/c it's the first element of a list.
 In `+`, '+' is treated as a variable--evaluating this will result in a void-variable error
 Symbols can be used as both--think of them as a chest with two drawers. In one, you can put a function definition--in the other, you can put a varying value. The two don't affect each other.
+*** cons vs car vs cdr
+Note: All are non-mutating
+
+cons: Short for "construct"
+  - Returns a list with an element pushed onto the beginning of a list
+(cons 'pine '(fir oak maple))
+-> (pine fir oak maple)
+
+car:  Acronym for "Contents of Address part of Register"
+  - The CAR of a list is the first item in the list
+  - Could be called "first"
+(car '(fir oak maple))
+-> fir
+
+cdr:  Acronym for "Contents of Decrement part of Register"
+  - The CDR of a list is a list containing everything after the first item in the list
+  - Could be called "rest"
+(cdr '(fir oak maple))
+-> (oak maple)
+
+Holdovers from original Lisp machines, have been obsolete for years
 
 ** Quick Text Manipulation
 *** Highlight Paragraph over piont
