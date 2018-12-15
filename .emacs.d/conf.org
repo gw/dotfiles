@@ -319,6 +319,21 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
             (message "Deleted file %s" filename)
             (kill-buffer))))))
 #+END_SRC
+** Custom function to rename the current buffer and file
+#+BEGIN_SRC emacs-lisp
+  (defun gw/rename-current-buffer-and-file ()
+    "Rename the current buffer and file it is visiting."
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (if (not (and filename (file-exists-p filename)))
+          (message "Buffer is not visiting a file!")
+        (let ((new-name (read-file-name "New name: " filename)))
+          (cond
+           ((vc-backend filename) (vc-rename-file filename new-name))
+           (t
+            (rename-file filename new-name t)
+            (set-visited-file-name new-name t t)))))))
+#+END_SRC
 
 
 * Point
@@ -537,6 +552,9 @@ Use the former to define a global keymapping, use the latter to define a mapping
 
 * Stuff for future
 ** Features
+*** Why is editing HTML so slow? Learn how to debug emacs perf and figure out what's causing intermittent typing lag
+*** Use something fast (fd?) to generate Projectile candidates so quickly that we don't actually need to cache it
+*** Map C-x C-s to save all modified buffers that you actually care about
 *** Learn and set up Magit
 *** Make company autcomplete fuzzy-match and rank by recent usage
 *** Use full file path name in 'ivy-switch-buffer so you can better disambiguate
@@ -559,13 +577,13 @@ Not a tiny horizontal split on the other side of the frame
 *** Get Sorbet in Emacs
 *** Pay-server rubocop errors (things that fail builds) show up as "info" in Flycheck. Make them show up as errors!
 Idea--delete the projectile cache on a git hook
-*** Update projectile's cache after any git actions
+*** Update projectile's cache in the background, async, after any git actions
 *** Make C-v and M-v set the mark, but not on subsequent invocations of C-v or M-v
 *** Fast find/replace in file / region / directory / project
 *** Function to toggle between last focused window and current window
 *** Modify counsel-file-jump to use ripgrep, or find another method for finding a file under a non-project directory
 *** Show search directory in prompt of counsel-rg
-*** Get S-SPC working in Ivy
+*** Get S-SPC working in Ivy (start a new search where the files being searched are those in the current candidates list)
 *** Magit-like interface into Ivy/Counsel that makes it easy to toggle case-sensitiviy
 *** Figure out how to change keybindings on particular contexts, e.g. ivy minibuffer (bind S-SPC to ivy-restrict-to-matches) and when autocomplete menu is visible (bind C-w to still be backwards kill word instead of showing documentation)
 *** Disable bold fonts after init, so it actually works (after everything else loads)
