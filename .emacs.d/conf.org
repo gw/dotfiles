@@ -198,7 +198,11 @@ This is the only non-Vim way I can live without "cib" and friends
   (use-package expand-region
     :bind ("C-=" . er/expand-region))
 #+END_SRC
-
+** Use "M-z" to zap up UNTIL char, and "M-Z" to zap up to char
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-z") 'zap-up-to-char)
+  (global-set-key (kbd "M-Z") 'zap-to-char)
+#+END_SRC
 ** Auto-insert the other half of a pair
 #+BEGIN_SRC emacs-lisp
   (electric-pair-mode 1)
@@ -685,7 +689,11 @@ cdr:  Acronym for "Contents of Decrement part of Register"
 Holdovers from original Lisp machines, have been obsolete for years
 
 ** Quick Text Manipulation
-*** Highlight Paragraph over piont
+*** Repeat last command
+From `repeat.el`, now standard in Emacs
+"C-x z", and then "z" to keep repeating it after that
+If the command used the minibuffer you'll have to keep providing input
+*** Highlight Paragraph over point
 M-h
 *** Reflow paragraph over point
 M-q
@@ -725,14 +733,18 @@ as you type.
 *** Setting a persistent place to jump back to
 Two options: Registers and Bookmarks
 
-Registers: named by single-letter "key"s, don't persist across Emacs sessions. Good for quickly saving locations related to your current task, but which you probably won't need to remember later.
+Registers:
+Named by single-letter "key"s, don't persist across Emacs sessions. Good for quickly saving locations related to your current task, but which you probably won't need to remember later.
+
 Save position of point to a register named by "key"
 C-x r <SPC> "key"
 
 Jump to the register named by "key". Can be in a different, unopened buffer.
 C-x r j "key"
 
-Bookmarks: named by arbitrary strings, do persist across Emacs sessions--when you exit Emacs any modified bookmarks will be persisted to bookmark-default-file, which defaults to ~/.emacs.d/bookmarks. Good for saving locations that you'll come back to frequently over the course of a project.
+Bookmarks:
+Named by arbitrary strings, do persist across Emacs sessions--when you exit Emacs any modified bookmarks will be persisted to bookmark-default-file, which defaults to ~/.emacs.d/bookmarks. Good for saving locations that you'll come back to frequently over the course of a project.
+
 Save position of point to a bookmark named "name":
 C-x r m "name"
 
