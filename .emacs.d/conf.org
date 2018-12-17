@@ -150,6 +150,11 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   (setq org-src-fontify-natively t)
 #+END_SRC
 
+*** Soft-indent stuff and hide stars for a cleaner look
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-indented t)
+#+END_SRC
+
 
 * Indentation / tabs
 ** Never use tabs
@@ -198,10 +203,9 @@ This is the only non-Vim way I can live without "cib" and friends
   (use-package expand-region
     :bind ("C-=" . er/expand-region))
 #+END_SRC
-** Use "M-z" to zap up UNTIL char, and "M-Z" to zap up to char
+** Use "M-z" to zap up UNTIL char instead of also killing the char
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-z") 'zap-up-to-char)
-  (global-set-key (kbd "M-Z") 'zap-to-char)
 #+END_SRC
 ** Auto-insert the other half of a pair
 #+BEGIN_SRC emacs-lisp
@@ -574,6 +578,7 @@ Use the former to define a global keymapping, use the latter to define a mapping
 
 * Stuff for future
 ** Features
+*** Have "C-w" just kill backwards word in isearch, and bind something else to "yank next word in buffer and add to search"
 *** Why is editing HTML so slow? Learn how to debug emacs perf and figure out what's causing intermittent typing lag
 *** Use something fast (fd?) to generate Projectile candidates so quickly that we don't actually need to cache it
 *** Map C-x C-s to save all modified buffers that you actually care about
@@ -779,7 +784,8 @@ visual-line-mode
 ** Calling functions
 *** Call interactive function with an argument
 If an interactive function takes an argument, that argument comes from the prefix argument, which is best passed with <M-number> before calling <M-x> to find the function or using its keybinding.
-Are prefix arguments always numbers?
+
+To quickly call with a negative prefix argument, just do <M-->
 ** Info Mode
 *** Navigation
 **** Basic Navigation
