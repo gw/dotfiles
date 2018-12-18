@@ -167,18 +167,25 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   (setq-default tab-width 4)
 #+END_SRC
 
-** Soft-wrap long lines in texty modes
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
-  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
-#+END_SRC
-
 ** Correctly indent soft-wrapped lines
 #+BEGIN_SRC emacs-lisp
   (use-package adaptive-wrap
-      :defer t  ; Needed b/c we're not using any of the implicit defer macros
-      :init (add-hook 'visual-line-mode-hook 'adaptive-wrap-prefix-mode))
+      :defer t)  ; Needed b/c we're not using any of the implicit defer macros
 #+END_SRC
+
+** Soft-wrap and indent long lines in texty modes
+#+BEGIN_SRC emacs-lisp
+  (defun gw/soft-wrap-and-indent-mode ()
+    "Turn on 'visual-line-mode' and adaptive-wrap-prefix-mode.
+  org-mode doesn't need this (it only needs org-indent-mode and)
+  visual-line-mode--adaptive-wrap-prefix messes it up."
+    (progn
+      (turn-on-visual-line-mode)
+      (adaptive-wrap-prefix-mode)))
+
+  (add-hook 'text-mode-hook 'gw/soft-wrap-and-indent-mode)
+#+END_SRC
+
 ** Use dtrt-indent to auto-detect indentation in some modes
 When enabled as a minor mode, it will transparently try to set the indentation offset and `indent-tabs-mode` if it confidently detect what the currently-edited file is doing. It's source code is well-documented-just read it if you're having trouble.
 #+BEGIN_SRC emacs-lisp
