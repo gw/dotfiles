@@ -46,11 +46,13 @@ there's no active region."
 directory."
   (setq default-directory "~/"))
 
-(defun sensible-defaults/increase-gc-threshold ()
-  "Allow 20MB of memory (instead of 0.76MB) before calling
-garbage collection. This means GC runs less often, which speeds
-up some operations."
-  (setq gc-cons-threshold 20000000))
+(defun gw/dynamic-gc-cons-threshold ()
+  "Disable GC when entering the minibuffer, and reset to 1MB on exit.
+Frequent, fast GC ain't that bad during normal use.
+Taken from: http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/"
+  (progn
+    (add-hook 'minibuffer-setup-hook (lambda () (setq gc-cons-threshold most-positive-fixnum)))
+    (add-hook 'minibuffer-exit-hook (lambda () (setq gc-cons-threshold 1000000)))))
 
 (defun sensible-defaults/delete-trailing-whitespace ()
   "Call DELETE-TRAILING-WHITESPACE every time a buffer is saved."
@@ -155,8 +157,8 @@ insert the text where point is, not where the mouse cursor is."
 
 (defun sensible-defaults/use-all-settings ()
   "Use all of the sensible-defaults settings."
+  (gw/dynamic-gc-cons-threshold)
   (sensible-defaults/open-files-from-home-directory)
-  (sensible-defaults/increase-gc-threshold)
   (sensible-defaults/delete-trailing-whitespace)
   (sensible-defaults/treat-camelcase-as-separate-words)
   (sensible-defaults/automatically-follow-symlinks)
