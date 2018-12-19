@@ -143,6 +143,7 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   ;; (use-package hc-zenburn-theme
   ;;   :config
   ;;   (load-theme 'hc-zenburn t))
+#+END_SRC
 ** Soft-wrap long lines in texty modes
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
