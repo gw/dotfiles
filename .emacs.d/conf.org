@@ -195,18 +195,39 @@ This is the only non-Vim way I can live without "cib" and friends
   (use-package expand-region
     :bind ("C-=" . er/expand-region))
 #+END_SRC
+
 ** Use "M-z" to zap up UNTIL char instead of also killing the char
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-z") 'zap-up-to-char)
 #+END_SRC
+
 ** Auto-insert the other half of a pair
 #+BEGIN_SRC emacs-lisp
   (electric-pair-mode 1)
 #+END_SRC
+
 ** Don't allow invisible edits in Org mode
 It's easy to accidentally edit across folds--throw an error.
 #+BEGIN_SRC emacs-lisp
   (setq org-catch-invisible-edits t)
+#+END_SRC
+
+** Make "C-e"/"C-a" heading-aware
+#+BEGIN_SRC emacs-lisp
+  (setq org-special-ctrl-a/e t)
+#+END_SRC
+
+** Change "C-a" go to toggle b/w BOL and first-non-whitespace char
+#+BEGIN_SRC emacs-lisp
+  (defun gw/smart-move-beginning-of-line ()
+    "Move point to first non-whitespace char--if there, move to BOL."
+    (interactive)
+    (let ((pt (point)))
+      (beginning-of-line-text)
+      (when (eq pt (point))
+        (beginning-of-line))))
+
+  (global-set-key (kbd "C-a") 'gw/smart-move-beginning-of-line)
 #+END_SRC
 
 
@@ -768,11 +789,6 @@ C-x r w "key"
 
 Accessed just like any register:
 C-x r j "key"
-** Org Mode
-*** Word-wrap lines at frame boundary
-toggle-truncate-lines
-visual-line-mode
-
 ** Calling functions
 *** Call interactive function with an argument
 If an interactive function takes an argument, that argument comes from the prefix argument, which is best passed with <M-number> before calling <M-x> to find the function or using its keybinding.
