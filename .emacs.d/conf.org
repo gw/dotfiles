@@ -217,17 +217,14 @@ It's easy to accidentally edit across folds--throw an error.
   (setq org-special-ctrl-a/e t)
 #+END_SRC
 
-** Change "C-a" go to toggle b/w BOL and first-non-whitespace char
+** Bind "C-i" to go to beginning of text on line
 #+BEGIN_SRC emacs-lisp
-  (defun gw/smart-move-beginning-of-line ()
-    "Move point to first non-whitespace char--if there, move to BOL."
-    (interactive)
-    (let ((pt (point)))
-      (beginning-of-line-text)
-      (when (eq pt (point))
-        (beginning-of-line))))
+  ;; Decouple C-i from TAB and C-m from RET
+  ;; NB: This will only work in GUI Emacs
+  (define-key input-decode-map [?\C-m] [C-m])
+  (define-key input-decode-map [?\C-i] [C-i])
 
-  (global-set-key (kbd "C-a") 'gw/smart-move-beginning-of-line)
+  (global-set-key (kbd "<C-i>") 'beginning-of-line-text) ; Why do the angle brackets matter here?
 #+END_SRC
 
 
