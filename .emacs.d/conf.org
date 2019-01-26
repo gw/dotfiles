@@ -58,6 +58,9 @@
   ;; Disable all alarms
   (setq ring-bell-function 'ignore)
 
+  ;; Disable native tabs in Mac
+  (setq mac-frame-tabbing nil)
+
   ;; Custom function to toggle fullscreen on mac
   ;; This only works on railwaycat emacs
   ;; on railwaycat emacs you can just hold shift and
@@ -598,10 +601,16 @@ Use the former to define a global keymapping, use the latter to define a mapping
 
 * Stuff for future
 ** Features
+*** KBD shortcut to open the current line in github
+*** Write function to highlight everything at current indentation (v i i) in VSCode
+...and write one to highlight the boundary lines as well (v a i)
+*** Fix indentation when chaining Ruby method calls on multiple lines
+*** Highlight search term in occur buffers (C-c C-o in counsel-rg results)
 *** Have "C-w" just kill backwards word in isearch, and bind something else to "yank next word in buffer and add to search"
 *** Why is editing HTML so slow? Learn how to debug emacs perf and figure out what's causing intermittent typing lag
 *** Use something fast (fd?) to generate Projectile candidates so quickly that we don't actually need to cache it
 *** Map C-x C-s to save all modified buffers that you actually care about
+*** Learn and set up Dired
 *** Learn and set up Magit
 *** Make company autcomplete fuzzy-match and rank by recent usage
 *** Use full file path name in 'ivy-switch-buffer so you can better disambiguate
@@ -617,7 +626,6 @@ Not a tiny horizontal split on the other side of the frame
 - Plus a function to counsel-search b/w recently-run tests, which defaults to the most recently-run test
 *** Swiper doesn't reset font faces in *xref* buffers
 *** Write analogue of gw/delete-current-buffer-and-file that renames current buffer and file
-*** KBD shortcut to open the current line in github
 *** Improve IBuffer to show longer filenames
 *** Write comma-separated items (within a paren or list or other delimiter)
 *** Run ripper-tags on git hooks
