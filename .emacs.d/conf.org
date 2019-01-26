@@ -134,6 +134,13 @@ These custom scaling functions affect text EVERYWHERE, not just the current buff
   ;; Don't accelerate scrolling
   (setq mouse-wheel-progressive-speed nil)
 #+END_SRC
+** Emulate vim scrolloff behavior
+Default is to center point whenever scrolling off screen.
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-step 1)
+  (setq scroll-margin 5)
+#+END_SRC
+
 ** Solid cursor that's wide as glyph underneath
 #+BEGIN_SRC emacs-lisp
   (blink-cursor-mode 0)
