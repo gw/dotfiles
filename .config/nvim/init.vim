@@ -139,6 +139,11 @@ nnoremap <silent> <Leader>D :e #<CR>
 " Leader t to swap windows
 nnoremap <Leader>t <C-w><C-w>
 
+" ' jumps to line, ` jumps to line and column, so always do the latter
+vnoremap ' `
+nnoremap ' `
+onoremap ' `
+
 " clever-f frees up ';', so just hit that to enter ex mode
 nnoremap ; :
 vnoremap ; :
