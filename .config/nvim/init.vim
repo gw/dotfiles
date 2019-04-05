@@ -93,6 +93,13 @@ set undodir=~/.config/nvim/undodir
 " Check for on-disk changes when gaining focus or switching buffers
 au FocusGained,BufEnter * :checktime
 
+" Remember cursor position between vim sessions
+" see :h shada (the viminfo replacement for Neovim)
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal! g'\"" |
+      \ endif
+
 "
 "
 "
