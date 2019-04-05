@@ -82,6 +82,7 @@ alias gaf='git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 -o
 alias hex='hexdump -C'
 # Neovim
 alias vim='nvim'
+alias vim_conf='vim ~/.config/nvim/init.vim'
 # count all occurrences of a pattern with ag
 # Uses ag instead of rg b/c the former supports multi-line patterns
 function count_pattern {
