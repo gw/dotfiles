@@ -12,22 +12,13 @@
 call plug#begin('~/.nvim/plugged')
 
 "Colors
-Plug 'lifepillar/vim-solarized8'
+Plug 'endel/vim-github-colorscheme'
+Plug 'connorholyday/vim-snazzy'
 
 "File/Project Search/Switching
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mileszs/ack.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'ap/vim-buftabline'
-
-"Autocompletion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-clang', { 'for': 'c' }
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-Plug 'jiangmiao/auto-pairs'
-
-"Linting
-Plug 'neomake/neomake'
 
 "Text navigation
 Plug 'easymotion/vim-easymotion'
@@ -38,16 +29,10 @@ Plug 't9md/vim-quickhl'
 Plug 'tpope/vim-sleuth'
 Plug 'ntpeters/vim-better-whitespace'
 
-"Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-"Tags
-Plug 'majutsushi/tagbar'
-
 call plug#end()
 
-colorscheme solarized8_light_high
+set termguicolors
+colorscheme snazzy
 
 "
 "
@@ -85,11 +70,6 @@ set foldmethod=indent
 "Don't fold newly opened files
 set nofoldenable
 
-"Use Silver Searcher for all grepping
-set grepprg=ag\ --vimgrep "Vim's builtin grep search program
-set grepformat=%f:%l:%c:%m,%f:%l:%m
-let g:ackprg = "ag --vimgrep"  "Ack.vim's search program
-
 "Relative line numbers on all other lines
 set relativenumber
 "Absolute line number on current line
@@ -105,7 +85,7 @@ set hidden
 
 "Maintain undo history between sessions
 set undofile
-set undodir=~/.nvim/undodir
+set undodir=~/.config/nvim/undodir
 
 "
 "
@@ -118,6 +98,10 @@ set undodir=~/.nvim/undodir
 "
 "
 "
+
+" jk or kj to escape to normal mode
+imap jk <Esc>
+imap kj <Esc>
 
 "'U' to 'redo'
 nnoremap U <C-r>
@@ -135,11 +119,7 @@ nnoremap k gk
 nnoremap <C-I> <C-O>
 nnoremap <C-O> <C-I>
 
-" Mash wf or fw to go from insert -> normal mode
-inoremap wf <Esc>
-inoremap fw <Esc>
-
-" Y to copy from cursos to end of line, like D and C
+" Y to copy from cursor to end of line, like D and C
 nnoremap Y y$
 
 " n and N center the matched line
@@ -186,64 +166,17 @@ nnoremap <silent> <Leader>* :nohls<CR>
 "
 "
 
-"Ack.vim ('!' keeps Ack from popping up the first result)
-nnoremap <Leader>a :Ack!<Space>
-"Highlight search results
-let g:ackhighlight = 1
-"Autofold search results
-let g:ack_autofold_results = 1
-"Leader A to open Ack but with previous query pre-loaded
-" nnoremap <Leader>A :AckFromSearch!<CR>
-
-" YCM
-"Don't highlight errors for now, doesn't work with solarized8
-"let g:ycm_enable_diagnostic_highlighting = 0
-"Gutter icon for lint errors
-"let g:ycm_warning_symbol = '>'
-"let g:ycm_error_symbol = '>'
-"Make GoTo* commands open in same buffer
-"let g:ycm_goto_buffer_command = 'same-buffer'
-"nnoremap <Leader>sd :YcmCompleter GoTo<CR>
-
-" Gitgutter
-" Don't set up any keymappings, it sets <Leader>h which I want to save for
-" quickhl
-let g:gitgutter_map_keys = 0
-" Don't update signs while typing (for speed)
-let g:gitgutter_realtime = 0
-
-" Neomake
-" Open locations window automatically on lint errors, but without moving the
-" cursor
-"let g:neomake_open_list = 2
-let g:neomake_list_height = 5
-"let g:neomake_echo_current_error = 1
-" Use eslint for javascript
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_logfile = '/usr/local/var/log/neomake.log'
-
 " Easymotion
 " Disable all default mappings
 let g:EasyMotion_do_mapping = 0
-" Case insensitive unless capital
-let g:Easymotion_smartcase = 1
 nmap s <Plug>(easymotion-s2)
 vmap s <Plug>(easymotion-s2)
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang'
-" When deoplete window is open and you press enter, actually insert newline
-" instead of just closing the deoplete window, which is the default.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-    return deoplete#close_popup() . "\<CR>"
-endfunction
-"Hide annoying preview window
-set completeopt-=preview
+" Case insensitive unless capital
+let g:Easymotion_smartcase = 1
 
 " CtrlP
+" Set vim's general grep program
+set grepprg=rg\ --color=never
 " Execute 'CtrlP' with ctrl+p
 let g:ctrlp_map = '<Leader>f'
 "Put CtrlP window at bottom of screen, best matches at top (top-to-bottom)
@@ -252,11 +185,9 @@ let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_working_path_mode = 0
 "Use Silver Searcher under the hood, showing hidden files but still respecting
 "the global ag ignore list at ~/.agignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_user_command = 'rg %s --files --color=never -glob ""'
 "ag is hella fast so don't cache the index--always be up to date
 let g:ctrlp_use_caching = 0
-"Add customize which modes are available for navigation by c-f and c-b
-let g:ctrlp_extensions = ['tag']
 
 " vim-better-whitespace
 " Strip all whitespace on save
@@ -287,22 +218,6 @@ xmap <Leader>h <Plug>(quickhl-manual-this)
 nmap <Leader>H <Plug>(quickhl-manual-reset)
 xmap <Leader>H <Plug>(quickhl-manual-reset)
 
-" Tagbar
-nnoremap <silent> <F3> :TagbarToggle<CR>
-"Jump to tagbar window when opening it
-let g:tagbar_autofocus = 1
-"Don't alpha-sort the tags--show them as they appear in the file
-let g:tagbar_sort = 0
-"Omit help text and blank lines b/w scopes
-let g:tagbar_compact = 1
-"Show relative line numbers in tagbar window for easier motion
-let g:tagbar_show_linenumbers = -1
-"Single- instead of double-click jump to tag
-let g:tagbar_singleclick = 1
-"Close and Open scope folds with h and l, a la filebeagle
-let g:tagbar_map_openfold = "l"
-let g:tagbar_map_closefold = "h"
-
 
 "
 "
@@ -315,10 +230,6 @@ let g:tagbar_map_closefold = "h"
 "
 "
 "
-
-" Neomake
-" Lint when entering or saving buffer
-autocmd! BufWritePost,BufEnter * Neomake
 
 " Ignore quickfix window when navigating buffers with :bnext and :bprev
 augroup qf
