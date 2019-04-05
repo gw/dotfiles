@@ -135,6 +135,17 @@ nnoremap Y y$
 nnoremap n nzz
 nnoremap N Nzz
 
+" Emacs-y navigation in command mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-d> <Del>
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
+
 " Leader d to delete a buffer.
 " Close location window, nav to last buffer, then close the one we just left.
 " This preserves the window split. Otherwise killing a buffer loses the split.
