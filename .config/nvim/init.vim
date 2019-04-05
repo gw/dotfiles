@@ -32,6 +32,9 @@ Plug 't9md/vim-quickhl'
 Plug 'tpope/vim-sleuth'
 Plug 'ntpeters/vim-better-whitespace'
 
+" Git
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 
 set termguicolors

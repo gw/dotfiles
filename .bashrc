@@ -77,12 +77,15 @@ alias gl='git log --pretty=format:"%C(yellow) %h %C(red) %<(31,trunc)%cD %C(gree
 __git_complete gll _git_log
 alias glf='git log --name-status --pretty=format:"%C(yellow) %H %C(red) %cD %C(green) %<(25)%cN %C(black) %s"'
 __git_complete glf _git_log
+# Github Desktop
+alias gh='github'
 # fuzzy-finding git add powered by fzf
 alias gaf='git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 -o -t git add'
 # Hexdump
 alias hex='hexdump -C'
 # Neovim
 alias vim='nvim'
+alias v='nvim'
 alias vim_conf='vim ~/.config/nvim/init.vim'
 # count all occurrences of a pattern with ag
 # Uses ag instead of rg b/c the former supports multi-line patterns
