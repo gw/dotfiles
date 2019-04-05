@@ -90,6 +90,9 @@ set hidden
 set undofile
 set undodir=~/.config/nvim/undodir
 
+" Check for on-disk changes when gaining focus or switching buffers
+au FocusGained,BufEnter * :checktime
+
 "
 "
 "
