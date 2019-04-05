@@ -38,6 +38,10 @@ stty stop undef
 stty start undef
 
 # Grant's aliases
+# Tmux
+# -u tells tmux that our terminal supports utf-8, and to not send them as '_'
+# -f tells tmux to look elsewhere for tmux.conf
+alias tmux='tmux -u -f ~/.config/tmux/tmux.conf'
 # Emacs
 alias e='emacs'
 # Shell
