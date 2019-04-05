@@ -1,0 +1,164 @@
+// Remap cmd + {h, j, k, l, \} to alt + {h, j, k, l, \},
+// Copy/paste this into ~/.config/karabiner/karabiner.json
+// into the "rules" array
+
+{
+	"manipulators": [
+		{
+			"conditions": [
+				{
+					"bundle_identifiers": [
+						"^net\\.kovidgoyal\\.kitty$"
+					],
+					"type": "frontmost_application_if"
+				}
+			],
+			"description": "Kitty cmd+backslash -> alt+backslash",
+			"from": {
+				"key_code": "backslash",
+				"modifiers": {
+					"mandatory": [
+						"command"
+					]
+				}
+			},
+			"to": [
+				{
+					"key_code": "backslash",
+					"modifiers": [
+						"option"
+					]
+				}
+			],
+			"type": "basic"
+		}
+	]
+},
+{
+		"manipulators": [
+			{
+				"conditions": [
+					{
+						"bundle_identifiers": [
+							"^net\\.kovidgoyal\\.kitty$"
+						],
+						"type": "frontmost_application_if"
+					}
+				],
+				"description": "Kitty cmd+l -> alt+l",
+				"from": {
+					"key_code": "l",
+					"modifiers": {
+						"mandatory": [
+							"command"
+						]
+					}
+				},
+				"to": [
+					{
+						"key_code": "l",
+						"modifiers": [
+							"option"
+						]
+					}
+				],
+				"type": "basic"
+			}
+		]
+},
+{
+		"manipulators": [
+			{
+				"conditions": [
+					{
+						"bundle_identifiers": [
+							"^net\\.kovidgoyal\\.kitty$"
+						],
+						"type": "frontmost_application_if"
+					}
+				],
+				"description": "Kitty cmd+k -> alt+k",
+				"from": {
+					"key_code": "k",
+					"modifiers": {
+						"mandatory": [
+							"command"
+						]
+					}
+				},
+				"to": [
+					{
+						"key_code": "k",
+						"modifiers": [
+							"option"
+						]
+					}
+				],
+				"type": "basic"
+			}
+		]
+},
+{
+		"manipulators": [
+			{
+				"conditions": [
+					{
+						"bundle_identifiers": [
+							"^net\\.kovidgoyal\\.kitty$"
+						],
+						"type": "frontmost_application_if"
+					}
+				],
+				"description": "Kitty cmd+j -> alt+j",
+				"from": {
+					"key_code": "j",
+					"modifiers": {
+						"mandatory": [
+							"command"
+						]
+					}
+				},
+				"to": [
+					{
+						"key_code": "j",
+						"modifiers": [
+							"option"
+						]
+					}
+				],
+				"type": "basic"
+			}
+		]
+},
+{
+		"manipulators": [
+			{
+				"conditions": [
+					{
+						"bundle_identifiers": [
+							"^net\\.kovidgoyal\\.kitty$"
+						],
+						"type": "frontmost_application_if"
+					}
+				],
+				"description": "Kitty cmd+h -> alt+h",
+				"from": {
+					"key_code": "h",
+					"modifiers": {
+						"mandatory": [
+							"command"
+						]
+					}
+				},
+				"to": [
+					{
+						"key_code": "h",
+						"modifiers": [
+							"option"
+						]
+					}
+				],
+				"type": "basic"
+			}
+		]
+}
