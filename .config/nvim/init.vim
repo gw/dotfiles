@@ -112,7 +112,7 @@ nnoremap U <C-r>
 " Save all buffers
 noremap <Leader>w :wa<CR>
 " Quit the tab
-noremap <Leader>q :quit<CR>
+noremap <silent> <Leader>q :quit<CR>
 
 " Move by visual line, not logical line, when soft-wrapping
 nnoremap j gj
