@@ -19,7 +19,6 @@ Plug 'connorholyday/vim-snazzy'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
-Plug 'ap/vim-buftabline'
 
 "Windows / Splits
 Plug 'christoomey/vim-tmux-navigator'
@@ -130,15 +129,12 @@ nnoremap Y y$
 nnoremap n nzz
 nnoremap N Nzz
 
-" Ctrl-h and Ctrl-l to navigate buffers
-nnoremap <silent> <C-h> :bprev<CR>
-nnoremap <silent> <C-l> :bnext<CR>
-" Leader d to delete a buffer. Navs to prev buffer and kills the one we just
-" left. This preserves the window split. Otherwise killing a buffer loses the
-" split.
-nnoremap <Leader>d :bprev\|bdelete #<CR>
+" Leader d to delete a buffer.
+" Close location window, nav to last buffer, then close the one we just left.
+" This preserves the window split. Otherwise killing a buffer loses the split.
+nnoremap <silent> <Leader>d :lclose<bar>b#<bar>bd #<CR>
 " Leader D to reopen last deleted buffer
-nnoremap <Leader>D :e #<CR>
+nnoremap <silent> <Leader>D :e #<CR>
 
 " Leader t to swap windows
 nnoremap <Leader>t <C-w><C-w>
