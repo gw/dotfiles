@@ -1,5 +1,5 @@
 " Prerequisites (in leu of a an install script)
-" The Silver Searcher (ctrlp, vimgrep, ackprg)
+" Ripgrep
 " .agignore should be set up, pref symlinked from .gitignore_global
 " clang, libclang (deoplete)
 " ~/.nvim/undodir must exist (for persistent undo)
@@ -16,7 +16,8 @@ Plug 'endel/vim-github-colorscheme'
 Plug 'connorholyday/vim-snazzy'
 
 "File/Project Search/Switching
-Plug 'ctrlpvim/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'ap/vim-buftabline'
 
@@ -166,6 +167,11 @@ nnoremap <silent> <Leader>* :nohls<CR>
 "
 "
 
+" FZF
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fb :Buffers<CR>
+nnoremap <Leader>fh :History<CR>
+
 " Easymotion
 " Disable all default mappings
 let g:EasyMotion_do_mapping = 0
@@ -173,21 +179,6 @@ nmap s <Plug>(easymotion-s2)
 vmap s <Plug>(easymotion-s2)
 " Case insensitive unless capital
 let g:Easymotion_smartcase = 1
-
-" CtrlP
-" Set vim's general grep program
-set grepprg=rg\ --color=never
-" Execute 'CtrlP' with ctrl+p
-let g:ctrlp_map = '<Leader>f'
-"Put CtrlP window at bottom of screen, best matches at top (top-to-bottom)
-let g:ctrlp_match_window = 'bottom,order:ttb'
-"Respect any changes we make to the workdir during a session
-let g:ctrlp_working_path_mode = 0
-"Use Silver Searcher under the hood, showing hidden files but still respecting
-"the global ag ignore list at ~/.agignore
-let g:ctrlp_user_command = 'rg %s --files --color=never -glob ""'
-"ag is hella fast so don't cache the index--always be up to date
-let g:ctrlp_use_caching = 0
 
 " vim-better-whitespace
 " Strip all whitespace on save
