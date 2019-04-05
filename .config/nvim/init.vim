@@ -20,9 +20,6 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
 
-"Windows / Splits
-Plug 'christoomey/vim-tmux-navigator'
-
 "Text navigation
 Plug 'easymotion/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
@@ -214,16 +211,6 @@ let g:filebeagle_suppress_keymaps = 1
 map <silent> <Leader>p  <Plug>FileBeagleOpenCurrentWorkingDir
 map <silent> -          <Plug>FileBeagleOpenCurrentBufferDir
 
-" vim-tmux-navigator
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-" <C-\> is default for this, just keep it
-nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
-" Disable tmux navigator when zooming the Vim pane
-let g:tmux_navigator_disable_when_zoomed = 1
 
 " clever-f
 " Don't search across lines--more similar to original ';' behavior
