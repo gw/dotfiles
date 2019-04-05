@@ -45,6 +45,7 @@ alias tmux='tmux -u -f ~/.config/tmux/tmux.conf'
 # Emacs
 alias e='emacs'
 # Shell
+alias cat='bat'
 alias l='ls -Gp'
 alias la='ls -Gpa'
 alias ll='ls -Gpl'
