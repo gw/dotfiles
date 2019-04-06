@@ -158,6 +158,15 @@ nnoremap <silent> <Leader>d :lclose<bar>b#<bar>bd #<CR>
 " Leader D to reopen last deleted buffer
 nnoremap <silent> <Leader>D :e #<CR>
 
+" C-{hjkl} to move splits
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
+nnoremap <C-h> <C-w><C-h>
+
+" Open new splits to the right and down
+set splitbelow
+set splitright
 
 " ' jumps to line, ` jumps to line and column, so always do the latter
 vnoremap ' `
