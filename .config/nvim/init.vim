@@ -12,8 +12,9 @@
 call plug#begin('~/.nvim/plugged')
 
 "Colors
-Plug 'endel/vim-github-colorscheme'
 Plug 'connorholyday/vim-snazzy'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'cormacrelf/vim-colors-github'
 
 "File/Project Search/Switching
 Plug '/usr/local/opt/fzf'
@@ -35,7 +36,7 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 set termguicolors
-colorscheme snazzy
+colorscheme github
 
 "
 "
