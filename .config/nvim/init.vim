@@ -24,6 +24,9 @@ Plug 'jeetsukumaran/vim-filebeagle'
 " Autocomplete
 Plug 'lifepillar/vim-mucomplete'
 
+" Linting
+Plug 'w0rp/ale'
+
 "Text navigation
 Plug 'easymotion/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
@@ -219,6 +222,27 @@ nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\
 "
 "
 "
+
+" Ale
+" Only lint on save
+let g:ale_lint_on_text_changed = 'never'
+" Run all javascript linters on .jsx files too
+let g:ale_linter_aliases = {'jsx': ['javascript']}
+let g:ale_fixers = {
+\   'javascript': ['prettier', 'eslint'],
+\}
+let g:ale_fix_on_save = 1
+" Configure signs
+let g:ale_echo_msg_format = '[%linter%] %s'
+
+" pay-server config
+function! SetupConfigForPayServer()
+" let g:vroom_test_unit_command = 'pay test'
+" let g:vroom_use_bundle_exec = 0
+  let g:ale_ruby_rubocop_executable = '/Users/gwu/stripe/pay-server/scripts/bin/rubocop'
+endfunction
+
+autocmd BufRead,BufNewFile */stripe/pay-server/* call SetupConfigForPayServer()
 
 " Mucomplete
 set completeopt=menuone
