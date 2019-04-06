@@ -203,7 +203,7 @@ vnoremap <silent> * :<C-U>
   \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>:set hls<CR>
 " Clear all '*' highlights (doesn't affect quickhl)
-nnoremap <silent> <Leader>* :nohls<CR>
+nnoremap <silent> <Leader>c :nohls<CR>
 
 
 "
