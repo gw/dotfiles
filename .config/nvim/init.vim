@@ -150,15 +150,13 @@ cnoremap <C-d> <Del>
 cnoremap <M-b> <S-Left>
 cnoremap <M-f> <S-Right>
 
-" Leader d to delete a buffer.
+" Leader d to delete a buffer. Leader D to bring it back.
 " Close location window, nav to last buffer, then close the one we just left.
 " This preserves the window split. Otherwise killing a buffer loses the split.
 nnoremap <silent> <Leader>d :lclose<bar>b#<bar>bd #<CR>
 " Leader D to reopen last deleted buffer
 nnoremap <silent> <Leader>D :e #<CR>
 
-" Leader t to swap windows
-nnoremap <Leader>t <C-w><C-w>
 
 " ' jumps to line, ` jumps to line and column, so always do the latter
 vnoremap ' `
