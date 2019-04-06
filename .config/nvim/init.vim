@@ -151,8 +151,22 @@ cnoremap <C-n> <Down>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-d> <Del>
+" This doesn't work in command mode, for some reason
+" cnoremap <C-g> <Esc>
 cnoremap <M-b> <S-Left>
 cnoremap <M-f> <S-Right>
+
+" Mirror above in insert mode
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-d> <Del>
+inoremap <C-g> <Esc>
+inoremap <M-b> <S-Left>
+inoremap <M-f> <S-Right>
 
 " Leader d to delete a buffer. Leader D to bring it back.
 " Close location window, nav to last buffer, then close the one we just left.
