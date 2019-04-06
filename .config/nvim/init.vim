@@ -204,6 +204,8 @@ vnoremap <silent> * :<C-U>
   \gV:call setreg('"', old_reg, old_regtype)<CR>:set hls<CR>
 " Clear all '*' highlights (doesn't affect quickhl)
 nnoremap <silent> <Leader>c :nohls<CR>
+" Double-click a word to highlight it
+nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
 
 "
