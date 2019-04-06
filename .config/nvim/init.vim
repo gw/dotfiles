@@ -21,6 +21,9 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
 
+" Autocomplete
+Plug 'lifepillar/vim-mucomplete'
+
 "Text navigation
 Plug 'easymotion/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
@@ -199,6 +202,10 @@ nnoremap <silent> <Leader>* :nohls<CR>
 "
 "
 "
+
+" Mucomplete
+set completeopt=menuone
+set shortmess+=c " Turn off completion messages
 
 " FZF
 nnoremap <Leader>ff :Files<CR>
