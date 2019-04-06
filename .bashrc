@@ -86,7 +86,9 @@ alias hex='hexdump -C'
 # Neovim
 alias vim='nvim'
 alias v='nvim'
+# Dotfile Configuration
 alias vim_conf='vim ~/.config/nvim/init.vim'
+alias kitty_conf='vim ~/.config/kitty/kitty.conf'
 # count all occurrences of a pattern with ag
 # Uses ag instead of rg b/c the former supports multi-line patterns
 function count_pattern {
