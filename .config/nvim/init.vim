@@ -35,6 +35,7 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -225,6 +226,18 @@ set shortmess+=c " Turn off completion messages
 nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fb :Buffers<CR>
 nnoremap <Leader>fh :History<CR>
+
+" Gitgutter
+" Don't set up any default mappings
+let g:gitgutter_map_keys = 0
+" Jump b/w hunks
+" nmap <Leader>hn <Plug>GitGutterNextHunk
+" nmap <Leader>hp <Plug>GitGutterPrevHunk
+" Stage / unstage hunks
+" nmap <Leader>ha <Plug>GitGutterStageHunk
+" nmap <Leader>hr <Plug>GitGutterUndoHunk
+" Preview hunks (for seeing what it looked like before)
+" nmap <Leader>hp <Plug>GitGutterPreviewHunk
 
 " Easymotion
 " Disable all default mappings
