@@ -22,7 +22,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
 
 " Autocomplete
-Plug 'lifepillar/vim-mucomplete'
+" Plug 'lifepillar/vim-mucomplete'
+Plug 'ajh17/VimCompletesMe'
 
 " Linting
 Plug 'w0rp/ale'
@@ -247,10 +248,6 @@ function! SetupConfigForPayServer()
 endfunction
 
 autocmd BufRead,BufNewFile */stripe/pay-server/* call SetupConfigForPayServer()
-
-" Mucomplete
-set completeopt=menuone
-set shortmess+=c " Turn off completion messages
 
 " FZF
 nnoremap <Leader>ff :Files<CR>
