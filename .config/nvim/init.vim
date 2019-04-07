@@ -155,8 +155,6 @@ nnoremap N Nzz
 " Emacs-y navigation in command mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-d> <Del>
