@@ -19,6 +19,7 @@ Plug 'cormacrelf/vim-colors-github'
 "File/Project Search/Switching
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'wincent/ferret'
 Plug 'jeetsukumaran/vim-filebeagle'
 
 " Autocomplete
@@ -246,6 +247,13 @@ function! SetupConfigForPayServer()
 endfunction
 
 autocmd BufRead,BufNewFile */stripe/pay-server/* call SetupConfigForPayServer()
+
+" Ferret
+" Don't set any normal mode mappings
+let g:FerretMap=0
+" Always open quickfix menus (i.e., Ferret search results) in vertical splits
+" Just does whatever <C-w>L does
+autocmd FileType qf wincmd L
 
 " FZF
 nnoremap <Leader>ff :Files<CR>
