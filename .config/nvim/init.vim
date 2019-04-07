@@ -98,6 +98,10 @@ set hidden
 set undofile
 set undodir=~/.config/nvim/undodir
 
+
+" Reduce updatetime so gitgutter updates faster
+set updatetime=500
+
 " Check for on-disk changes when gaining focus or switching buffers
 au FocusGained,BufEnter * :checktime
 
