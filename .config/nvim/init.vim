@@ -251,6 +251,9 @@ autocmd BufRead,BufNewFile */stripe/pay-server/* call SetupConfigForPayServer()
 " Ferret
 " Don't set any normal mode mappings
 let g:FerretMap=0
+nmap <Leader>fs <Plug>(FerretAck)
+" Grep for word under cursor
+nmap <Leader>fw <Plug>(FerretAckWord)
 " Always open quickfix menus (i.e., Ferret search results) in vertical splits
 " Just does whatever <C-w>L does
 autocmd FileType qf wincmd L
