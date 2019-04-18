@@ -46,6 +46,9 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Windows / Buffers
+Plug 'moll/vim-bbye'
+
 call plug#end()
 
 set termguicolors
@@ -183,8 +186,8 @@ inoremap <M-f> <S-Right>
 " Leader d to delete a buffer. Leader D to bring it back.
 " Close location window, nav to last buffer, then close the one we just left.
 " This preserves the window split. Otherwise killing a buffer loses the split.
-nnoremap <silent> <Leader>d :lclose<bar>b#<bar>bd #<CR>
-" Leader D to reopen last deleted buffer
+nnoremap <silent> <Leader>d :Bdelete<CR>
+" Leader D to reopen the last buffer (deleted or not)
 nnoremap <silent> <Leader>D :e #<CR>
 
 " C-{hjkl} to move splits
