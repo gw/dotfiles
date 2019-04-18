@@ -22,6 +22,7 @@ Plug 'itchyny/lightline.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'zackhsi/fzf-tags'
 Plug 'wincent/ferret'
 Plug 'jeetsukumaran/vim-filebeagle'
 
@@ -269,6 +270,9 @@ autocmd FileType qf wincmd L
 nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fb :Buffers<CR>
 nnoremap <Leader>fh :History<CR>
+
+" FZF-tags
+nmap <C-]> <Plug>(fzf_tags)
 
 " Gitgutter
 " Don't set up any default mappings
