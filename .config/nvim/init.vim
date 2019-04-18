@@ -50,6 +50,8 @@ Plug 'airblade/vim-gitgutter'
 
 " Editing
 Plug 'tmsvg/pear-tree'
+Plug 'tpope/vim-commentary'
+
 " Windows / Buffers
 Plug 'moll/vim-bbye'
 
