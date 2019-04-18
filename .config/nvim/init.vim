@@ -45,6 +45,7 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 
 " Windows / Buffers
@@ -273,6 +274,9 @@ nnoremap <Leader>fh :History<CR>
 
 " FZF-tags
 nmap <C-]> <Plug>(fzf_tags)
+
+" Fugitive / Rhubarb
+let g:github_enterprise_urls = ['https://git.corp.stripe.com']
 
 " Gitgutter
 " Don't set up any default mappings
