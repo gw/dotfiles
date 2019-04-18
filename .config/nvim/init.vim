@@ -19,6 +19,7 @@ Plug 'tomasr/molokai'
 "File/Project Search/Switching
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'wincent/ferret'
 Plug 'jeetsukumaran/vim-filebeagle'
 
@@ -274,6 +275,18 @@ let g:gitgutter_map_keys = 0
 " nmap <Leader>hr <Plug>GitGutterUndoHunk
 " Preview hunks (for seeing what it looked like before)
 " nmap <Leader>hp <Plug>GitGutterPreviewHunk
+
+" Gutentags
+" Enable GutentagsToggleEnabled and GutentagsToggleTrace
+let g:gutentags_define_advanced_commands = 1
+" Enable tracing on startup
+" let g:gutentags_trace = 1
+let g:gutentags_file_list_command = 'fd --type f'
+" Only generate the tags file when writing a new file.
+" This makes vim way faster to exit when writing git commits,
+" presuambly b/c it isn't trying to kill ctags or something.
+let g:gutentags_generate_on_missing = 0
+let g:gutentags_generate_on_new = 0
 
 " Easymotion
 " Disable all default mappings
