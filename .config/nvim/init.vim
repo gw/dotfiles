@@ -48,6 +48,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 
+" Editing
+Plug 'tmsvg/pear-tree'
 " Windows / Buffers
 Plug 'moll/vim-bbye'
 
