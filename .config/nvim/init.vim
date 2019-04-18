@@ -15,6 +15,8 @@ call plug#begin('~/.nvim/plugged')
 Plug 'cormacrelf/vim-colors-github'
 Plug 'tomasr/molokai'
 
+" UI
+Plug 'itchyny/lightline.vim'
 
 "File/Project Search/Switching
 Plug '/usr/local/opt/fzf'
@@ -29,6 +31,7 @@ Plug 'ajh17/VimCompletesMe'
 
 " Linting
 Plug 'w0rp/ale'
+Plug 'maximbaz/lightline-ale'
 
 "Text navigation
 Plug 'easymotion/vim-easymotion'
@@ -287,6 +290,34 @@ let g:gutentags_file_list_command = 'fd --type f'
 " presuambly b/c it isn't trying to kill ctags or something.
 let g:gutentags_generate_on_missing = 0
 let g:gutentags_generate_on_new = 0
+
+" Lightline
+" Don't show --INSERT-- in the command area, since lightline shows the mode
+set noshowmode
+" Show full filepath instead of just filename--have plenty of room down there
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'FilenameForLightline'
+      \ }
+      \ }
+
+" Show full path of filename
+function! FilenameForLightline()
+    return expand('%')
+endfunction
+
+" Show ALE warnings/errors
+let g:lightline.component_expand = {
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+let g:lightline.active = { 'right': [['linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
 " Easymotion
 " Disable all default mappings
