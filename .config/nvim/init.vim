@@ -12,9 +12,9 @@
 call plug#begin('~/.nvim/plugged')
 
 "Colors
-Plug 'connorholyday/vim-snazzy'
-Plug 'owickstrom/vim-colors-paramount'
 Plug 'cormacrelf/vim-colors-github'
+Plug 'tomasr/molokai'
+
 
 "File/Project Search/Switching
 Plug '/usr/local/opt/fzf'
