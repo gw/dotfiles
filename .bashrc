@@ -51,6 +51,12 @@ alias l='ls -Gp'
 alias la='ls -Gpa'
 alias ll='ls -Gpl'
 alias lal='ls -Gpal'
+# Kitty term
+# --all: Set for all tabs, not just the currently active one
+# --configured: Set for new tabs / windows, too
+# NB: This won't persist through a restart.
+alias kitty_darken='kitty @ set-colors --all --configured ~/.config/kitty/scheme_vibrantink.conf'
+alias kitty_lighten='kitty @ set-colors --all --configured ~/.config/kitty/scheme_terminalbasic.conf'
 # Git
 alias gg='git grep'
 alias ga='git add'
