@@ -17,6 +17,9 @@ export HISTCONTROL=ignoreboth:erasedups
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 
+# Bat (a `cat` clone with wings)
+export BAT_THEME='GitHub'
+
 # FZF
 # Drop-down instead of full-screen
 # https://github.com/junegunn/fzf/issues/379
