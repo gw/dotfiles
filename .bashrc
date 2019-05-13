@@ -47,7 +47,7 @@ stty start undef
 # -f tells tmux to look elsewhere for tmux.conf
 alias tmux='tmux -u -f ~/.config/tmux/tmux.conf'
 # Emacs
-alias e='emacs'
+alias e='TERM=xterm-24bit /usr/local/Cellar/emacs/26.2/bin/emacs'
 # Shell
 alias cat='bat'
 alias l='ls -Gp'
