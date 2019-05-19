@@ -97,9 +97,11 @@ set foldmethod=indent
 set nofoldenable
 
 "Relative line numbers on all other lines
-set relativenumber
+" set relativenumber
 "Absolute line number on current line
-set number
+" set nonumber
+" Allows line and col number to be shown when you press C-g
+set noruler
 "Highlight current line
 set cursorline
 
