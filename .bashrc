@@ -58,8 +58,8 @@ alias lal='ls -Gpal'
 # --all: Set for all tabs, not just the currently active one
 # --configured: Set for new tabs / windows, too
 # NB: This won't persist through a restart.
-alias kitty_darken='kitty @ set-colors --all --configured ~/.config/kitty/scheme_vibrantink.conf'
-alias kitty_lighten='kitty @ set-colors --all --configured ~/.config/kitty/scheme_terminalbasic.conf'
+alias kitty_darken='kitty @ set-colors --all --configured ~/.config/kitty/scheme_vibrantink.conf && kitty @ set-colors active_border_color=green'
+alias kitty_lighten='kitty @ set-colors --all --configured ~/.config/kitty/scheme_terminalbasic.conf && kitty @ set-colors active_border_color=black'
 # Git
 alias gg='git grep'
 alias ga='git add'
