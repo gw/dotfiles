@@ -367,8 +367,8 @@ let g:clever_f_fix_key_direction = 1
 
 " quickhl
 " Add a highlight to the cword or visual range
-nmap <Leader>h <Plug>(quickhl-manual-this)
-xmap <Leader>h <Plug>(quickhl-manual-this)
+nmap <Leader>h <Plug>(quickhl-manual-this-whole-word)
+xmap <Leader>h <Plug>(quickhl-manual-this-whole-word)
 " Clear all quickhl highlights
 nmap <Leader>H <Plug>(quickhl-manual-reset)
 xmap <Leader>H <Plug>(quickhl-manual-reset)
