@@ -23,7 +23,9 @@ export BAT_THEME='GitHub'
 # FZF
 # Drop-down instead of full-screen
 # https://github.com/junegunn/fzf/issues/379
-export FZF_DEFAULT_OPTS='--height 40% --reverse --history=~/.fzf_history'
+export FZF_DEFAULT_OPTS='--height 40% --reverse'
+# history isn't working atm
+# export FZF_DEFAULT_OPTS='--height 40% --reverse --history=~/.fzf_history'
 # Use the faster fd instead of find
 export FZF_DEFAULT_COMMAND='fd --type file'
 # Preview first 100 lines of files
