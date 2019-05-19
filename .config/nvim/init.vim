@@ -386,6 +386,9 @@ xmap <Leader>H <Plug>(quickhl-manual-reset)
 "
 "
 
+" Maintain split proportions when Vim is resized
+autocmd VimResized * :wincmd =
+
 " Ignore quickfix window when navigating buffers with :bnext and :bprev
 augroup qf
     autocmd!
