@@ -158,3 +158,7 @@ export PROMPT_COMMAND=prompt_command
 # as the most recent command.
 #export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a" # Only append, so new shells get stuff from existing shells
+
+# Install space-commander completions
+complete -C /Users/gwu/stripe/space-commander/bin/commands/sc-complete _sc
+for cmd in "${HOME}"/stripe/space-commander/bin/*; do complete -C "${HOME}"/stripe/space-commander/bin/commands/sc-complete "$(basename "$cmd")"; done
