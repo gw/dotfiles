@@ -62,6 +62,8 @@ alias lal='ls -Gpal'
 # NB: This won't persist through a restart.
 alias kitty_darken='kitty @ set-colors --all --configured ~/.config/kitty/scheme_vibrantink.conf && kitty @ set-colors active_border_color=green'
 alias kitty_lighten='kitty @ set-colors --all --configured ~/.config/kitty/scheme_terminalbasic.conf && kitty @ set-colors active_border_color=black'
+# Copy local terminfo files to target server so things work more nicely with kitty
+alias ssh_kitty='kitty +kitten ssh'
 # Git
 alias gg='git grep'
 alias ga='git add'
