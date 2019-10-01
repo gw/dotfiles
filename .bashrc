@@ -108,6 +108,8 @@ alias kitty_conf='vim ~/.config/kitty/kitty.conf'
 function count_pattern {
   ag -c "$1" | awk -F ":" '{print $NF}' | paste -sd+ - | bc
 }
+# Ripgrep
+alias rgf="rg -F" # Treat pattern as fixed string instead of regex
 
 # cd to pushd
 # Writing it as a function lets `cd` with no args still
