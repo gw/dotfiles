@@ -110,6 +110,12 @@ function count_pattern {
 }
 # Ripgrep
 alias rgf="rg -F" # Treat pattern as fixed string instead of regex
+# Sorbet
+alias sb="bazel build //main:sorbet --config=dbg"
+alias sd="sb && lldb -- bazel-bin/main/sorbet --silence-dev-message --stop-after=namer -p autogen-subclasses test/cli/autogen-subclasses/a.rb"
+alias sr="sb && bazel-bin/main/sorbet --silence-dev-message --stop-after=namer -p autogen-subclasses test/cli/autogen-subclasses/a.rb"
+# alias st="bazel test //... --config=dbg --test_output=errors"
+alias st="bazel run //test/cli:test_autogen-subclasses-alias && bazel run //test/cli:test_autogen-subclasses && bazel run //test/cli:test_autogen-subclasses-ignore"
 
 # cd to pushd
 # Writing it as a function lets `cd` with no args still
