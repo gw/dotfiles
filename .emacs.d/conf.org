@@ -81,7 +81,7 @@
 ** Set default font and custom resize behavior
 These custom scaling functions affect text EVERYWHERE, not just the current buffer.
 #+BEGIN_SRC emacs-lisp
-  (setq gw/default-font "Iosevka light")
+  (setq gw/default-font "Iosevka Term SS04")
   (setq gw/default-font-size 13)
   (setq gw/current-font-size gw/default-font-size)
 
