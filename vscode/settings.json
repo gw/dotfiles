@@ -1,0 +1,18 @@
+{
+       "workbench.activityBar.visible": false,
+       "workbench.sideBar.location": "right",
+       "editor.fontFamily": "Iosevka Term SS04",
+       "editor.minimap.enabled": false,
+       "workbench.editor.showTabs": false,
+       "editor.fontSize": 13,
+       "editor.cursorStyle": "block",
+       "editor.cursorBlinking": "solid",
+       "editor.acceptSuggestionOnEnter": "off",
+       "editor.quickSuggestionsDelay": 400,
+       "terminal.integrated.fontSize": 13,
+       "files.trimFinalNewlines": true,
+       "files.insertFinalNewline": true,
+       "window.zoomLevel": 0,
+       "editor.formatOnPaste": true,
+       "workbench.colorTheme": "Default Light+"
+}
