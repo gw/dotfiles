@@ -57,11 +57,11 @@
     },
     {
         // Move to next editor (tab)
-   "key": "ctrl+0",
+   "key": "cmd+0",
    "command": "workbench.action.navigateRight"
     },
     {
-   "key": "ctrl+9",
+   "key": "cmd+9",
    "command": "workbench.action.navigateLeft"
     },
     {
