@@ -16,4 +16,5 @@
        "editor.formatOnPaste": true,
        "workbench.colorTheme": "Default Light+",
        "workbench.panel.defaultLocation": "right",
+       "workbench.quickOpen.closeOnFocusLost": false
 }
