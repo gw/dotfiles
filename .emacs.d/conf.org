@@ -185,7 +185,7 @@ __ - underline
 
   (defun gw/writing-mode()
     (interactive)
-    (setq buffer-face-mode-face '(:family "iA Writer Quattro S" :height 160))
+    (setq buffer-face-mode-face '(:family "iA Writer Quattro V" :height 160))
     (buffer-face-mode)
     (olivetti-mode)
     (olivetti-set-width 60)
