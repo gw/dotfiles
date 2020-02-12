@@ -178,7 +178,22 @@ __ - underline
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t)
 #+END_SRC
+** Custom gw/writing-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package olivetti
+    :ensure t)
 
+  (defun gw/writing-mode()
+    (interactive)
+    (setq buffer-face-mode-face '(:family "iA Writer Quattro S" :height 150))
+    (buffer-face-mode)
+    (olivetti-mode)
+    (olivetti-set-width 70)
+    (set-fringe-mode 0)
+    )
+
+  (add-hook 'org-mode-hook 'gw/writing-mode)
+#+END_SRC
 
 * Indentation / tabs
 ** Never use tabs
