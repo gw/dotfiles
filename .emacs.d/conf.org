@@ -569,6 +569,21 @@ Default: add or remove faces to text in region
   (global-set-key (kbd "C-x 3") 'gw/split-window-right-and-switch)
 #+END_SRC
 
+*** "alt -" and "alt _": Insert en- and em-dashes
+#+BEGIN_SRC emacs-lisp
+  (defun gw/insert-em-dash ()
+    "Inserts an EM-DASH (not a HYPHEN, not an M-DASH)"
+    (interactive)
+    (insert "—"))
+
+  (defun gw/insert-en-dash ()
+    "Inserts an EN-DASH (not a HYPHEN, not an N-DASH)"
+    (interactive)
+    (insert "–"))
+
+  (global-set-key (kbd "s-_") 'gw/insert-em-dash)
+  (global-set-key (kbd "s--") 'gw/insert-en-dash)
+#+END_SRC
 
 ** Org Mode
 *** <el: Elisp source block template
