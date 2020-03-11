@@ -550,11 +550,13 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
 ** Use Projectile for project management
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
-    :demand  ; Override the deferral introduced by :bind to allow project switching at startup
+    :bind-keymap
+    ("C-c C-p" . projectile-command-map)
     :config
     (setq projectile-completion-system 'ivy)
     (setq projectile-track-known-projects-automatically nil)  ; Don't auto-detect projects--it's noisy
-    (setq projectile-enable-caching t)
+    ;; Annoying by default—set in .projectile config for large projects
+    ;; (setq projectile-enable-caching t)
     (projectile-mode))  ; Enable projectile-mode globally
 #+END_SRC
 
