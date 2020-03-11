@@ -22,6 +22,14 @@
 
 
 * Set up use-package
+** Tips for using use-package
+Macros
+:init - Run /before/ package is loaded
+:config - Run /after/ package is loaded
+
+You almost never need :defer—these all imply :defer:
+:commands, :bind, :bind*, :bind-keymap, :bind-keymap*, :mode, :interpreter, :hook.
+
 ** Make sure it's installed, and set some options
 #+BEGIN_SRC emacs-lisp
   (unless (package-installed-p 'use-package)
@@ -143,7 +151,7 @@ Default is to center point whenever scrolling off screen.
 
 ** Solid cursor that's wide as glyph underneath
 #+BEGIN_SRC emacs-lisp
-  (blink-cursor-mode 0)
+  (blink-cursor-mode 1)
   (setq x-stretch-cursor 1)
 #+END_SRC
 
@@ -239,7 +247,7 @@ __ - underline
 
   (defun gw/writing-mode()
     (interactive)
-    (setq buffer-face-mode-face '(:family "iA Writer Quattro V" :height 160))
+    (setq buffer-face-mode-face '(:family "iA Writer Quattro V" :height 150))
     (buffer-face-mode)
     (olivetti-mode)
     (olivetti-set-width 60)
@@ -249,6 +257,7 @@ __ - underline
 
   (add-hook 'org-mode-hook 'gw/writing-mode)
 #+END_SRC
+
 
 * Indentation / tabs
 ** Never use tabs
@@ -553,8 +562,9 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
     ("C-x b" . ivy-switch-buffer)       ; Otherwise, uses normal non-ivy minibuffer until you M-x ivy-switch-buffer manually, once
     ("<f1> f" . counsel-describe-function)   ; Highlights interactive functions
     ("<f1> v" . counsel-describe-variable))  ; Highlights defcustoms
-
 #+END_SRC
+Other Nice Keybindings
+- When any Ivy buffer is open, M-n (next history element) will populate the search with the thing at point
 
 ** Use Projectile for project management
 #+BEGIN_SRC emacs-lisp
@@ -808,7 +818,6 @@ Prob give counsel-file-jump its own history cuz file-name-history appears to be 
 It's just treated as another search term
 https://github.com/abo-abo/swiper/blob/master/doc/ivy.org#ivyregex-plus
 *** Ivy results highlight case-insensitively even if ivy-case-fold-search-default is nil
-*** imenu results are truncated at a too-short column length
 
 
 * How To Do Stuff in Emacs
@@ -875,6 +884,11 @@ Replacement text has:
 - \, arbitrary (lisp expression)
 
 *** Replace all string-regexp matches in project
+projectile-find-replace and projectile-find-replace-regexp
+or;
+the builtin project-find-regexp
+or
+counsel-rg, then C-x C-q to enable wrep, standard query-replace, then save the wgrep buffer
 
 *** Run shell command on region, replacing it with output
 Highlight region and do:
