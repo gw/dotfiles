@@ -534,7 +534,8 @@ Ivy provides a generic narrowing interface similar to (but simpler than) Helm. S
            ))
     (setq ivy-re-builders-alist
           '((t . ivy--regex-plus)))  ; Multi-word non-fuzzy regex matching
-    (setq counsel-rg-base-command "rg --case-sensitive --max-columns 120 --no-heading --line-number --color never %s .")
+    (add-to-list 'ivy-height-alist '(counsel-rg . 15)) ; Display more results
+    (setq counsel-rg-base-command "rg --case-sensitive --no-heading --line-number --color never %s .") ; Add --max-columns if this gets slow
     :bind
     ("C-x C-f" . counsel-find-file)     ; Respects counsel-find-file-ignore-regexp
     ("C-S-s" . counsel-grep-or-swiper)  ; Replace redundant forward-isearch binding with swiper
