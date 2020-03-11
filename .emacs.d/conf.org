@@ -460,6 +460,21 @@ C-c <right> to jump to top of configuration stack
                                   ))
     (winner-mode 1))
 #+END_SRC
+** Define boilerplate for new files with auto-insert
+#+BEGIN_SRC emacs-lisp
+  (use-package autoinsert
+    :config
+    (auto-insert-mode 1)
+    (setq auto-insert-query nil)
+    (add-hook 'find-file-hook 'auto-insert)
+    (add-to-list 'auto-insert-alist
+                 ;; Zettel
+                 '(("\\.txt$" . "Note")
+                   nil
+                   > "# " _ \n \n
+                   "# Connections\n\n"
+                   "-- Generated --")))
+#+END_SRC
 
 
 * Point
