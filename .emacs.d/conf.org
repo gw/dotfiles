@@ -564,6 +564,12 @@ When used with C-u prefix arg, prompts for directory under which to search
   (global-set-key (kbd "C-x f") 'counsel-recentf)
 #+END_SRC
 
+** Use `wgrep` for bulk find-replace
+#+BEGIN_SRC emacs-lisp
+  (use-package wgrep
+    :ensure t)
+#+END_SRC
+
 
 * VC / Diffing
 
