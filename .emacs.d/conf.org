@@ -570,7 +570,9 @@ Other Nice Keybindings
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
     :bind-keymap
-    ("C-c C-p" . projectile-command-map)
+    ;; I'd just C-c C-p here but markdown-mode uses that for useful navigation
+    ;; stuff
+    ("C-c p" . projectile-command-map)
     :config
     (setq projectile-completion-system 'ivy)
     (setq projectile-track-known-projects-automatically nil)  ; Don't auto-detect projects--it's noisy
