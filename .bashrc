@@ -49,7 +49,7 @@ stty start undef
 # -f tells tmux to look elsewhere for tmux.conf
 alias tmux='tmux -u -f ~/.config/tmux/tmux.conf'
 # Emacs
-alias e='TERM=xterm-24bit /usr/local/Cellar/emacs/26.2/bin/emacs'
+alias e='emacs'
 # Shell
 alias cat='bat'
 alias l='ls -Gp'
@@ -162,3 +162,5 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a" # Only
 # Install space-commander completions
 complete -C /Users/gwu/stripe/space-commander/bin/commands/sc-complete _sc
 for cmd in "${HOME}"/stripe/space-commander/bin/*; do complete -C "${HOME}"/stripe/space-commander/bin/commands/sc-complete "$(basename "$cmd")"; done
+
+export PATH=~/Code/git/dotfiles/grant_scripts:$PATH

@@ -2,7 +2,7 @@
 
 EMACS='/Applications/Emacs.app'
 # You'll probably have to change this
-EMACS_CLIENT='/usr/local/Cellar/emacs-mac/emacs-26.1-z-mac-7.1/bin/emacsclient'
+EMACS_CLIENT='/usr/local/Cellar/emacs-mac/emacs-26.3-z-mac-7.7/bin/emacsclient'
 
 DEFAULT_EVAL='(switch-to-buffer "*scratch*")'
 DEFAULT_ARGS="-e"
