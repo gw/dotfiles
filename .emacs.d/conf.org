@@ -711,8 +711,8 @@ Default: add or remove faces to text in region
     (interactive)
     (ivy-read "Select note: "
               (gw/all-notes)
-              :action (lambda (tag)
-                        (insert (format "[[%s]]" tag)))))
+              :action (lambda (note)
+                        (insert (format "[[%s]]" note)))))
 
   (defun gw/insert-tag ()
     "Select a tag and insert it."
@@ -750,18 +750,29 @@ Default: add or remove faces to text in region
     "Insert a markdown heading with a formatted version of the buffer's filename."
     (insert (format "# %s" (gw/munged-filename))))
 
-  ;; Make this globally available
-  ;; (defun gw/open-or-create-note ())
+  (defun gw/open-or-create-note ()
+    "Open or create a note in the zettel-dir."
+    (interactive)
+    (ivy-read "Open note: "
+              (gw/all-notes)
+              :action (lambda (note)
+                        (find-file (format "%s%s.txt" gw/zettel-dir-truename note)))))
+
+  ;; Allow binding stuff to C-z, which is normally non-prefix
+  (define-key global-map (kbd "C-z") (make-sparse-keymap))
+  (global-set-key (kbd "C-z C-n") 'gw/open-or-create-note)
 
   (define-minor-mode gw/zettel-mode
     "Zettelkasten conveniences."
     :lighter " Z"
     :keymap (let ((map (make-sparse-keymap)))
-              (define-key map (kbd "C-c n") 'gw/insert-wikilink)
-              (define-key map (kbd "C-c t") 'gw/insert-tag)
+              (define-key map (kbd "C-z n") 'gw/insert-wikilink)
+              (define-key map (kbd "C-z t") 'gw/insert-tag)
               map))
 
-  ;; Insert boilerplate when opening new files in zettel-mode
+  ;; Insert boilerplate when opening new files in markdown-mode
+  ;; TODO This ideally is predicated on gw/zettel-mode, but auto-insert
+  ;; only checks the major mode, so we'd have to hack auto-insert.
   (define-auto-insert 'markdown-mode 'gw/insert-note-template)
 
   ;; Enable zettel-mode when opening a file in the zettel-dir
