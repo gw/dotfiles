@@ -205,35 +205,48 @@ __ - underline
 
   (add-hook 'markdown-mode-hook 'gw/writing-mode)
 
+  (setq-default gw/zettel-dir "~/icloud_drive/Documents")
+
+  (defun gw/all-notes ()
+    "Get a list of all notes."
+    (mapcar 'file-name-base
+            (delete-dups
+             (split-string
+              (shell-command-to-string
+               (format "fd . %s" gw/zettel-dir))
+              "\n"))))
+
+  (defun gw/all-tags ()
+    "Get a list of all tags."
+    (delete-dups
+     (split-string
+      (shell-command-to-string
+       (format "rg -o --no-heading --no-filename --no-line-number \"#\\w+\" %s" gw/zettel-dir)))))
+
   (defun gw/insert-wikilink ()
-    "Select a note and insert it, creating if it doesn't exist."
+    "Select a note and insert wikilink to it."
     (interactive)
-    (insert
-     (format "[[%s]]"
-             (ivy-read "Select note: "
-                       (mapcar 'file-name-base
-                               (delete-dups
-                                (split-string
-                                 (shell-command-to-string
-                                  "fd . ~/icloud_drive/Documents")
-                                 "\n"))))))
-    ;; :action isn't working, for some reason, so I just wrapped it all in 'insert
-    ;; :action (lambda (tag)
-              ;; (insert tag))
-    )
+    (ivy-read "Select note: "
+              (gw/all-notes)
+              :action (lambda (tag)
+                        (insert (format "[[%s]]" tag)))))
 
   (defun gw/insert-tag ()
     "Select a tag and insert it."
     (interactive)
-    (insert (ivy-read "Select tag: "
-              (delete-dups
-               (split-string
-                (shell-command-to-string
-                 "rg -o --no-heading --no-filename --no-line-number \"#\\w+\" ~/icloud_drive/Documents")))))
-    ;; :action isn't working, for some reason, so I just wrapped it all in 'insert
-    ;; :action (lambda (tag)
-              ;; (insert tag))
-    )
+    (ivy-read "Select tag: "
+              (gw/all-tags)
+              :action
+              (lambda (tag)
+                (insert tag))
+              ;; Can use this if I install ivy-hydra to mark multiple candidates
+              ;; :multi-action
+              ;; (lambda (tags)
+              ;;   (insert (string-join tags " ")))
+              ))
+
+  ;; Make this globally available
+  ;; (defun gw/open-or-create-note ())
 
   (global-set-key (kbd "C-c n") 'gw/insert-wikilink)
   (global-set-key (kbd "C-c t") 'gw/insert-tag)
