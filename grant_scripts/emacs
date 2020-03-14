@@ -1,8 +1,9 @@
 #!/bin/bash
 
+# This should be a symlink to the homebrew binary
 EMACS='/Applications/Emacs.app'
-# You'll probably have to change this
-EMACS_CLIENT='/usr/local/Cellar/emacs-mac/emacs-26.3-z-mac-7.7/bin/emacsclient'
+# This should be a path straight to the homebrew binary
+EMACS_CLIENT='/usr/local/opt/emacs-mac/bin/emacsclient'
 
 DEFAULT_EVAL='(switch-to-buffer "*scratch*")'
 DEFAULT_ARGS="-e"
