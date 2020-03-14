@@ -56,6 +56,15 @@ You almost never need :defer—these all imply :defer:
 #+END_SRC
 
 
+* Custom defvars
+#+BEGIN_SRC emacs-lisp
+  (defvar gw/zettel-dir "~/icloud_drive/Documents/"
+    "The directory to use when searching for notes / tags.")
+
+  (defvar gw/zettel-dir-truename (file-truename gw/zettel-dir)
+    "The value of gw/zettel-dir with symlinks resolved.")
+#+END_SRC
+
 * UI
 ** Hide toolbars, menus, frame maximization, etc
 #+BEGIN_SRC emacs-lisp
@@ -191,66 +200,23 @@ __ - underline
   (use-package markdown-mode
     :ensure t
     :mode (("README\\.md\\'" . gfm-mode)
-           ("\\.txt\\'" . markdown-mode)
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
-    :init
+    :config
+    ;; Enable and configure wikilinks following behavior
     (setq markdown-enable-wiki-links t)
     (setq markdown-wiki-link-search-subdirectories t)
     (setq markdown-wiki-link-search-parent-directories t)
     ;; By default, it converts [[Foo Bar]] to Foo_Bar when following links—don't
     ;; do that.
     (setq markdown-link-space-sub-char " ")
+    ;; Open markdown mode when working in zettel-dir.
+    ;; Doing it manually here b/c :mode macro doesn't eval
+    ;; the (format) expression
     )
 
-  (add-hook 'markdown-mode-hook 'gw/writing-mode)
-
-  (setq-default gw/zettel-dir "~/icloud_drive/Documents")
-
-  (defun gw/all-notes ()
-    "Get a list of all notes."
-    (mapcar 'file-name-base
-            (delete-dups
-             (split-string
-              (shell-command-to-string
-               (format "fd . %s" gw/zettel-dir))
-              "\n"))))
-
-  (defun gw/all-tags ()
-    "Get a list of all tags."
-    (delete-dups
-     (split-string
-      (shell-command-to-string
-       (format "rg -o --no-heading --no-filename --no-line-number \"#\\w+\" %s" gw/zettel-dir)))))
-
-  (defun gw/insert-wikilink ()
-    "Select a note and insert wikilink to it."
-    (interactive)
-    (ivy-read "Select note: "
-              (gw/all-notes)
-              :action (lambda (tag)
-                        (insert (format "[[%s]]" tag)))))
-
-  (defun gw/insert-tag ()
-    "Select a tag and insert it."
-    (interactive)
-    (ivy-read "Select tag: "
-              (gw/all-tags)
-              :action
-              (lambda (tag)
-                (insert tag))
-              ;; Can use this if I install ivy-hydra to mark multiple candidates
-              ;; :multi-action
-              ;; (lambda (tags)
-              ;;   (insert (string-join tags " ")))
-              ))
-
-  ;; Make this globally available
-  ;; (defun gw/open-or-create-note ())
-
-  (global-set-key (kbd "C-c n") 'gw/insert-wikilink)
-  (global-set-key (kbd "C-c t") 'gw/insert-tag)
-
+  ;; Enable markdown mode for all files in zettel-dir
+  (add-to-list 'auto-mode-alist `(,(concat "^" gw/zettel-dir-truename) . markdown-mode))
 #+END_SRC
 
 ** Custom gw/writing-mode
@@ -258,16 +224,23 @@ __ - underline
   (use-package olivetti
     :ensure t)
 
-  (defun gw/writing-mode()
-    (interactive)
+  (define-minor-mode gw/writing-mode
+    "A nicely formatted writing environment."
+    :lighter " Write"
+
+    ;; Use a nice, prose-friendly font
     (setq buffer-face-mode-face '(:family "iA Writer Quattro V" :height 150))
     (buffer-face-mode)
+
+    ;; Keep text in a centered column regardless of frame width
     (olivetti-mode)
     (olivetti-set-width 60)
-    (set-fringe-mode 0)
-    (setq line-spacing 4)
-    )
 
+    ;; Other UI niceties
+    (set-fringe-mode 0)
+    (setq line-spacing 4))
+
+  (add-hook 'markdown-mode-hook 'gw/writing-mode)
   (add-hook 'org-mode-hook 'gw/writing-mode)
 #+END_SRC
 
@@ -496,31 +469,8 @@ C-c <right> to jump to top of configuration stack
     :config
     (auto-insert-mode 1)
     (setq auto-insert-query nil)
-    (add-hook 'find-file-hook 'auto-insert)
-
-    (defun gw/regexp-list (regex string)
-    "Return a list of all REGEXP matches in STRING."
-    ;; source: http://emacs.stackexchange.com/questions/7148/get-all-regexp-matches-in-buffer-as-a-list
-    (let ((pos 0)        ; string marker
-          (matches ()))  ; return list
-      (while (string-match regex string pos)
-        (push (match-string 0 string) matches)
-        (setq pos (match-end 0)))
-      (setq matches (reverse matches))
-      matches))
-
-    (defun gw/munged-filename ()
-      "Get the buffer's filename, with capitalized words separated by spaces."
-      (string-join
-       (let ((case-fold-search nil))
-         (gw/regexp-list "[A-Z][a-z]*" (file-name-base buffer-file-name)))
-       " "))
-
-    (defun gw/insert-note-template ()
-      "Insert a markdown heading with a formatted version of the buffer's filename."
-      (insert (format "# %s" (gw/munged-filename))))
-
-    (define-auto-insert "\\.txt$" 'gw/insert-note-template))
+    (setq auto-insert-alist '())
+    (add-hook 'find-file-hook 'auto-insert))
 #+END_SRC
 
 
@@ -737,6 +687,92 @@ Default: add or remove faces to text in region
 #+END_SRC
 
 
+* Custom Modes
+** gw/zettel-mode
+#+BEGIN_SRC emacs-lisp
+  (defun gw/all-notes ()
+    "Get a list of all notes."
+    (mapcar 'file-name-base
+            (delete-dups
+             (split-string
+              (shell-command-to-string
+               (format "fd . %s" gw/zettel-dir))
+              "\n"))))
+
+  (defun gw/all-tags ()
+    "Get a list of all tags."
+    (delete-dups
+     (split-string
+      (shell-command-to-string
+       (format "rg -o --no-heading --no-filename --no-line-number \"#\\w+\" %s" gw/zettel-dir)))))
+
+  (defun gw/insert-wikilink ()
+    "Select a note and insert wikilink to it."
+    (interactive)
+    (ivy-read "Select note: "
+              (gw/all-notes)
+              :action (lambda (tag)
+                        (insert (format "[[%s]]" tag)))))
+
+  (defun gw/insert-tag ()
+    "Select a tag and insert it."
+    (interactive)
+    (ivy-read "Select tag: "
+              (gw/all-tags)
+              :action
+              (lambda (tag)
+                (insert tag))
+              ;; Can use this if I install ivy-hydra to mark multiple candidates
+              ;; :multi-action
+              ;; (lambda (tags)
+              ;;   (insert (string-join tags " ")))
+              ))
+
+  (defun gw/regexp-list (regex string)
+    "Return a list of all REGEXP matches in STRING."
+    ;; source: http://emacs.stackexchange.com/questions/7148/get-all-regexp-matches-in-buffer-as-a-list
+    (let ((pos 0)        ; string marker
+          (matches ()))  ; return list
+      (while (string-match regex string pos)
+        (push (match-string 0 string) matches)
+        (setq pos (match-end 0)))
+      (setq matches (reverse matches))
+      matches))
+
+  (defun gw/munged-filename ()
+    "Get the buffer's filename, with capitalized words separated by spaces."
+    (string-join
+     (let ((case-fold-search nil))
+       (gw/regexp-list "[A-Z][a-z]*" (file-name-base buffer-file-name)))
+     " "))
+
+  (defun gw/insert-note-template ()
+    "Insert a markdown heading with a formatted version of the buffer's filename."
+    (insert (format "# %s" (gw/munged-filename))))
+
+  ;; Make this globally available
+  ;; (defun gw/open-or-create-note ())
+
+  (define-minor-mode gw/zettel-mode
+    "Zettelkasten conveniences."
+    :lighter " Z"
+    :keymap (let ((map (make-sparse-keymap)))
+              (define-key map (kbd "C-c n") 'gw/insert-wikilink)
+              (define-key map (kbd "C-c t") 'gw/insert-tag)
+              map))
+
+  ;; Insert boilerplate when opening new files in zettel-mode
+  (define-auto-insert 'markdown-mode 'gw/insert-note-template)
+
+  ;; Enable zettel-mode when opening a file in the zettel-dir
+  ;; There's no minor-mode equivalent to auto-mode-alist, so we hack one here.
+  (add-hook 'find-file-hook
+            (lambda ()
+              (when (string= (file-name-directory buffer-file-name) gw/zettel-dir-truename)
+                (gw/zettel-mode))))
+#+END_SRC
+
+
 * History
 ** Persist kill-ring, isearch queries, and other minibuffer stuff across sessions
 #+BEGIN_SRC emacs-lisp
@@ -766,6 +802,7 @@ Use the former to define a global keymapping, use the latter to define a mapping
 
 
 * Stuff for future
+** Memex Features
 ** Features
 *** KBD shortcut to open the current line in github
 *** Write function to highlight everything at current indentation (v i i) in VSCode
