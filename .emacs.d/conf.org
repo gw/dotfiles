@@ -204,13 +204,18 @@ __ - underline
     ;; By default, it converts [[Foo Bar]] to Foo_Bar when following links—don't
     ;; do that.
     (setq markdown-link-space-sub-char " ")
-    ;; Open markdown mode when working in zettel-dir.
-    ;; Doing it manually here b/c :mode macro doesn't eval
-    ;; the (format) expression
+    ;; Hide all formatting markdup
+    (setq-default markdown-hide-urls t)
     )
 
   ;; Enable markdown mode for all files in zettel-dir
   (add-to-list 'auto-mode-alist `(,(concat "^" gw/zettel-dir-truename) . markdown-mode))
+
+  ;; Mimic org-mode's adaptive bulleted list wrapping
+  (add-hook 'markdown-mode-hook 'adaptive-wrap-prefix-mode)
+
+  ;; Enable inline images by default
+  (add-hook 'markdown-mode-hook 'markdown-toggle-inline-images)
 #+END_SRC
 
 ** Custom gw/writing-mode
