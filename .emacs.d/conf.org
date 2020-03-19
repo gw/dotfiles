@@ -742,10 +742,7 @@ Default: add or remove faces to text in region
 
   (defun gw/munged-filename ()
     "Get the buffer's filename, with capitalized words separated by spaces."
-    (string-join
-     (let ((case-fold-search nil))
-       (gw/regexp-list "[A-Z][a-z]*" (file-name-base buffer-file-name)))
-     " "))
+    (file-name-base buffer-file-name))
 
   (defun gw/insert-note-template ()
     "Insert a markdown heading with a formatted version of the buffer's filename."
