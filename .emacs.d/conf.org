@@ -65,6 +65,7 @@ You almost never need :defer—these all imply :defer:
     "The value of gw/zettel-dir with symlinks resolved.")
 #+END_SRC
 
+
 * UI
 ** Hide toolbars, menus, frame maximization, etc
 #+BEGIN_SRC emacs-lisp
@@ -164,13 +165,6 @@ Default is to center point whenever scrolling off screen.
   (setq x-stretch-cursor 1)
 #+END_SRC
 
-** Pick a theme
-#+BEGIN_SRC emacs-lisp
-  ;; I use the default them during the day and zenburn at night
-  ;; (use-package hc-zenburn-theme
-  ;;   :config
-  ;;   (load-theme 'hc-zenburn t))
-#+END_SRC
 ** Soft-wrap long lines in texty modes
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
