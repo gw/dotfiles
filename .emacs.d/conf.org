@@ -705,7 +705,8 @@ Default: add or remove faces to text in region
     (delete-dups
      (split-string
       (shell-command-to-string
-       (format "rg -o --no-heading --no-filename --no-line-number \"#\\w+\" %s" gw/zettel-dir)))))
+       ;; -o: Print only the matching parts of a matching line
+       (format "rg -g '!assets' -o --no-heading --no-filename --no-line-number \"#\\w+\" %s" gw/zettel-dir)))))
 
   (defun gw/insert-wikilink ()
     "Select a note and insert wikilink to it."
