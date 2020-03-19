@@ -692,11 +692,11 @@ Default: add or remove faces to text in region
   (defun gw/all-notes ()
     "Get a list of all notes."
     (mapcar 'file-name-base
-            (delete-dups
-             (split-string
-              (shell-command-to-string
-               (format "fd . %s" gw/zettel-dir))
-              "\n"))))
+            (split-string
+             (shell-command-to-string
+              ;; -t sorts by mtime, then we exclude assets/
+              (format "ls -t %s | rg --invert-match assets" gw/zettel-dir))
+             "\n")))
 
   (defun gw/all-tags ()
     "Get a list of all tags."
