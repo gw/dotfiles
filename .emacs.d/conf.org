@@ -55,6 +55,25 @@ You almost never need :defer—these all imply :defer:
     :config (auto-compile-on-load-mode))
 #+END_SRC
 
+** Enable diminishing modes
+#+BEGIN_SRC emacs-lisp
+  (use-package diminish
+    :ensure t
+    :diminish eldoc-mode
+    :diminish visual-line-mode
+    :diminish buffer-face-mode
+    :diminish org-src-mode
+    :diminish org-indent-mode)
+
+  (with-eval-after-load 'subword
+    (diminish 'subword-mode))
+
+  (with-eval-after-load 'face-remap
+    (diminish 'buffer-face-mode))
+
+  (with-eval-after-load 'org-indent
+    (diminish 'org-indent-mode))
+#+END_SRC
 
 * Custom defvars
 #+BEGIN_SRC emacs-lisp
@@ -82,7 +101,7 @@ You almost never need :defer—these all imply :defer:
   ;; Custom function to toggle fullscreen on mac
   ;; This only works on railwaycat emacs
   ;; on railwaycat emacs you can just hold shift and
-  ;; pinch in/out--I keep this around for when I'm
+  ;; pinch in/out—I keep this around for when I'm
   ;; using a mouse instead of a trackpad
   (defun gw/mac-toggle-fullscreen ()
     (interactive)
@@ -259,6 +278,7 @@ __ - underline
 When enabled as a minor mode, it will transparently try to set the indentation offset and `indent-tabs-mode` if it confidently detect what the currently-edited file is doing. It's source code is well-documented-just read it if you're having trouble.
 #+BEGIN_SRC emacs-lisp
   (use-package dtrt-indent
+    :diminish
     :defer t
     :init
     (add-hook 'prog-mode-hook 'dtrt-indent-mode)
@@ -315,6 +335,7 @@ It's easy to accidentally edit across folds--throw an error.
 ** Use `hungry-delete` to kill extra whitespace
 #+BEGIN_SRC emacs-lisp
   (use-package hungry-delete
+    :diminish
     :ensure t
     :config
     (global-hungry-delete-mode))
@@ -370,6 +391,7 @@ It's easy to accidentally edit across folds--throw an error.
 ** Configure Company and Company-Irony
 #+BEGIN_SRC emacs-lisp
   (use-package company
+    :diminish
     :defer t  ; Needed b/c we're not using any of the implicit defer macros
     :init (add-hook 'prog-mode-hook 'company-mode)  ; Load when activating a programming language mode
     :config
@@ -495,6 +517,7 @@ C-c <right> to jump to top of configuration stack
 ** Show current match/total in modeline with isearch
 #+BEGIN_SRC emacs-lisp
   (use-package anzu
+    :diminish
     :config (global-anzu-mode))
 #+END_SRC
 
@@ -511,6 +534,7 @@ In MELPA, Ivy and Swiper are included as dependencies of Counsel, so we just hav
 Ivy provides a generic narrowing interface similar to (but simpler than) Helm. Swiper and Counsel both use Ivy--Swiper replaces `isearch`, and Counsel replaces most of the common minibuffer search interfaces--see below.
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
+    :diminish ivy-mode
     :config       ; Stuff that only has meaning after package is loaded (possibly deferred)
     (ido-mode 0)  ; Disable Ido
     (ivy-mode 1)  ; Enable Ivy
