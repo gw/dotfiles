@@ -849,6 +849,10 @@ Default: add or remove faces to text in region
     :keymap (let ((map (make-sparse-keymap)))
               (define-key map (kbd "C-z n") 'gw/insert-wikilink)
               (define-key map (kbd "C-z t") 'gw/insert-tag)
+              (define-key map (kbd "<down>") 'markdown-next-link)
+              (define-key map (kbd "<up>") 'markdown-previous-link)
+              (define-key map (kbd "<left>") 'previous-buffer)
+              (define-key map (kbd "<right>") 'markdown-follow-thing-at-point)
               map))
 
   ;; Insert boilerplate when opening new files in markdown-mode
