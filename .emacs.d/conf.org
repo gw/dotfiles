@@ -895,10 +895,14 @@ Default: add or remove faces to text in region
        (format "rg -g '!assets' -o --no-heading --no-filename --no-line-number \"#\\w+\" %s" gw/zettel-dir)))))
 
   (defun gw/insert-wikilink ()
-    "Select a note and insert wikilink to it."
+    "Select a note and insert wikilink to it.
+  Removes the current buffer's file from the candidate list."
     (interactive)
     (ivy-read "Select note: "
-              (gw/all-notes)
+              (seq-filter
+               (lambda (note)
+                 (not (string= note (file-name-base (buffer-file-name)))))
+               (gw/all-notes))
               :action (lambda (note)
                         (insert (format "[[%s]]" note)))))
 
