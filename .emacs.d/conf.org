@@ -281,14 +281,15 @@ __ - underline
   (add-hook 'markdown-mode-hook 'markdown-toggle-inline-images)
 #+END_SRC
 
-** Custom gw/writing-mode
+** Custom gw/prose-mode and gw/centered-code-mode
 #+BEGIN_SRC emacs-lisp
   (use-package olivetti
+    :diminish
     :ensure t)
 
-  (define-minor-mode gw/writing-mode
+  (define-minor-mode gw/prose-mode
     "A nicely formatted writing environment."
-    :lighter " Write"
+    :lighter nil
 
     ;; Use a nice, prose-friendly font
     (setq buffer-face-mode-face '(:family "iA Writer Quattro V" :height 150))
@@ -303,8 +304,17 @@ __ - underline
     (setq left-fringe-width 0 right-fringe-width 0)
     (setq line-spacing 4))
 
-  (add-hook 'markdown-mode-hook 'gw/writing-mode)
-  (add-hook 'org-mode-hook 'gw/writing-mode)
+  (add-hook 'markdown-mode-hook 'gw/prose-mode)
+  (add-hook 'org-mode-hook 'gw/prose-mode)
+
+
+  (define-minor-mode gw/centered-code-mode
+    "Keep code front and center."
+    :lighter nil
+    (olivetti-mode)
+    (olivetti-set-width 120))
+
+  (add-hook 'prog-mode-hook 'gw/centered-code-mode)
 #+END_SRC
 
 
