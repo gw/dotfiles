@@ -386,7 +386,17 @@ It's easy to accidentally edit across folds--throw an error.
   (global-set-key (kbd "<C-i>") 'beginning-of-line-text) ; Why do the angle brackets matter here?
 #+END_SRC
 
-
+** Use multiple-cursors
+#+BEGIN_SRC emacs-lisp
+  (use-package multiple-cursors
+    :ensure t
+    :bind (("C->" . mc/mark-next-like-this)
+           ("C-<" . mc/mark-previous-like-this)
+           ("C-c C->" . mc/mark-all-like-this)
+           ("C-S-<mouse-1>" . mc/add-cursor-on-click))
+    :config
+    (setq-default mc/always-repeat-command t mc/always-run-for-all t))
+#+END_SRC
 ** Use `hungry-delete` to kill extra whitespace
 #+BEGIN_SRC emacs-lisp
   (use-package hungry-delete
