@@ -222,10 +222,7 @@ Default is to center point whenever scrolling off screen.
 
   (defadvice quit-window
       (after rebalance activate)
-    (balance-windwos))
-
-
-
+    (balance-windows))
 #+END_SRC
 ** Org Mode
 *** Hide emphasis markup
@@ -363,6 +360,7 @@ This is the only non-Vim way I can live without "cib" and friends
 ** Auto-insert the other half of a pair
 #+BEGIN_SRC emacs-lisp
   (electric-pair-mode 1)
+  (setq-default electric-pair-preserve-balance nil)
 #+END_SRC
 
 ** Don't allow invisible edits in Org mode
@@ -552,7 +550,7 @@ C-c <right> to jump to top of configuration stack
                                   ))
     (winner-mode 1))
 #+END_SRC
-** Define boilerplate for new files with auto-insert
+** Set up auto-insert
 #+BEGIN_SRC emacs-lisp
   (use-package autoinsert
     :config
