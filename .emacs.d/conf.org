@@ -388,12 +388,12 @@ It's easy to accidentally edit across folds--throw an error.
 #+BEGIN_SRC emacs-lisp
   (use-package multiple-cursors
     :ensure t
+    :init
+    (setq-default mc/always-repeat-command t mc/always-run-for-all t)
     :bind (("C->" . mc/mark-next-like-this)
            ("C-<" . mc/mark-previous-like-this)
            ("C-c C->" . mc/mark-all-like-this)
-           ("C-S-<mouse-1>" . mc/add-cursor-on-click))
-    :config
-    (setq-default mc/always-repeat-command t mc/always-run-for-all t))
+           ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 #+END_SRC
 ** Use `hungry-delete` to kill extra whitespace
 #+BEGIN_SRC emacs-lisp
