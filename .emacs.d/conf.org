@@ -791,63 +791,55 @@ Default: add or remove faces to text in region
 ** gw/zettel-mode
 #+BEGIN_SRC emacs-lisp
   ;;; Backlink generation
-  ;;; Commentary:
-  ;; 1. Get all filenames with mtimes
-  ;; 2. For every file, generate all outbound links (above the --Backlinks-- line)
-  ;; 3. Add those links to our target -> [...inbound_links] hash
-  ;; 4. Go through hash and update the --Backlinks-- section for every file
-  ;; 5. Reset all mtimes?
-
-  ;; TODO
-  ;; Add the save hook, play around, ensure functionality
-  ;; Clean up and integrate into zettel-mode
 
   ;;; Code:
-  ;; TODO this should take directory as a parameter
-  (defun gw/all-notes-w-mtimes ()
+  (defun gw/all-notes-w-mtimes (dir)
     "Get a list of (filename . mtime) pairs.
-  Output format: ((<abs-note-path> . <mtime timestamp str>) (<abs-note-path> . <mtime timestamp str>))"
+  Searches the given DIR for files that start with a capital letter.
+  Output format: ((<abs-note-path> . (int int int int)) (<abs-note-path> . (int int int int)))"
     (mapcar
      (lambda (file_and_attr)
        (cons
         (car file_and_attr)
         (file-attribute-modification-time (cdr file_and_attr))))
-     (directory-files-and-attributes gw/zettel-dir-truename t "^[A-Z]")))
+     (directory-files-and-attributes dir t "^[A-Z]"))) ; `t' returns abs paths
 
-  (defun gw/generated-end-idx ()
-    "Get the position of the end of the generated heading.
-  Meant to be called inside with-temp-buffer. Returns point-max if
-  there's no generated heading.
-  Returns: int"
-    (point-min)
-    (save-excursion
-      (let ((case-fold-search nil))
-        (or (search-forward "# Backlinks" nil t)
-            (point-max)))))
-
-
-  (defun gw/outbound-links (filepath)
+  (defun gw/outbound-links (note-abspath)
     "Get all unique outbound (above `# Backlinks`) links for a note.
-  Returns: (\"Memex\" \"Activities\")"
+  Returns: (\"Memex\" \"Activities\"), or nil if no outbound links."
     (with-temp-buffer
-       (insert-file-contents filepath)
-      (let ((generated-idx (gw/generated-end-idx))
-            (res))
-        (while (re-search-forward "\\[\\[\\(.+\\)\\]\\]" generated-idx t)
-          ;; add-to-list dedups
+      (insert-file-contents note-abspath)
+      (goto-char (point-max))
+      (search-backward "# Backlinks" nil t)
+
+      (let ((res))
+        (while (re-search-backward "\\[\\[\\(.+\\)\\]\\]" nil t)
+          ;; add-to-list already dedups entries
           (add-to-list 'res (match-string-no-properties 1)))
         res)))
+
+  ;;; How This Works:
+  ;; - Get a list of all notes and their mtimes, as a list of (<abs-path> . (int int int int)) pairs
+  ;; - For each note, get the outbound links, and put them in a {link-shortname: (abs-backlink abs-backlink)} hash
+  ;; - For each note, look its shortname up in the hash to find its backlinks, and insert a wikilink for each of them
+  ;;
+  ;; Invariants:
+  ;; - "# Backlinks" must be the last section in every note
+  ;; - gw/gen-backlinks assumes all note buffers have been saved—it doesn't check or ask before modifying the underlying files.
 
   (defun gw/gen-backlinks ()
     "Get a map of target_note: [notes_that_link_target_note]."
     (message "Starting backlink generation.")
     (let ((res (make-hash-table :test #'equal))
-          (notes (gw/all-notes-w-mtimes)))
+          (notes (gw/all-notes-w-mtimes gw/zettel-dir)))
       (mapc
        (lambda (note)
          (mapc
           (lambda (link-target)
-            (puthash link-target (append (gethash link-target res ()) (list (car note))) res))
+            (puthash
+             link-target
+             (append (gethash link-target res ()) (list (car note)))
+             res))
           (gw/outbound-links (car note))))
        notes)
 
@@ -858,6 +850,8 @@ Default: add or remove faces to text in region
            (with-temp-buffer
              (insert-file-contents (car note))
              (goto-char (point-max))
+
+             ;; Clear out existing backlinks, if any.
              (when (search-backward "# Backlinks" nil t)
                (delete-region (point) (point-max))
                (delete-trailing-whitespace)
@@ -873,8 +867,10 @@ Default: add or remove faces to text in region
                       linkers)
                      (setq modified t))))
              (when modified
-               ;; Doesn't run save-hooks, which will include gw/gen-backlinks
+               ;; Doesn't run save-hooks. We probably could but it seems safer to not.
                (write-region 1 (point-max) (car note))
+               ;; Pretend we didn't touch the file (preserves mtime-based ordering
+               ;; in gw/all-notes)
                (set-file-times (car note) (cdr note))))))
        notes)))
 
