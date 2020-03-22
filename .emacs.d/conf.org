@@ -790,6 +790,97 @@ Default: add or remove faces to text in region
 * Custom Modes
 ** gw/zettel-mode
 #+BEGIN_SRC emacs-lisp
+  ;;; Backlink generation
+  ;;; Commentary:
+  ;; 1. Get all filenames with mtimes
+  ;; 2. For every file, generate all outbound links (above the --Backlinks-- line)
+  ;; 3. Add those links to our target -> [...inbound_links] hash
+  ;; 4. Go through hash and update the --Backlinks-- section for every file
+  ;; 5. Reset all mtimes?
+
+  ;; TODO
+  ;; Add the save hook, play around, ensure functionality
+  ;; Clean up and integrate into zettel-mode
+
+  ;;; Code:
+  ;; TODO this should take directory as a parameter
+  (defun gw/all-notes-w-mtimes ()
+    "Get a list of (filename . mtime) pairs.
+  Output format: ((<abs-note-path> . <mtime timestamp str>) (<abs-note-path> . <mtime timestamp str>))"
+    (mapcar
+     (lambda (file_and_attr)
+       (cons
+        (car file_and_attr)
+        (file-attribute-modification-time (cdr file_and_attr))))
+     (directory-files-and-attributes gw/zettel-dir-truename t "^[A-Z]")))
+
+  (defun gw/generated-end-idx ()
+    "Get the position of the end of the generated heading.
+  Meant to be called inside with-temp-buffer. Returns point-max if
+  there's no generated heading.
+  Returns: int"
+    (point-min)
+    (save-excursion
+      (let ((case-fold-search nil))
+        (or (search-forward "# Backlinks" nil t)
+            (point-max)))))
+
+
+  (defun gw/outbound-links (filepath)
+    "Get all unique outbound (above `# Backlinks`) links for a note.
+  Returns: (\"Memex\" \"Activities\")"
+    (with-temp-buffer
+       (insert-file-contents filepath)
+      (let ((generated-idx (gw/generated-end-idx))
+            (res))
+        (while (re-search-forward "\\[\\[\\(.+\\)\\]\\]" generated-idx t)
+          ;; add-to-list dedups
+          (add-to-list 'res (match-string-no-properties 1)))
+        res)))
+
+  (defun gw/gen-backlinks ()
+    "Get a map of target_note: [notes_that_link_target_note]."
+    (message "Starting backlink generation.")
+    (let ((res (make-hash-table :test #'equal))
+          (notes (gw/all-notes-w-mtimes)))
+      (mapc
+       (lambda (note)
+         (mapc
+          (lambda (link-target)
+            (puthash link-target (append (gethash link-target res ()) (list (car note))) res))
+          (gw/outbound-links (car note))))
+       notes)
+
+      (mapc
+       (lambda (note)
+         (let ((modified nil))
+           ;; Adapted from https://wilkesley.org/~ian/xah/emacs/elisp_idioms_batch.html
+           (with-temp-buffer
+             (insert-file-contents (car note))
+             (goto-char (point-max))
+             (when (search-backward "# Backlinks" nil t)
+               (delete-region (point) (point-max))
+               (delete-trailing-whitespace)
+               (setq modified t))
+
+             (let ((linkers (gethash (file-name-base (car note)) res)))
+               (if linkers
+                   (progn
+                     (insert "\n# Backlinks\n")
+                     (mapc
+                      (lambda (linker)
+                        (insert (format "- [[%s]]\n" (file-name-base linker))))
+                      linkers)
+                     (setq modified t))))
+             (when modified
+               ;; Doesn't run save-hooks, which will include gw/gen-backlinks
+               (write-region 1 (point-max) (car note))
+               (set-file-times (car note) (cdr note))))))
+       notes)))
+
+
+  ;;; Zettelkasten helper methods
+
   (defun gw/all-notes ()
     "Get a list of all notes."
     (mapcar 'file-name-base
@@ -870,6 +961,10 @@ Default: add or remove faces to text in region
               (define-key map (kbd "<up>") 'markdown-previous-link)
               (define-key map (kbd "<left>") 'previous-buffer)
               (define-key map (kbd "<right>") 'markdown-follow-thing-at-point)
+              (define-key map (kbd "C-x C-s") (lambda ()
+                                                (interactive)
+                                                (gw/save-all-buffers)
+                                                (gw/gen-backlinks)))
               map))
 
   ;; Insert boilerplate when opening new files in markdown-mode
