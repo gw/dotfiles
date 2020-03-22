@@ -417,9 +417,10 @@ It's easy to accidentally edit across folds--throw an error.
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
     :ensure t
+    :init (add-hook 'prog-mode-hook 'flycheck-mode)
     :config
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (global-flycheck-mode))
+    )
 
   (defun gw/use-pay-server-rubocop ()
     "Try to use pay-server's rubocop script if available."
