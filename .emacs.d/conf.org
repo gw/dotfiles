@@ -114,6 +114,7 @@ You almost never need :defer—these all imply :defer:
 ** Narrower fringes
 #+BEGIN_SRC emacs-lisp
   (fringe-mode 4)  ; Default is 8
+  ;; (add-hook 'prog-mode-hook (lambda () (setq left-fringe-width 4 right-fringe-width 4)))
 #+END_SRC
 ** Set default font and custom resize behavior
 These custom scaling functions affect text EVERYWHERE, not just the current buffer.
@@ -254,8 +255,9 @@ __ - underline
     (olivetti-mode)
     (olivetti-set-width 60)
 
-    ;; Other UI niceties
-    (set-fringe-mode 0)
+    ;; Other UI niceties (Please keep these buffer-local, so we don't affect code
+    ;; buffers in the same frame)
+    (setq left-fringe-width 0 right-fringe-width 0)
     (setq line-spacing 4))
 
   (add-hook 'markdown-mode-hook 'gw/writing-mode)
