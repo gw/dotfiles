@@ -189,6 +189,44 @@ Default is to center point whenever scrolling off screen.
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 #+END_SRC
+** Function to temporarily maximize buffer
+#+BEGIN_SRC emacs-lisp
+  (defun gw/toggle-maximize-buffer ()
+    "Temporarily maximize the buffer."
+         (interactive)
+         (if (= 1 (length (window-list)))
+             (jump-to-register '_)
+           (progn
+             (window-configuration-to-register '_)
+             (delete-other-windows))))
+
+  ;; 'balance-windows is on "C-x +" by default but that sucks
+  (global-set-key (kbd "C-x =") 'balance-windows)
+  ;; TODO Display "ZOOM" in the mode line, or something
+  (global-set-key (kbd "C-x +") 'gw/toggle-maximize-buffer)
+
+  ;; Rebalance windows after adding / removing splits
+  (defadvice split-window-right
+      (after switch-and-balance activate)
+    (other-window 1)
+    (balance-windows))
+
+  (defadvice split-window-below
+      (after switch-and-balance activate)
+    (other-window 1)
+    (balance-windows))
+
+  (defadvice delete-window
+      (after rebalance activate)
+    (balance-windows))
+
+  (defadvice quit-window
+      (after rebalance activate)
+    (balance-windwos))
+
+
+
+#+END_SRC
 ** Org Mode
 *** Hide emphasis markup
 =//= - italic
@@ -674,20 +712,22 @@ Default: add or remove faces to text in region
 
 *** Switch windows when splitting
 #+BEGIN_SRC emacs-lisp
-  (defun gw/split-window-below-and-switch ()
-    "Split window horizontally below and switch to new frame."
-    (interactive)
-    (split-window-below)
-    (other-window 1))
+  ;; (defun gw/split-window-below-and-switch ()
+  ;;   "Split window horizontally below and switch to new frame."
+  ;;   (interactive)
+  ;;   (split-window-below)
+  ;;   (other-window 1)
+  ;;   (balance-windows))
 
-  (defun gw/split-window-right-and-switch ()
-    "Split window vertically to the right and switch to new frame."
-    (interactive)
-    (split-window-right)
-    (other-window 1))
+  ;; (defun gw/split-window-right-and-switch ()
+  ;;   "Split window vertically to the right and switch to new frame."
+  ;;   (interactive)
+  ;;   (split-window-right)
+  ;;   (other-window 1)
+  ;;   (balance-windows))
 
-  (global-set-key (kbd "C-x 2") 'gw/split-window-below-and-switch)
-  (global-set-key (kbd "C-x 3") 'gw/split-window-right-and-switch)
+  ;; (global-set-key (kbd "C-x 2") 'gw/split-window-below-and-switch)
+  ;; (global-set-key (kbd "C-x 3") 'gw/split-window-right-and-switch)
 #+END_SRC
 
 *** "alt -" and "alt _": Insert en- and em-dashes
