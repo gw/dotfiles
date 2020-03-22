@@ -559,6 +559,15 @@ C-c <right> to jump to top of configuration stack
     (setq auto-insert-alist '())
     (add-hook 'find-file-hook 'auto-insert))
 #+END_SRC
+** Remap C-x C-s to save all file-visiting buffers w/o prompting
+#+BEGIN_SRC emacs-lisp
+  (defun gw/save-all-buffers ()
+    "Save all file-visiting without any prompting."
+    (interactive)
+    (save-some-buffers t))
+
+  (global-set-key (kbd "C-x C-s") 'gw/save-all-buffers)
+#+END_SRC
 
 
 * Point
