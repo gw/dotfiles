@@ -75,6 +75,7 @@ You almost never need :defer—these all imply :defer:
     (diminish 'org-indent-mode))
 #+END_SRC
 
+
 * Custom defvars
 #+BEGIN_SRC emacs-lisp
   (defvar gw/zettel-dir "~/icloud_drive/Documents/"
@@ -193,19 +194,18 @@ Default is to center point whenever scrolling off screen.
 #+BEGIN_SRC emacs-lisp
   (defun gw/toggle-maximize-buffer ()
     "Temporarily maximize the buffer."
-         (interactive)
-         (if (= 1 (length (window-list)))
-             (jump-to-register '_)
-           (progn
-             (window-configuration-to-register '_)
-             (delete-other-windows))))
+    (interactive)
+    (if (= 1 (length (window-list)))
+        (jump-to-register '_)
+      (window-configuration-to-register '_)
+      (delete-other-windows)))
 
   ;; 'balance-windows is on "C-x +" by default but that sucks
   (global-set-key (kbd "C-x =") 'balance-windows)
   ;; TODO Display "ZOOM" in the mode line, or something
   (global-set-key (kbd "C-x +") 'gw/toggle-maximize-buffer)
 
-  ;; Rebalance windows after adding / removing splits
+  ;; Rebalance and switch windows after adding / removing splits
   (defadvice split-window-right
       (after switch-and-balance activate)
     (other-window 1)
@@ -510,10 +510,9 @@ Read more about directory-local variables [[https://www.gnu.org/software/emacs/m
       (when filename
         (if (vc-backend filename)
             (vc-delete-file filename)
-          (progn
-            (delete-file filename)
-            (message "Deleted file %s" filename)
-            (kill-buffer))))))
+          (delete-file filename)
+          (message "Deleted file %s" filename)
+          (kill-buffer)))))
 #+END_SRC
 ** Custom function to rename the current buffer and file
 #+BEGIN_SRC emacs-lisp
@@ -743,26 +742,6 @@ Default: add or remove faces to text in region
   (global-set-key (kbd "M-o") 'other-window)
 #+END_SRC
 
-*** Switch windows when splitting
-#+BEGIN_SRC emacs-lisp
-  ;; (defun gw/split-window-below-and-switch ()
-  ;;   "Split window horizontally below and switch to new frame."
-  ;;   (interactive)
-  ;;   (split-window-below)
-  ;;   (other-window 1)
-  ;;   (balance-windows))
-
-  ;; (defun gw/split-window-right-and-switch ()
-  ;;   "Split window vertically to the right and switch to new frame."
-  ;;   (interactive)
-  ;;   (split-window-right)
-  ;;   (other-window 1)
-  ;;   (balance-windows))
-
-  ;; (global-set-key (kbd "C-x 2") 'gw/split-window-below-and-switch)
-  ;; (global-set-key (kbd "C-x 3") 'gw/split-window-right-and-switch)
-#+END_SRC
-
 *** "alt -" and "alt _": Insert en- and em-dashes
 #+BEGIN_SRC emacs-lisp
   (defun gw/insert-em-dash ()
@@ -858,14 +837,13 @@ Default: add or remove faces to text in region
                (setq modified t))
 
              (let ((linkers (gethash (file-name-base (car note)) res)))
-               (if linkers
-                   (progn
-                     (insert "\n# Backlinks\n")
-                     (mapc
-                      (lambda (linker)
-                        (insert (format "- [[%s]]\n" (file-name-base linker))))
-                      linkers)
-                     (setq modified t))))
+               (when linkers
+                 (insert "\n# Backlinks\n")
+                 (mapc
+                  (lambda (linker)
+                    (insert (format "- [[%s]]\n" (file-name-base linker))))
+                  linkers)
+                 (setq modified t)))
              (when modified
                ;; Doesn't run save-hooks. We probably could but it seems safer to not.
                (write-region 1 (point-max) (car note))
