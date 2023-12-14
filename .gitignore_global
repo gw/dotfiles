@@ -47,3 +47,7 @@ tags
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Editor generated files #
+######################
+*.bak
