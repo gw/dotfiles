@@ -1,2 +1,5 @@
 [display]
 show_icons = false
+
+[preview]
+preview_script = "~/.config/joshuto/preview_file.sh"
