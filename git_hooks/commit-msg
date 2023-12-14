@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# A script designed to run in a git hook to automatically hard-wrap the commit description at 72 chars.
+# Also checks the commit title to make sure it's no longer than 70 chars.
+# To use:
+#   1) Make it executable
+#   2) `mkdir -p ~/.git_hooks` (To run for all git repos)
+#   3) Symlink this file into ~/.git_hooks
+#   4) `git config --global core.hooksPath ~/.git_hooks`
+
+set -euo pipefail
+
+commit_title_length=70
+commit_desc_wrap_width=72
+
+wrap_commit_description() {
+    local msg_file="$1"
+
+    # Read the title (first line) and description (rest of the message)
+    local title
+    local description
+    title=$(head -n 1 "$msg_file")
+    description=$(tail -n +2 "$msg_file")
+
+    # Check if the title is too long
+    if [[ ${#title} -gt $commit_title_length ]]; then
+        echo "Error: Commit title exceeds $commit_title_length characters."
+        exit 1
+    fi
+
+    # Continue if there's no commit description
+    if [[ -z "$description" ]]; then
+        exit 0
+    fi
+
+    # Hard-wrap the description
+    description=$(echo "$description" | fold -w "$commit_desc_wrap_width" -s)
+
+    # Overwrite commit message and description
+    echo "$title" > "$msg_file"
+    echo "$description" >> "$msg_file"
+}
+
+wrap_commit_description "$1"
