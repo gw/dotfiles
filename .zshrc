@@ -1,7 +1,20 @@
+# FZF
+#
 # Initialize FZF and default completions / keybindings.
 # Important that we do this first, so we can overwrite
 # keybindings below.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+FD_OPTIONS="--follow --exclude .git --exclude node_modules"
+# Used when invoking `fzf` without piping anything to it
+export FZF_DEFAULT_COMMAND="fd --type f --type l --strip-cwd-prefix --hidden $FD_OPTIONS"
+
+# Used when pressing ctrl+t
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# Preview first 100 lines of files
+export FZF_CTRL_T_OPTS="--preview 'bat -n -r :100 --color=always {}'"
+# Used when pressing alt+c
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 
 # Add completions for Homebrew-installed tools
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
@@ -33,7 +46,7 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd log_zsh_persistent_history # Run before every prompt
 
 # FZF widget (based on the default ctrl-r implementation at /opt/homebrew/opt/fzf/shell/key-bindings.zsh)
-# that reads from $PERSISTENT_HISTORY_FILE.
+# that reads from $PERSISTENT_HISTORY_FILE instead of `fc -rl`.
 # Only considers the most recent 10000 history entries, and uses awk to remove duplicates.
 persistent-history-widget() {
   local selected num
