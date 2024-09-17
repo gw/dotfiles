@@ -53,9 +53,9 @@ persistent-history-widget() {
   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
 
   local persistent_history_file="${PERSISTENT_HISTORY_FILE:-$HOME/.persistent_zsh_history}"
-  selected=$(tail -n 10000 "$persistent_history_file" | awk '!seen[$0]++' |
-    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} ${FZF_DEFAULT_OPTS-} -n2..,.. --layout=reverse --tac --scheme=history --bind=ctrl-z:ignore ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m" $(__fzfcmd))
-  
+  selected=$(tail -r "$persistent_history_file" | head -n 10000 | awk '!seen[$0]++' |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} ${FZF_DEFAULT_OPTS-} -n2..,.. --layout=reverse --scheme=history --bind=ctrl-z:ignore ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m" $(__fzfcmd))
+
   local ret=$?
   if [ -n "$selected" ]; then
     LBUFFER="$selected"
