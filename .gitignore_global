@@ -3,7 +3,6 @@
 .git/
 tmp/
 node_modules/
-bin/
 obj/
 build/
 
@@ -51,3 +50,7 @@ Thumbs.db
 # Editor generated files #
 ######################
 *.bak
+
+# Python venvs #
+################
+.venv/
