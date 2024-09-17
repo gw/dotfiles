@@ -15,6 +15,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat -n -r :100 --color=always {}'"
 # Used when pressing alt+c
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+# Enable pressing ctrl+k to delete everything after cursor
+export FZF_DEFAULT_OPTS='--bind ctrl-k:kill-line'
+
 
 # Add completions for Homebrew-installed tools
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
@@ -77,17 +80,33 @@ alias d='dirs -v' # Show recently-visited dirs. -v indexes them
 # Type "3" to jump to the 3rd directory on the stack
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
+# Don't delete past `/` when pressing ctrl+w or alt+backspace
+WORDCHARS=${WORDCHARS/\//}
+
 # Initialize the Pure prompt
 autoload -U promptinit; promptinit
 prompt pure
+# Prepend current date and time to each prompt
+PROMPT='%{$fg[yellow]%}%D{%L:%M:%S} '$PROMPT
 
 # Shell
-alias l='ls -Gp'
-alias la='ls -Gpa'
-alias ll='ls -Gpl'
-alias lal='ls -Gpal'
+alias cd='j' # zoxide
+alias l='ls -Gpl'
+alias la='ls -Gpal'
+# Function to create a directory and cd into it
+mcd() {
+    mkdir -p "$1" && cd "$1"
+}
 
-# git
+
+bindkey '^[[3;3~' kill-word
+
+#alias cat='bat'
+
+# Vim
+alias vim='nvim'
+alias v='nvim'
+
 # Git
 alias ga='git add'
 alias gs='git status'
@@ -98,8 +117,10 @@ alias gr='git remote -v'
 alias gb='git branch -v'
 alias gm='git merge --no-ff'
 alias gpl='git pull'
+alias gprom='git pull --rebase origin master'
 alias gps='git push'
 alias gco='git checkout'
+alias grs='git reset --soft HEAD~1'
 alias gl='git log --pretty=format:"%C(yellow) %h %C(red) %<(31,trunc)%cD %C(green) %<(25)%cN %C(black) %<(75,trunc)%s"'
 alias glf='git log --name-status --pretty=format:"%C(yellow) %H %C(red) %cD %C(green) %<(25)%cN %C(black) %s"'
 
