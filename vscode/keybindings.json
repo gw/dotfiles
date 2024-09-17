@@ -1,113 +1,60 @@
 // Place your key bindings in this file to override the defaults
 [
-    // When using Vim emulation layer
-    // // Ctrl+k to kill to end of line in insert mode
-    // {
-    //     "key": "ctrl+k",
-    //     "command": "deleteAllRight",
-    //     "when": "editorTextFocus && vim.active && vim.mode == ‘Insert’ && !inDebugRepl"
-    // },
-    // // Ctrl+e to go to end of line in insert mode
-    // {
-    //     "key": "ctrl+e",
-    //     "command": "cursorLineEnd",
-    //     "when": "editorTextFocus && vim.active && vim.mode == ‘Insert’ && !inDebugRepl"
-    // },
     {
-   "key": "cmd+s",
-   "command": "saveAll"
-    },
-    // {
-    //   "key": "cmd+v",
-    //   "command": "pasteAndIndent.action",
-    //   "when": "editorTextFocus && !editorReadOnly"
-    // },
-    // {
-    //   "key": "cmd+v",
-    //   "command": "editor.action.clipboardPasteAction",
-    //   "when": "!editorTextFocus"
-    // },
-    // {
-    //   "key": "shift+cmd+v",
-    //   "command": "editor.action.clipboardPasteAction",
-    //   "when": "editorTextFocus && !editorReadonly"
-    // },
-    {
-   "key": "ctrl+/",
-   "command": "undo",
-   "when": "editorTextFocus && !editorReadOnly"
+        "key": "cmd+s",
+        "command": "saveAll"
     },
     {
-   "key": "alt+d",
-   "command": "deleteWordEndRight",
-   "when": "editorTextFocus && !editorReadonly"
+        "key": "alt+d",
+        "command": "deleteWordEndRight",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         // Move by words with alt+f and alt+b
-   "key": "alt+b",
-   "command": "cursorWordStartLeft"
+        "key": "alt+b",
+        "command": "cursorWordStartLeft"
     },
     {
-   "key": "alt+f",
-   "command": "cursorWordStartRight"
+        "key": "alt+f",
+        "command": "cursorWordStartRight"
     },
     {
-   "key": "ctrl+w",
-   "command": "deleteWordLeft"
+        "key": "ctrl+w",
+        "command": "deleteWordLeft"
     },
     {
-        // Move to next editor (tab)
-   "key": "cmd+0",
-   "command": "workbench.action.navigateRight"
+        // Navigate editor groups (splits)
+        "key": "cmd+0",
+        "command": "workbench.action.navigateRight"
     },
     {
-   "key": "cmd+9",
-   "command": "workbench.action.navigateLeft"
+        "key": "cmd+9",
+        "command": "workbench.action.navigateLeft"
+    },
+    // Navigate editors (tabs)
+    {
+        "key": "ctrl+9",
+        "command": "workbench.action.previousEditorInGroup"
     },
     {
-    "key": "ctrl+l",
-    "command": "center-editor-window.center",
-    "when": "editorTextFocus"
+        "key": "ctrl+0",
+        "command": "workbench.action.nextEditorInGroup"
     },
     {
-   "key": "ctrl+t",
-   "command": "workbench.action.navigateEditorGroups"
+        "key": "ctrl+t",
+        "command": "workbench.action.navigateEditorGroups"
     },
     {
-        // Open version control
-   "key": "shift+cmd+v",
-   "command": "-markdown.showPreview",
-   "when": "editorLangId == ‘markdown’"
-    },
-    {
-   "key": "shift+cmd+v",
-   "command": "workbench.view.scm"
-    },
-    {
-        // Stage changes in diff editor
-   "key": "ctrl+s",
-   "command": "git.stageSelectedRanges",
-   "when": "isInDiffEditor"
-    },
-    {
-        // Open project switcher
-   "key": "ctrl+cmd+p",
-   "command": "projectManager.listProjects"
+        "key": "shift+cmd+s",
+        "command": "workbench.view.scm"
     },
     {
         // Toggle integrated terminal
-   "key": "ctrl+.",
-   "command": "workbench.action.terminal.toggleTerminal"
+        "key": "ctrl+.",
+        "command": "workbench.action.terminal.toggleTerminal"
     },
     {
-        // Run default test task
-   "key": "f1",
-   "command": "workbench.action.tasks.test"
+        "key": "ctrl+l",
+        "command": "expandLineSelection",
     },
-    {
-        // Run another test task
-   "key": "shift+f1",
-   "command": "workbench.action.tasks.runTask",
-   "args": "Pay Test File at Line"
-    }
 ]
