@@ -57,4 +57,13 @@
         "key": "ctrl+l",
         "command": "expandLineSelection",
     },
+    {
+        "key": "shift+cmd+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "shift+cmd+c",
+        "command": "workbench.view.extension.dockerView",
+    }
 ]
