@@ -35,4 +35,15 @@
     "remote.SSH.remotePlatform": {
         "qa-oscar07": "linux"
     },
+    "cursor.chat.terminalShowHoverHint": false,
+    "window.zoomLevel": 0.2,
+    "editor.minimap.enabled": true,
+    "editor.minimap.autohide": true,
+    "cursor.cpp.enablePartialAccepts": true,
+    "docker.containers.label": "ContainerName",
+    "docker.containers.description": [
+        "Status"
+    ],
+    "docker.containers.groupBy": "None",
+    "docker.containers.sortBy": "CreatedTime",
 }
