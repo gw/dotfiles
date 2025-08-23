@@ -180,6 +180,7 @@ handle_mime() {
             bat --color=always --paging=never \
                 --style=plain \
                 --terminal-width="${PREVIEW_WIDTH}" \
+                --theme=auto:system \
                 "${FILE_PATH}" && exit 0
             cat "${FILE_PATH}" && exit 0
             exit 1 ;;
