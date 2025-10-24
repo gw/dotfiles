@@ -1,9 +1,9 @@
 {
-    "workbench.colorTheme": "Solarized Light",
+    "workbench.colorTheme": "Default Light+",
     "editor.fontFamily": "Iosevka Custom",
     "editor.lineHeight": 1.33,
     "window.commandCenter": false,
-    "editor.fontSize": 13.5,
+    "editor.fontSize": 14,
     "workbench.quickOpen.closeOnFocusLost": false,
     "editor.cursorStyle": "block",
     "editor.cursorSurroundingLines": 5,
@@ -18,26 +18,14 @@
     "git.autofetch": true,
     "cursor-retrieval.canAttemptGithubLogin": false,
     "editor.formatOnSave": true,
-    "remote.SSH.logLevel": "trace",
-    "remote.SSH.enableAgentForwarding": true,
-    "remote.SSH.enableDynamicForwarding": false,
-    "remote.SSH.configFile": "/Users/gwu/.ssh/config",
-    "remote.SSH.useExecServer": false,
-    "remote.SSH.remoteServerListenOnSocket": true,
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.enablePersistentSessions": false,
     "git.useIntegratedAskPass": false,
     "git.terminalAuthentication": false,
-    "window.zoomLevel": 0.2,
     "terminal.integrated.scrollback": 10000,
     "cursor.chat.showSuggestedFiles": true,
     "cursor.cmdk.useThemedDiffBackground": true,
-    "remote.SSH.remotePlatform": {
-        "qa-oscar07": "linux"
-    },
     "cursor.chat.terminalShowHoverHint": false,
-    "window.zoomLevel": 0.2,
-    "editor.minimap.enabled": true,
     "editor.minimap.autohide": true,
     "cursor.cpp.enablePartialAccepts": true,
     "docker.containers.label": "ContainerName",
@@ -46,4 +34,32 @@
     ],
     "docker.containers.groupBy": "None",
     "docker.containers.sortBy": "CreatedTime",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "git.enableSmartCommit": true,
+    "githubPullRequests.fileListLayout": "tree",
+    "workbench.panel.defaultLocation": "right",
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.launchpad.indicator.enabled": false,
+    "editor.inlineSuggest.enabled": false,
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "githubPullRequests.pullBranch": "never",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "window.zoomLevel": 0.4,
+    "rust-analyzer.cfg.setTest": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        "rules": {
+            "*.mutable:rust": {
+                "underline": false,
+            }
+        }
+    },
+    "center-editor-window.threeStateToggle": true
 }

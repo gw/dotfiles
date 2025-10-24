@@ -65,5 +65,20 @@
     {
         "key": "shift+cmd+c",
         "command": "workbench.view.extension.dockerView",
+    },
+    {
+        "key": "shift+cmd+e",
+        "command": "-aichat.fixerrormessage",
+        "when": "(arbitrary function)"
+    },
+    {
+        // Let me navigate newlines in AI chat
+        "key": "cmd+n",
+        "command": "-composer.createNew",
+        "when": "composerFocused || focusedView =~ /^workbench.panel.aichat.view/"
+    },
+    {
+        "key": "cmd+i",
+        "command": "composerMode.agent"
     }
 ]
