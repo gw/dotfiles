@@ -1,0 +1,19 @@
+scrollback-limit = 50000000
+font-size = 14
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false
+
+theme = dark:0x96f,light:Monokai Pro Light
+
+keybind = cmd+j=goto_split:left
+keybind = cmd+l=goto_split:right
+keybind = cmd+i=goto_split:up
+keybind = cmd+k=goto_split:down
+
+keybind = ctrl+9=previous_tab
+keybind = ctrl+0=next_tab
+keybind = shift+enter=text:\n
+
+keybind = cmd+enter=new_split:right
+keybind = cmd+shift+enter=new_split:down
