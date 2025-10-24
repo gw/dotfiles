@@ -1,9 +1,7 @@
 {
-    "workbench.colorTheme": "Default Light+",
-    "editor.fontFamily": "Iosevka Custom",
+    "editor.fontFamily": "CommitMonoLightNarrow",
     "editor.lineHeight": 1.33,
-    "window.commandCenter": false,
-    "editor.fontSize": 14,
+    "editor.fontSize": 13.5,
     "workbench.quickOpen.closeOnFocusLost": false,
     "editor.cursorStyle": "block",
     "editor.cursorSurroundingLines": 5,
@@ -16,50 +14,50 @@
     "workbench.sideBar.location": "right",
     "files.insertFinalNewline": true,
     "git.autofetch": true,
-    "cursor-retrieval.canAttemptGithubLogin": false,
-    "editor.formatOnSave": true,
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.enablePersistentSessions": false,
     "git.useIntegratedAskPass": false,
     "git.terminalAuthentication": false,
     "terminal.integrated.scrollback": 10000,
-    "cursor.chat.showSuggestedFiles": true,
-    "cursor.cmdk.useThemedDiffBackground": true,
-    "cursor.chat.terminalShowHoverHint": false,
-    "editor.minimap.autohide": true,
-    "cursor.cpp.enablePartialAccepts": true,
-    "docker.containers.label": "ContainerName",
-    "docker.containers.description": [
-        "Status"
-    ],
-    "docker.containers.groupBy": "None",
-    "docker.containers.sortBy": "CreatedTime",
+    "editor.lightbulb.enabled": "off",
+    "[dockercompose]": {
+        "editor.codeLens": false
+    },
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
     "git.enableSmartCommit": true,
     "githubPullRequests.fileListLayout": "tree",
     "workbench.panel.defaultLocation": "right",
-    "gitlens.currentLine.enabled": false,
-    "gitlens.codeLens.enabled": false,
-    "gitlens.launchpad.indicator.enabled": false,
-    "editor.inlineSuggest.enabled": false,
-    "editor.quickSuggestions": {
-        "other": "off"
-    },
-    "editor.suggestOnTriggerCharacters": false,
+    // Uncomment these if using Cursor
+    // "editor.inlineSuggest.enabled": false,
+    // "editor.quickSuggestions": {
+    //     "other": "off"
+    // },
+    // "editor.suggestOnTriggerCharacters": false,
     "githubPullRequests.pullBranch": "never",
     "diffEditor.ignoreTrimWhitespace": false,
-    "window.zoomLevel": 0.4,
-    "rust-analyzer.cfg.setTest": false,
-    "editor.inlayHints.enabled": "offUnlessPressed",
-    "editor.semanticTokenColorCustomizations": {
-        "enabled": true,
-        "rules": {
-            "*.mutable:rust": {
-                "underline": false,
-            }
-        }
-    },
-    "center-editor-window.threeStateToggle": true
+    "editor.tabCompletion": "on",
+    "containers.containers.groupBy": "None",
+    "containers.containers.description": [
+        "Status"
+    ],
+    "containers.containers.label": "ContainerName",
+    "containers.containers.sortBy": "CreatedTime",
+    "workbench.activityBar.location": "hidden",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontLigatures.enabled": true,
+    "terminal.integrated.fontFamily": "Jetbrains Mono NL",
+    "editor.stickyTabStops": true,
+    "window.commandCenter": false,
+    "workbench.layoutControl.enabled": false,
+    "diffEditor.renderSideBySide": false,
+    "editor.formatOnSave": true,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "window.zoomLevel": 0.1,
+    "terminal.integrated.tabs.enabled": false,
+    "workbench.colorTheme": "Default Light Modern",
+    "editor.minimap.autohide": "mouseover",
+    "editor.minimap.enabled": false,
 }
